@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 21:16:03 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 08:59:30 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 10:14:54 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int						token_redir(char *line, int index)
 	}
 	return (i);
 }
-
 
 int						get_end(char *line, int index)
 {

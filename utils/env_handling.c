@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:36:06 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/11 17:11:07 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 10:04:26 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	max_of(int i, int j)
-{
-	if (i < j)
-		return (j);
-	else
-		return (i);
-}
 
 void	sort_env(void)
 {
