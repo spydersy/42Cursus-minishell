@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 11:49:17 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 12:04:49 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,7 @@ char        *join_paths(t_tokens tokens, int index, char **paths)
     i = -1;
     cmd = tokens.tokens[index];
     if (index != 0)
-    {
         cmd = tokens.tokens[index] + 1;
-    }
 	while (paths[++i])
 	{
 		tmp = ft_strjoin(paths[i], cmd);
@@ -101,14 +99,30 @@ char        *join_paths(t_tokens tokens, int index, char **paths)
 char        *get_exec_path(t_tokens token, char **paths)
 {
     int     i;
+    int     fd;
+    int     index;
+    char    *exec_path;
 
     i = -1;
+    index = 0;
     while (++i < token.nb)
     {
         if (token.type[i] == CMD || token.type[i] == -CMD)
             break ;
     }
-    return (join_paths(token, i, paths));
+    exec_path = join_paths(token, i, paths);
+    if (exec_path == NULL)
+    {
+        if (i != 0)
+            index++;
+        fd = open(token.tokens[i] + index, O_RDONLY, 0666);
+        if (fd > 0)
+        {
+            close(fd);
+            return (token.tokens[i] + index);
+        }
+    }
+    return (exec_path);
 }
 
 void        to_execution(t_tokens *tokens, int nb)
