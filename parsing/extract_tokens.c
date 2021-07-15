@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 10:24:52 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 10:48:22 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	extract_tokens(char **commands)
     }
     else
     {
-    	/* start_execution(); */    
+        to_execution(tok, nb);
     }
     i = -1;
 	while (++i < nb)

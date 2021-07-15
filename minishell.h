@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 10:43:34 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 10:57:04 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_tokens
 	int					pipe;
 	int					*type;
 	char				**tokens;
-	char				*abs_path;
+	char				*exec_path;
 }						t_tokens;
 
 typedef struct s_separator
@@ -91,7 +91,7 @@ int						*set_tok_types(t_tokens tok);
 int						bs_position(char **tokens);
 
 void					prompt(int sig);
-void					to_execution(void);
+void					to_execution(t_tokens *tokens, int nb);
 void					free_toks(t_tokens tok);
 void					init_env(char **env);
 void					clear_window(void);

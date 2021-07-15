@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:34:43 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/15 09:56:12 by abelarif         ###   ########.fr        #
+#    Updated: 2021/07/15 10:56:13 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 1 - Not interpret unspecified special characters ;
 1 - Not interpret unspecified special characters \
 0 - Have a working History.
-0 - Search and launch the right executable.
+P - Search and launch the right executable.
 0 - Builtins.
 0 - Filter content inside ' and ".
 0 - “<<” read input from the current source until a line containing only the de-
