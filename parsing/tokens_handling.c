@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 21:16:03 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/08 12:26:19 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 08:59:30 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int						get_end(char *line, int index)
 	{
 		index = token_quotes(line, index);
         if (index == -1)
-            ft_error("QUOTES", 0);
+            ft_error("This Shell does not support unclosed quotes.", 0);
 	}
 	else
 	{

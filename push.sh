@@ -1,15 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    TODO                                               :+:      :+:    :+:    #
+#    push.sh                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/15 08:34:43 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/15 09:17:20 by abelarif         ###   ########.fr        #
+#    Created: 2021/07/15 08:36:54 by abelarif          #+#    #+#              #
+#    Updated: 2021/07/15 08:41:03 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-1 - Not interpret unclosed quotes.
-1 - Not interpret unspecified special characters ;
-0 - Not interpret unspecified special characters \
+git add *
+for i in "$*"
+do
+   git commit -m $i
+done
+git push

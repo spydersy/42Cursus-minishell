@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/12 13:00:08 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 09:03:45 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@
 #define REDO0		9003	/*	>				*/
 #define	REDO1		9004	/*	>>				*/
 #define REDI0		9005	/*	<				*/
-#define FILE		9006	/*	file			*/
-#define ERROR		9007	/*	error			*/
-#define PROTECTED0	9008	/*	protected arg	*/
-#define PROTECTED1	9009	/*	protected arg	*/
-#define SKIPED		9010	/*	skiped tok		*/
+// #define REDI0		9006	/*	<<				*/
+#define FILE		9007	/*	file			*/
+#define ERROR		9008	/*	error			*/
+#define PROTECTED0	9009	/*	protected arg	*/
+#define PROTECTED1	9010	/*	protected arg	*/
+#define SKIPED		9011	/*	skiped tok		*/
 
 		/*	DBG TOOLS	*/
-#define DBG		while(1){printf("DBG\n");}
+#define DBG		    while(1){printf("DBG\n");}
 #define	SLEEP(A)	printf(A); sleep(5)
 
 
@@ -88,7 +89,7 @@ int						ft_error(char *description, int exitstat);
 int						count_tokens(char *line);
 
 void					prompt(int sig);
-void				    to_lexer(t_tokens *toks);
+void                    to_execution(void);
 void				    init_env(char **env);
 void					clear_window(void);
 void    				extract_semicolon_line(char *line);

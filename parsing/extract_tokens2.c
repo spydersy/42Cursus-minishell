@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tokens2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/12 13:08:34 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/15 09:43:38 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,30 @@ int	*set_tok_types(t_tokens tok)
 	return (type);
 }
 
+int     bs_position(char **tokens)
+{
+    int         i;
+    int         j;
+    t_quote     q;
+
+    i = -1;
+    while (tokens[++i])
+    {
+        j = -1;
+        q = init_quote();
+        while (tokens[i][++j])
+        {
+            if (tokens[i][j] == '\\' && q.d_quote == false && q.s_quote == false)
+                return (0);
+            if (tokens[i][j] == '\'' || tokens[i][j] == '\"')
+            {
+				q = set_quote_value(tokens[i][j], q);
+            }
+        }
+    }
+    return (1);
+}
+
 void	print_types(int *types, int nb, char **tokens)
 {
 	int		i;
@@ -118,7 +142,7 @@ void	print_types(int *types, int nb, char **tokens)
 	i = -1;
 	while (++i < nb)
 	{
-		if (types[i] == CMD || types[i] == -CMD)
+		else if (types[i] == CMD || types[i] == -CMD)
 			printf("type[%d] , %d [%s]: [CMD]\n", i, types[i], tokens[i]);
 		else if (types[i] == ARG || types[i] == -ARG)
 			printf("type[%d] , %d [%s]: [ARG]\n", i, types[i], tokens[i]);
@@ -136,16 +160,25 @@ void	print_types(int *types, int nb, char **tokens)
 			printf("type[%d] , %d [%s]: [PROTEC1]\n", i, types[i], tokens[i]);
 		else
 			printf("type[%d] , %d [%s]: [random]\n", i, types[i], tokens[i]);
+        return (0);
 	}
 }
-
+/*
+        if (bs_position(tokens) == 0)
+        {
+            ft_error("This Shell does not support unspecified special characters \"\\\"", 0);
+            return (1);
+        }    
+*/
 void	extract_tokens(char **commands)
 {
 	int			i;
 	int			nb;
 	t_tokens	*tok;
+    int         error_bs;
 
 	i = 0;
+    error_bs = 0;
 	while (commands[i])
 		i++;
 	nb = i;
@@ -160,12 +193,13 @@ void	extract_tokens(char **commands)
 		tok[i].tokens = split_tok(commands[i], tok[i].nb);
 		tok[i].type = set_tok_types(tok[i]);
 		tok[i] = replace_dollar(tok + i);
-		print_types(tok[i].type, tok[i].nb, tok[i].tokens);
+		error_bs = print_types(tok[i].type, tok[i].nb, tok[i].tokens);
 	}
-	i = -1;
-	//free_toks();
-	// to_lexer(tok);
+
+    /* if (error_bs = 0)  */
 	/* start_execution(); */
+
+    i = -1;
 	while (++i < nb)
 	{
 		free_toks(tok[i]);
