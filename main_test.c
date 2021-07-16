@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:15:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 12:20:28 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/16 12:23:42 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+int		main()
+{
+	char	*args[] = {"addd.out", NULL};
+    char    *buffer;
+
+	execve(args[1], args, NULL);
+    perror(buffer);
+	printf("FATAL\n");
+	return (0);
+}
+
+/*
 int main()
 {
     int             ret;
@@ -25,3 +37,4 @@ int main()
     printf("ret : %d\n", ret);
     return (0);
 }
+*/
