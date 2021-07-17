@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 07:51:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/17 14:48:58 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void					extract_tokens(char **commands);
 void					set_separator_type(int *type, char **toks);
 
 char					*read_line(void);
+char                    *builtin_pwd(int descriptor);
 char					**split_tok(char *line, int nb);
 char					*get_token(char *line, int flag);
 char					**splitSep(char *line, int *sepIndex, int nbSep);
