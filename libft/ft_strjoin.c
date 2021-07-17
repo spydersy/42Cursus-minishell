@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-ghem <ael-ghem@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/12 18:35:13 by ael-ghem          #+#    #+#             */
-/*   Updated: 2019/10/16 16:47:38 by ael-ghem         ###   ########.fr       */
+/*   Created: 2020/01/09 13:17:14 by abelarif          #+#    #+#             */
+/*   Updated: 2021/07/17 18:48:23 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*ret;
-	size_t	len_s1;
-	size_t	len_s2;
+	int		lens1;
+	int		lens2;
+	char	*p;
+	int		i;
+	int		j;
 
-	ret = NULL;
-	if (s1)
-	{
-		len_s1 = ft_strlen(s1);
-		if (s2 == NULL)
-			return (ret = ft_strdup(s1));
-		len_s2 = ft_strlen(s2);
-		ret = (char *)ft_calloc(sizeof(char), len_s1 + len_s2 + 1);
-		if (ret)
-		{
-			ft_strlcpy(ret, s1, len_s1 + 1);
-			ft_strlcat((ret + len_s1), s2, len_s2 + len_s1 + 1);
-		}
-	}
-	return (ret);
+	if (s1 == 0 || s2 == 0)
+		return (0);
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	p = malloc((lens1 + lens2 + 1) * sizeof(char));
+	if (p == NULL)
+		return (0);
+	i = -1;
+	while (++i < lens1)
+		p[i] = s1[i];
+	j = 0;
+	while (i < (lens1 + lens2))
+		p[i++] = s2[j++];
+	p[i] = '\0';
+	return (p);
 }

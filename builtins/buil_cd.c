@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 14:36:48 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 15:37:49 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/17 17:51:35 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void        exec_cd(char *path)
     if (ret == 0)
     {
         new_pwd = builtin_pwd(1);
+        /*
         set_env("OLDPWD=", old_pwd);
         set_env("PWD=", new_pwd);
+        */
     }
 }
 

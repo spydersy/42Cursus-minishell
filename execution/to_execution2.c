@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/16 12:40:43 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 09:17:31 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:11:42 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int     to_execution2(t_tokens *tokens)
             if (pipe(pipes + 2 * i) == -1)
                 ft_error("PIPES", 1);
         }
-        child_process(tokens, pipes);
+        // child_process(tokens, pipes);
     }
 
     return (0);

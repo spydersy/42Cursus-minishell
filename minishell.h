@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 14:48:58 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:09:11 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,45 @@
 # define KCYN  "\x1B[36m"
 # define KWHT  "\x1B[37m"
 
-        /*  FILES DESCRIPTORS   */
 # define STDIN  0
 # define STDOUT 1
 # define STDERR 2
 
-		/*	TOK TYPES	*/
-# define CMD        9001	/*	command			*/
-# define ARG        9002	/*	arguments		*/
-# define REDO0		9003	/*	>				*/
-# define REDO1		9004	/*	>>				*/
-# define REDI0		9005	/*	<				*/
-# define REDI1		9006	/*	<<				*/
-# define FILE		9007	/*	file			*/
-# define ERROR		9008	/*	error			*/
-# define PROTECTED0	9009	/*	protected arg	*/
-# define PROTECTED1	9010	/*	protected arg	*/
-# define SKIPED		9011	/*	skiped tok		*/
-
-		/*	DBG TOOLS	*/
-# define DBG		    while(1){printf("DBG\n");}
-# define	SLEEP(A)	printf(A); sleep(5)
-
+/*	command			*/
+/*	arguments		*/
+/*	>				*/
+/*	>>				*/
+/*	<				*/
+/*	<<				*/
+/*	file			*/
+/*	error			*/
+/*	protected arg	*/
+/*	protected arg	*/
+/*	skiped tok		*/
+# define CMD        9001
+# define ARG        9002
+# define REDO0		9003
+# define REDO1		9004
+# define REDI0		9005
+# define REDI1		9006
+# define FILE		9007
+# define ERROR		9008
+# define PROTECTED0	9009
+# define PROTECTED1	9010
+# define SKIPED		9011
 typedef struct s_quote
 {
-	bool            	s_quote;
-	bool            	d_quote;
-}               		t_quote;
+	bool				s_quote;
+	bool				d_quote;
+}						t_quote;
 
-typedef	struct s_env
+typedef struct s_env
 {
-	char	**env;		//free_exit
-	char	**sorted;	//free_exit
-	char	**history;
-    int     history_size;
-	int		size;
+	char				**env;
+	char				**sorted;
+	char				**history;
+	int					history_size;
+	int					size;
 }						t_env;
 
 typedef struct s_tokens
@@ -93,7 +97,7 @@ int						count_bslash(char *line);
 int						count_tokens(char *line);
 int						bs_position(char **tokens);
 int						*set_tok_types(t_tokens tok);
-int                     to_execution2(t_tokens *tokens);
+int						to_execution2(t_tokens *tokens);
 int						count_bs(char *line, int index);
 int						*get_bslash_index(char *line, int nb);
 int						ft_error(char *description, int exitstat);
@@ -109,7 +113,7 @@ void					extract_tokens(char **commands);
 void					set_separator_type(int *type, char **toks);
 
 char					*read_line(void);
-char                    *builtin_pwd(int descriptor);
+char					*builtin_pwd(int descriptor);
 char					**split_tok(char *line, int nb);
 char					*get_token(char *line, int flag);
 char					**splitSep(char *line, int *sepIndex, int nbSep);

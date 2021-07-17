@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/12 18:23:59 by ael-ghem          #+#    #+#             */
-/*   Updated: 2021/06/05 20:10:22 by abelarif         ###   ########.fr       */
+/*   Created: 2020/01/09 14:35:15 by abelarif          #+#    #+#             */
+/*   Updated: 2021/07/17 18:45:32 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *sub;
+	char	*sub;
 
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
 	{
-		if (!(sub = (char*)malloc(sizeof(char))))
+		sub = (char *)malloc(sizeof(char));
+		if (sub == NULL)
 			return (NULL);
 		sub[0] = '\0';
 		return (sub);
 	}
 	else if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	if (!(sub = (char*)malloc(sizeof(char) * len + 1)))
+	sub = (char *)malloc(sizeof(char) * len + 1);
+	if (sub == NULL)
 		return (NULL);
 	ft_strlcpy(sub, s + start, len + 1);
 	return (sub);
@@ -35,8 +37,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 char	*ft_subtoken(char const *s, unsigned int start, size_t len)
 {
-	char	*sub;
-	int		i;
+	char			*sub;
+	int				i;
 
 	i = 0;
 	sub = malloc(sizeof(char) * (len - start + 1));
