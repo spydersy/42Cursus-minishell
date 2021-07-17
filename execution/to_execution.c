@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 12:04:49 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/16 13:38:52 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,10 @@ void        to_execution(t_tokens *tokens, int nb)
     while (++i < nb)
     {
         tokens[i].exec_path = get_exec_path(tokens[i], paths);
+        printf("NB PIPES : %d\n", tokens[i].pipe);
         printf("EXEC_PATH : [%s]\n", tokens[i].exec_path);
     }
+    printf("Start execution : \n**********************************************\n");
+    to_execution2(tokens);
     free_paths(paths);
 }

@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/16 12:46:29 by abelarif         ###   ########.fr        #
+#    Updated: 2021/07/16 13:49:28 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ LIBFT_SRCS=				./libft/ft_atoi.c\
 						./libft/ft_putendl_fd.c\
 
 EXECUTION_SRCS=			./execution/to_execution.c\
+						./execution/to_execution2.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
