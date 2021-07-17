@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/16 19:56:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/17 07:51:33 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define REDO0		9003	/*	>				*/
 # define REDO1		9004	/*	>>				*/
 # define REDI0		9005	/*	<				*/
-// #define REDI0		9006	/*	<<				*/
+# define REDI1		9006	/*	<<				*/
 # define FILE		9007	/*	file			*/
 # define ERROR		9008	/*	error			*/
 # define PROTECTED0	9009	/*	protected arg	*/
