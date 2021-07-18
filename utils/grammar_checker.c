@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 07:31:23 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 07:38:48 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,34 @@ int redirection_grammar(t_tokens *tokens)
     return (1);
 }
 
+int no_command(t_tokens *tokens)
+{
+    int     i;
+    int     j;
+    int     command;
+
+    i = -1;
+    while (++i < tokens->pipe)
+    {
+        j = -1;
+        command = 0;
+        while (tokens[i].tokens[++j])
+        {
+            if (tokens[i].type[j] == CMD || tokens[i].type[j] == -CMD)
+            {
+                command = 1;
+                break;
+            }
+        }
+        if (command == 0)
+        {
+            ft_error("No command", 0);
+            return (1);
+        }
+    }
+    return (0);
+}
+
 int grammar_checker(char **commands, t_tokens *tokens)
 {
     int     i;
@@ -90,5 +118,7 @@ int grammar_checker(char **commands, t_tokens *tokens)
     {
         return (0);
     }
+    if (no_command(tokens) == 1)
+        return (0);
     return (1);
 }

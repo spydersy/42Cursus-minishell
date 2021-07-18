@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 19:31:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 07:47:49 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void        to_execution(t_tokens *tokens, int nb)
 
     i = -1;
     paths = get_paths();
+    
     while (++i < nb)
     {
         tokens[i].exec_path = get_exec_path(tokens[i], paths);
@@ -142,8 +143,3 @@ void        to_execution(t_tokens *tokens, int nb)
     to_execution2(tokens);
     free_paths(paths);
 }
-
-// void    set_execution_requirements(t_tokens *tokens, int nb)
-// {
-
-// }

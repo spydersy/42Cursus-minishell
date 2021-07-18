@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 06:13:26 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 07:51:30 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,18 @@ typedef struct s_separator
 	int					nb_separator;
 	char				**content;
 }						t_separator;
+
+typedef struct s_execution
+{
+    int                 nb_commands;
+    char                *command;
+    char                **args;
+    char                **infiles0;
+    char                **infiles1; //later
+    char                **outfiles0;
+    char                **outfiles1;
+};
+
 
 t_env					g_env;
 
