@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 19:41:41 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 06:10:50 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	extract_tokens(char **commands)
     {
         ft_error("This Shell does not support unspecified special characters \"\\\"", 0);
     }
-    if (grammar_checker() == 1)
+    if (grammar_checker(commands, tok) == 1)
     {
         to_execution(tok, nb);
     }

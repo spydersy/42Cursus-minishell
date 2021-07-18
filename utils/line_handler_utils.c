@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   line_handling_utils.c                              :+:      :+:    :+:   */
+/*   line_handler_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/21 20:34:22 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/12 14:06:29 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 07:03:23 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ t_separator			get_separator_index(char *line, char separator_type)
 
 	i = -1;
 	c = -1;
-	 
 	quote = init_quote();
-	separator.nb_separator = count_separators(line, separator_type);
+	separator.separator_index = NULL;
+    separator.nb_separator = count_separators(line, separator_type);
 	separator.separator_index = malloc(separator.nb_separator * sizeof(int));
 	if (separator.separator_index == NULL)
 		ft_error(NULL, 1);
@@ -88,7 +88,7 @@ t_separator			get_separator_index(char *line, char separator_type)
 		if ((line[i] == 39 || line[i] == 34) && (count_bs(line, i) % 2 == 0))
 			quote = set_quote_value(line[i], quote);
 		else if (line[i] == separator_type && (count_bs(line, i) % 2 == 0))
-			if (!quote.s_quote && !quote.d_quote)
+			if (!quote.s_quote && !quote.d_quote && c + 1 < separator.nb_separator)
 				separator.separator_index[++c] = i;
 	}
 	return (separator);

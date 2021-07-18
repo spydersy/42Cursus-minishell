@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/17 18:43:35 by abelarif         ###   ########.fr        #
+#    Updated: 2021/07/18 06:14:01 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ UTILS_SRCS=				./utils/max_of.c\
 						./utils/tokens_utils.c\
 						./utils/env_handling.c\
 						./utils/splitByIndex.c\
+						./utils/grammar_checker.c\
 						./utils/backslash_handling.c\
 						./utils/line_handler_utils.c\
 
