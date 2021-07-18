@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 07:38:48 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:17:37 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ int is_empty(char *str)
             return (0);
     }
     return (1);
+}
+
+int is_arg(int type)
+{
+    if (type == ARG || type == -ARG)
+        return (1);
+    return (0);
+}
+
+int is_cmd(int type)
+{
+    if (type == CMD || type == -CMD)
+        return (1);
+    return (0);
 }
 
 int is_redirection(int type)
@@ -49,8 +63,7 @@ int redirection_grammar(t_tokens *tokens)
         j = -1;
         while (tokens[i].tokens[++j])
         {
-        printf("XXXXXXXX\n");
-            if (is_redirection(tokens[i].type[j]) == 1)
+            if (is_redirection(tokens[i].type[j]) != 0)
             {
                 if (tokens[i].tokens[j + 1])
                 {

@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 07:47:49 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:08:20 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,21 +125,118 @@ char        *get_exec_path(t_tokens token, char **paths)
     return (exec_path);
 }
 
-void        to_execution(t_tokens *tokens, int nb)
+char    *ft_replace(t_tokens token, int index)
 {
-    char        **paths;
-    int         i;
+    if (is_cmd(token.type[index]))
+    {
+        if (index == 0)
+            return (ft_strdup(token.tokens[index]));
+        else
+            return (ft_strdup(token.tokens[index] + 1));
+    }
+    else if (is_arg(token.type[index]))
+    {
+        return (ft_strdup(token.tokens[index] + 1));
+    }
+    return (NULL);
+}
+
+char    **get_args(t_tokens tokens)
+{
+    int     i;
+    int     c;
+    char    **args;
+
+    c = 0;
+    i = -1;
+    while (tokens.tokens[++i])
+    {
+        if (is_arg(tokens.type[i]) || is_cmd(tokens.type[i]))
+            c++;
+    }
+    args = malloc(sizeof(char *) * (c + 1));
+    if (args == NULL)
+        ft_error("MALLOC", 1);
+    i = -1;
+    c = -1;
+    while (tokens.tokens[++i])
+    {
+        if (is_cmd(tokens.type[i]) || is_arg(tokens.type[i]))
+            args[++c] = ft_replace(tokens, i);
+    }
+    args[c + 1] = NULL;
+    return (args);
+}
+
+char    **get_redirections(t_tokens token)
+{
+    int     i;
+    int     c;
+    char    **redirections;
+
+    i = -1;
+    c = 0;
+
+    while (token.tokens[++i])
+    {
+        if ()
+        {
+            
+        }
+    }
+}
+
+t_execution *expand_tokens(t_tokens *tokens, int nb)
+{
+    int             i;
+    t_execution     *exec;
+    char            **paths;
 
     i = -1;
     paths = get_paths();
-    
+    exec = malloc(sizeof(t_execution) * nb);
+    if (exec == NULL)
+        ft_error("MALLOC", 1);
     while (++i < nb)
     {
-        tokens[i].exec_path = get_exec_path(tokens[i], paths);
-        printf("NB PIPES : %d\n", tokens[i].pipe);
-        printf("EXEC_PATH : [%s]\n", tokens[i].exec_path);
+        exec[i].exec_path = get_exec_path(tokens[i], paths);
+        exec[i].args = get_args(tokens[i]);
+        exec[i].redirections = get_redirections(tokens[i]);
     }
-    printf("Start execution : \n**********************************************\n");
-    to_execution2(tokens);
     free_paths(paths);
+    return (exec);
+}
+
+void        print_args(char **args)
+{
+    int     i;
+
+    i = -1;
+    while (args[++i])
+    {
+        printf("\targ[%d] : [%s]\n", i, args[i]);
+    }
+}
+
+void        to_execution(t_tokens *tokens, int nb)
+{
+    t_execution     *exec;
+    int             i;
+
+    i = -1;
+    exec = expand_tokens(tokens, nb);
+    while (++i < nb)
+    {
+    printf("**********************************************\n");
+            printf("exec_paths : [%s]\n",exec[i].exec_path);
+            print_args(exec[i].args);
+    printf("----------------------------------------------\n\n");
+    }
+    // while (++i < nb)
+    // {
+        // tokens[i].exec_path = get_exec_path(tokens[i], paths);
+        // printf("NB PIPES : %d\n", tokens[i].pipe);
+        // printf("EXEC_PATH : [%s]\n", tokens[i].exec_path);
+    // }
+    // to_execution2(tokens);
 }

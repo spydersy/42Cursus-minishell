@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 07:51:30 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:11:31 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,27 @@
 # define STDOUT 1
 # define STDERR 2
 
-/*	command			*/
-/*	arguments		*/
+
 /*	>				*/
 /*	>>				*/
 /*	<				*/
 /*	<<				*/
-/*	file			*/
-/*	error			*/
-/*	protected arg	*/
-/*	protected arg	*/
-/*	skiped tok		*/
-# define CMD        9001
-# define ARG        9002
-# define REDO0		9003
-# define REDO1		9004
-# define REDI0		9005
-# define REDI1		9006
-# define FILE		9007
-# define ERROR		9008
-# define PROTECTED0	9009
-# define PROTECTED1	9010
-# define SKIPED		9011
+
+
+
+
+
+# define CMD        9001 /*	arguments		*/
+# define ARG        9002 
+# define REDO0		9003 
+# define REDO1		9004 
+# define REDI0		9005 
+# define REDI1		9006 
+# define FILE		9007 /*	file			*/
+# define ERROR		9008 /*	error			*/
+# define PROTECTED0	9009 /*	protected arg	*/
+# define PROTECTED1	9010 /*	protected arg	*/
+# define SKIPED		9011 /*	skiped tok		*/
 typedef struct s_quote
 {
 	bool				s_quote;
@@ -93,17 +92,16 @@ typedef struct s_separator
 typedef struct s_execution
 {
     int                 nb_commands;
-    char                *command;
     char                **args;
-    char                **infiles0;
-    char                **infiles1; //later
-    char                **outfiles0;
-    char                **outfiles1;
-};
+    char                **redirections;
+    char                *exec_path;
+}                       t_execution;
 
 
 t_env					g_env;
 
+int                     is_arg(int type);
+int                     is_cmd(int type);
 int						max_of(int i, int j);
 int						count_bslash(char *line);
 int						count_tokens(char *line);
