@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 09:54:15 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 10:31:44 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,38 @@ void        print_args(char **args)
     }
 }
 
+int         dollar_is_present(char *str)
+{
+    int     i;
+
+    i = -1;
+    while (str[++i])
+    {
+        if (str[i] == '$')
+            return (1);
+    }
+    return (0);
+}
+
+void        expand_args(t_execution *exec, int nb)
+{
+    int     i;
+    int     j;
+
+    i = -1;
+    while (++i < nb)
+    {
+        j = 0;
+        while (exec[i].args[++j])
+        {
+            if (exec[i].args[j][0] == '\"' && dollar_is_presennt(exec[i].args[j]))
+            {
+                
+            }
+        }
+    }
+}
+
 void        to_execution(t_tokens *tokens, int nb)
 {
     t_execution     *exec;
@@ -231,6 +263,7 @@ void        to_execution(t_tokens *tokens, int nb)
 
     i = -1;
     exec = expand_tokens(tokens, nb);
+    expand_args(exec);
     while (++i < nb)
     {
     printf("**********************************************\n");
