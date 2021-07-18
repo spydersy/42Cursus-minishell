@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 07:46:30 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:49:02 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	extract_tokens(char **commands)
 		tok[i].nb = count_tokens(commands[i]);
 		tok[i].tokens = split_tok(commands[i], tok[i].nb);
 		tok[i].type = set_tok_types(tok[i]);
-		tok[i] = replace_dollar(tok + i);
+		tok[i] = replace_dollar(tok + i); //WARNING PROTECTED TYPE
 		print_types(tok[i].type, tok[i].nb, tok[i].tokens);
 	}
     bs = bs_position(commands);

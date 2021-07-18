@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 09:17:37 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:52:16 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ int is_empty(char *str)
             return (0);
     }
     return (1);
+}
+
+int is_protected(int type)
+{
+    if (type == PROTECTED0 || type == -PROTECTED0)
+        return (1);
+    if (type == PROTECTED1 || type == -PROTECTED1)
+        return (1);
+    return (0);
 }
 
 int is_arg(int type)

@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 09:11:31 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:51:17 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_env					g_env;
 int                     is_arg(int type);
 int                     is_cmd(int type);
 int						max_of(int i, int j);
+int                     is_protected(int type);
 int						count_bslash(char *line);
 int						count_tokens(char *line);
 int						bs_position(char **tokens);

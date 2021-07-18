@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 09:08:20 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:54:15 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,10 @@ char    *ft_replace(t_tokens token, int index)
     {
         return (ft_strdup(token.tokens[index] + 1));
     }
+    if (is_protected(token.type[index]))
+    {
+        return (ft_strdup(token.tokens[index]));
+    }
     return (NULL);
 }
 
@@ -151,7 +155,8 @@ char    **get_args(t_tokens tokens)
     i = -1;
     while (tokens.tokens[++i])
     {
-        if (is_arg(tokens.type[i]) || is_cmd(tokens.type[i]))
+        if (is_arg(tokens.type[i]) || is_cmd(tokens.type[i])
+            || is_protected(tokens.type[i]))
             c++;
     }
     args = malloc(sizeof(char *) * (c + 1));
@@ -161,30 +166,31 @@ char    **get_args(t_tokens tokens)
     c = -1;
     while (tokens.tokens[++i])
     {
-        if (is_cmd(tokens.type[i]) || is_arg(tokens.type[i]))
+        if (is_cmd(tokens.type[i]) || is_arg(tokens.type[i])
+            || is_protected(tokens.type[i]))
             args[++c] = ft_replace(tokens, i);
     }
     args[c + 1] = NULL;
     return (args);
 }
 
-char    **get_redirections(t_tokens token)
-{
-    int     i;
-    int     c;
-    char    **redirections;
+// char    **get_redirections(t_tokens token)
+// {
+    // int     i;
+    // int     c;
+    // char    **redirections;
 
-    i = -1;
-    c = 0;
+    // i = -1;
+    // c = 0;
 
-    while (token.tokens[++i])
-    {
-        if ()
-        {
+    // while (token.tokens[++i])
+    // {
+        // if ()
+        // {
             
-        }
-    }
-}
+        // }
+    // }
+// }
 
 t_execution *expand_tokens(t_tokens *tokens, int nb)
 {
@@ -201,7 +207,7 @@ t_execution *expand_tokens(t_tokens *tokens, int nb)
     {
         exec[i].exec_path = get_exec_path(tokens[i], paths);
         exec[i].args = get_args(tokens[i]);
-        exec[i].redirections = get_redirections(tokens[i]);
+        // exec[i].redirections = get_redirections(tokens[i]);
     }
     free_paths(paths);
     return (exec);
