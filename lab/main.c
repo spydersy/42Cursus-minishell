@@ -5,15 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/19 15:41:21 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/21 11:08:05 by abelarif         ###   ########.fr       */
+/*   Created: 2021/07/18 14:41:22 by abelarif          #+#    #+#             */
+/*   Updated: 2021/07/18 14:43:51 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdio.h>
 
-int	main(int argc, char *argv[], char *envp[])
+int     main(void)
 {
-	minishell(argc, argv, envp);
-	return (0);
+    char    *line;
+
+    line = readline("minishell $");
+    printf("LINE : [%s]\n", line);
+    return (0);
 }

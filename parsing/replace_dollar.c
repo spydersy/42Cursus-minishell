@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:18:54 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/12 13:10:00 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/22 10:55:24 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 char	*env_search(char *str, int index)
 {
-    int         i;
-    int         lensrc;
-    char        *env;
+	int			i;
+	int			lensrc;
+	char		*env;
 
-    env = NULL;
-    i = -1;
-
+	env = NULL;
+	i = -1;
 	if (index != 0)
 		index = 1;
-    lensrc = ft_strlen(str + index);
-    while (g_env.sorted[++i])
-    {
-        if (ft_strncmp(str + 1 + index, g_env.sorted[i], lensrc - 1) == 0
-        && g_env.sorted[i][lensrc - 1] == '=') //edit
-        {
-            env = ft_substr(g_env.sorted[i], lensrc, ft_strlen(g_env.sorted[i]) - lensrc  + 2);
+	lensrc = ft_strlen(str + index);
+	while (g_env.sorted[++i])
+	{
+		if (ft_strncmp(str + 1 + index, g_env.sorted[i], lensrc - 1) == 0
+			&& g_env.sorted[i][lensrc - 1] == '=')
+		{
+			env = ft_substr(g_env.sorted[i], lensrc,
+					ft_strlen(g_env.sorted[i]) - lensrc + 2);
 			free(str);
 			str = NULL;
 			return (env);
-        }
-    }
+		}
+	}
 	free(str);
 	str = NULL;
-    return (ft_strdup(""));
+	return (ft_strdup(""));
 }
 
 void	dollar_handling(char **tok, int index)
@@ -47,7 +47,7 @@ void	dollar_handling(char **tok, int index)
 	str = ft_strdup(*tok);
 	free(*tok);
 	*tok = NULL;
-    *tok = env_search(str, index);
+	*tok = env_search(str, index);
 	if (*tok == NULL)
 		ft_error("tok", 1);
 }
@@ -95,7 +95,7 @@ char	**split_dollar_signe(char **old, int index)
 
 	i = -1;
 	content = ft_split(old[index], ' ');
-	new = malloc(sizeof(char*) * (count(old) + count(content)));
+	new = malloc(sizeof(char *) * (count(old) + count(content)));
 	while (++i < index)
 		new[i] = ft_strdup(old[i]);
 	c = -1;
@@ -123,14 +123,8 @@ void	set_types(t_tokens *tok, int oldlen, int newlen, int index)
 
 	i = -1;
 	newtype = malloc(sizeof(int) * newlen);
-	if (newtype == NULL)
-	{
-		ft_error("set types", 1);
-	}
 	while (++i < index)
-	{
-		newtype[i] =  tok->type[i];
-	}
+		newtype[i] = tok->type[i];
 	c = -1;
 	while (++c < newlen - oldlen + 1)
 	{
@@ -147,44 +141,46 @@ void	set_types(t_tokens *tok, int oldlen, int newlen, int index)
 		i++;
 	}
 	free(tok->type);
-	tok->type = NULL;
 	tok->type = newtype;
 }
 
 t_tokens	replace_dollar(t_tokens *tok)
 {
-    int         i;
-    int         presence;
-    int         oldlen;
-    int         newlen;
+	int			i;
+	int			presence;
+	int			oldlen;
+	int			newlen;
 
-    presence = 1;
-    oldlen = count(tok->tokens);
-    newlen = oldlen;
-    i = -1;
-    while (presence)
-    {
-        presence = 0;
-        while (tok->tokens[++i])
-        {
-            if (tok->tokens[i][1] == '$' || (i == 0 && tok->tokens[i][0] == '$'))
-            {
+	presence = 1;
+	oldlen = count(tok->tokens);
+	newlen = oldlen;
+	i = -1;
+	while (presence)
+	{
+		presence = 0;
+		while (tok->tokens[++i])
+		{
+			if (tok->tokens[i][1] == '$'
+				|| (i == 0 && tok->tokens[i][0] == '$'))
+			{
 				dollar_handling(&(tok->tokens[i]), i);
 				tok->tokens = split_dollar_signe(tok->tokens, i);
 				presence = 1;
 				newlen = count(tok->tokens);
 				if (oldlen != newlen)
-					set_types(tok,  oldlen, newlen, i);
+					set_types(tok, oldlen, newlen, i);
 				else if (tok->type[i] < 0)
 					tok->type[i] = -PROTECTED0;
 				else
 					tok->type[i] = PROTECTED0;
+				if (tok->type[0] == PROTECTED0 || tok->type[0] == -PROTECTED0)
+					tok->type[i] = -CMD;
 				i += newlen - oldlen;
 				oldlen = newlen;
 				break ;
-            }
-        }
+			}
+		}
 		tok->nb = i;
-    }
-    return (*tok);
+	}
+	return (*tok);
 }

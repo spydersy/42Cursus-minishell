@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:34:43 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/18 09:18:15 by abelarif         ###   ########.fr        #
+#    Updated: 2021/07/24 07:11:12 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,13 @@
 1 - Search the right executable.
     - Check if is an absolute path.
     - Check if is in current path.
-0 - Launch the right executable.
+1 - Launch the right executable.
 0 - Builtins.
 P - Expand tokens content.
-0 - “<<” read input from the current source until a line containing only the de-
-limiter is seen
+0 - “<<” read input from the current source until a line containing only the
+    delimiter is seen
 
-BUILTINS : 
+BUILTINS :
             0 - (1) echo    : $_
             0 - (1) cd      : $OLDPWD, $PWD, $_
             0 - (1) pwd     : $_
@@ -33,14 +33,8 @@ BUILTINS :
             0 - (1) exit    : $_, $?
 
 
-cat main.c | grep int   ----------------> DONE
-cat main.c || grep int  ----------------> DONE
-cat main.c ||| grep int ----------------> DONE
-cat main.c | | grep int ----------------> DONE
-cat main.c |            ----------------> DONE
-
-P - Expand tokens content : 
-    HOW ? 
+P - Expand tokens content :
+    HOW ?
         1 - char **args.
         1 - char **envp;
         0 - char **infiles, int *intype;

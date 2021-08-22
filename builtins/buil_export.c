@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 16:18:08 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 16:22:46 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/21 11:25:09 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ void        builtin_export(char **args)
     while (args[c])
     {
         c++;
-    
     }
 }

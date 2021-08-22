@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 10:31:44 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/22 10:14:33 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	join_bs(char **paths)
 		tmp = ft_strjoin(paths[i], "/");
 		free(paths[i]);
 		paths[i] = tmp;
-	}	
+	}
 }
 
 char        **get_paths(void)
@@ -187,7 +187,7 @@ char    **get_args(t_tokens tokens)
     // {
         // if ()
         // {
-            
+
         // }
     // }
 // }
@@ -237,24 +237,38 @@ int         dollar_is_present(char *str)
     return (0);
 }
 
-void        expand_args(t_execution *exec, int nb)
-{
-    int     i;
-    int     j;
+// char        *expand_dollar(char *arg)
+// {
+    // int     i;
 
-    i = -1;
-    while (++i < nb)
-    {
-        j = 0;
-        while (exec[i].args[++j])
-        {
-            if (exec[i].args[j][0] == '\"' && dollar_is_presennt(exec[i].args[j]))
-            {
-                
-            }
-        }
-    }
-}
+    // i = -1;
+    // while (arg[++i])
+    // {
+        // if (arg[i] == '$')
+        // {
+
+        // }
+    // }
+// }
+
+// void        expand_args(t_execution *exec, int nb)
+// {
+    // int     i;
+    // int     j;
+
+    // i = -1;
+    // while (++i < nb)
+    // {
+        // j = 0;
+        // while (exec[i].args[++j])
+        // {
+            // if (exec[i].args[j][0] == '\"' && dollar_is_present(exec[i].args[j]))
+            // {
+                // exec[i].args[j] = expand_dollar(exec[i].args[j]);
+            // }
+        // }
+    // }
+// }
 
 void        to_execution(t_tokens *tokens, int nb)
 {
@@ -263,7 +277,7 @@ void        to_execution(t_tokens *tokens, int nb)
 
     i = -1;
     exec = expand_tokens(tokens, nb);
-    expand_args(exec);
+    // expand_args(exec, nb);
     while (++i < nb)
     {
     printf("**********************************************\n");
