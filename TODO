@@ -40,3 +40,8 @@ P - Expand tokens content :
         0 - char **infiles, int *intype;
         0 - char **outfiles, int *outype;
         WARNING - Protected values;
+
+LAST TODO : 
+	- ADD CMD Type if needed.
+	- EXPAND Content inside double quotes.
+

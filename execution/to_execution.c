@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/24 12:59:32 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/24 13:25:03 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,26 +192,26 @@ char    **get_args(t_tokens tokens)
     // }
 // }
 
-t_execution *expand_tokens(t_tokens *tokens, int nb)
-{
-    int             i;
-    t_execution     *exec;
-    char            **paths;
+// t_execution *expand_tokens(t_tokens *tokens, int nb)
+// {
+    // int             i;
+    // t_execution     *exec;
+    // char            **paths;
 
-    i = -1;
-    paths = get_paths();
-    exec = malloc(sizeof(t_execution) * nb);
-    if (exec == NULL)
-        ft_error("MALLOC", 1);
-    while (++i < nb)
-    {
-        exec[i].exec_path = get_exec_path(tokens[i], paths);
-        exec[i].args = get_args(tokens[i]);
-        // exec[i].redirections = get_redirections(tokens[i]);
-    }
-    free_paths(paths);
-    return (exec);
-}
+    // i = -1;
+    // paths = get_paths();
+    // exec = malloc(sizeof(t_execution) * nb);
+    // if (exec == NULL)
+        // ft_error("MALLOC", 1);
+    // while (++i < nb)
+    // {
+        // exec[i].exec_path = get_exec_path(tokens[i], paths);
+        // exec[i].args = get_args(tokens[i]);
+        // // exec[i].redirections = get_redirections(tokens[i]);
+    // }
+    // free_paths(paths);
+    // return (exec);
+// }
 
 void        print_args(char **args)
 {
@@ -245,8 +245,7 @@ void        to_execution(t_tokens *tokens, int nb)
     if (nb){}
     while (++i < tokens[0].pipe)
     {
-        printf("----------------------------------\n");
-        print_toks(tokens[i].tokens, 434);
+        expand_double_quotes(tokens[i]);
     }
     // print_toks(tokens[i + 1].tokens, 12);
     // printf("NB : %d\n", tokens[i + 1].nb);
