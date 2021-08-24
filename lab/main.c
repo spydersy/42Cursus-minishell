@@ -11,12 +11,15 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 
-int     main(void)
+int     main()
 {
-    char    *line;
+	int	ret;
+	char	*argv[] = {"cat", "main.c", "../main.c", NULL};
+	char	*path = NULL;
 
-    line = readline("minishell $");
-    printf("LINE : [%s]\n", line);
-    return (0);
+	ret = execve(path, argv, NULL);
+	printf("DONE %d\n", ret);
+	return (0);
 }

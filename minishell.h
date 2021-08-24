@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 09:51:17 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/24 12:56:48 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@
 
 
 
-
+void    print_toks(char **str, int nb);
 
 # define CMD        9001 /*	arguments		*/
-# define ARG        9002 
-# define REDO0		9003 
-# define REDO1		9004 
-# define REDI0		9005 
-# define REDI1		9006 
+# define ARG        9002
+# define REDO0		9003
+# define REDO1		9004
+# define REDI0		9005
+# define REDI1		9006
 # define FILE		9007 /*	file			*/
 # define ERROR		9008 /*	error			*/
 # define PROTECTED0	9009 /*	protected arg	*/
@@ -108,7 +108,6 @@ int						count_bslash(char *line);
 int						count_tokens(char *line);
 int						bs_position(char **tokens);
 int						*set_tok_types(t_tokens tok);
-int						to_execution2(t_tokens *tokens);
 int						count_bs(char *line, int index);
 int						*get_bslash_index(char *line, int nb);
 int						ft_error(char *description, int exitstat);

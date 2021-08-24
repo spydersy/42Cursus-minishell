@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/18 09:49:02 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/24 12:57:05 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ void	set_separator_type(int *type, char **toks)
 	}
 }
 
+void    print_toks(char **str, int nb)
+{
+    int i;
+
+    i = -1;
+    while (str[++i])
+    {
+        printf("TOOOOOK [%d]: [%s]\n", nb, str[i]);
+    }
+}
+
 void	extract_tokens(char **commands)
 {
 	int			i;
@@ -73,14 +84,18 @@ void	extract_tokens(char **commands)
 	i = -1;
 	while (commands[++i])
 	{
+        printf("repeat : %d\n", i);
 		tok[i].pipe = nb;
 		tok[i].nb = count_tokens(commands[i]);
 		tok[i].tokens = split_tok(commands[i], tok[i].nb);
 		tok[i].type = set_tok_types(tok[i]);
 		tok[i] = replace_dollar(tok + i); //WARNING PROTECTED TYPE
+        print_toks(tok[i].tokens, 0);
 		print_types(tok[i].type, tok[i].nb, tok[i].tokens);
 	}
+    i = 0;
     bs = bs_position(commands);
+
     if (bs == 0)
     {
         ft_error("This Shell does not support unspecified special characters \"\\\"", 0);

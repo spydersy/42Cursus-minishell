@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/18 06:14:01 by abelarif         ###   ########.fr        #
+#    Updated: 2021/08/23 12:06:57 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ EXECUTION_SRCS=			./execution/to_execution.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
-						
+
 
 PARSING_SRCS=			./parsing/extraction.c\
 						./parsing/replace_dollar.c\

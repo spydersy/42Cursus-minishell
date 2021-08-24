@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/22 10:14:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/24 12:59:32 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,59 +237,24 @@ int         dollar_is_present(char *str)
     return (0);
 }
 
-// char        *expand_dollar(char *arg)
-// {
-    // int     i;
-
-    // i = -1;
-    // while (arg[++i])
-    // {
-        // if (arg[i] == '$')
-        // {
-
-        // }
-    // }
-// }
-
-// void        expand_args(t_execution *exec, int nb)
-// {
-    // int     i;
-    // int     j;
-
-    // i = -1;
-    // while (++i < nb)
-    // {
-        // j = 0;
-        // while (exec[i].args[++j])
-        // {
-            // if (exec[i].args[j][0] == '\"' && dollar_is_present(exec[i].args[j]))
-            // {
-                // exec[i].args[j] = expand_dollar(exec[i].args[j]);
-            // }
-        // }
-    // }
-// }
-
 void        to_execution(t_tokens *tokens, int nb)
 {
-    t_execution     *exec;
-    int             i;
+    int i;
 
     i = -1;
-    exec = expand_tokens(tokens, nb);
-    // expand_args(exec, nb);
-    while (++i < nb)
+    if (nb){}
+    while (++i < tokens[0].pipe)
     {
-    printf("**********************************************\n");
-            printf("exec_paths : [%s]\n",exec[i].exec_path);
-            print_args(exec[i].args);
-    printf("----------------------------------------------\n\n");
+        printf("----------------------------------\n");
+        print_toks(tokens[i].tokens, 434);
     }
+    // print_toks(tokens[i + 1].tokens, 12);
+    // printf("NB : %d\n", tokens[i + 1].nb);
     // while (++i < nb)
     // {
-        // tokens[i].exec_path = get_exec_path(tokens[i], paths);
-        // printf("NB PIPES : %d\n", tokens[i].pipe);
-        // printf("EXEC_PATH : [%s]\n", tokens[i].exec_path);
+    // printf("**********************************************\n");
+            // printf("exec_paths : [%s]\n",exec[i].exec_path);
+            // print_args(exec[i].args);
+    // printf("----------------------------------------------\n\n");
     // }
-    // to_execution2(tokens);
 }

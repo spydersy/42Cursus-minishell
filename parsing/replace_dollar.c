@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:18:54 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/22 10:55:24 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/24 11:26:12 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ char	**split_dollar_signe(char **old, int index)
 
 	i = -1;
 	content = ft_split(old[index], ' ');
+    printf("COUNT CONTENT : %d\n", count(content));
+    printf("COUNT OLD     : %d\n", count(old));
+    printf("------- INDEX : %d\n", index);
 	new = malloc(sizeof(char *) * (count(old) + count(content)));
 	while (++i < index)
 		new[i] = ft_strdup(old[i]);
@@ -165,6 +168,7 @@ t_tokens	replace_dollar(t_tokens *tok)
 			{
 				dollar_handling(&(tok->tokens[i]), i);
 				tok->tokens = split_dollar_signe(tok->tokens, i);
+                // print_toks(tok->tokens, 5);
 				presence = 1;
 				newlen = count(tok->tokens);
 				if (oldlen != newlen)
