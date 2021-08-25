@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/24 13:25:03 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/25 00:21:47 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,45 +174,6 @@ char    **get_args(t_tokens tokens)
     return (args);
 }
 
-// char    **get_redirections(t_tokens token)
-// {
-    // int     i;
-    // int     c;
-    // char    **redirections;
-
-    // i = -1;
-    // c = 0;
-
-    // while (token.tokens[++i])
-    // {
-        // if ()
-        // {
-
-        // }
-    // }
-// }
-
-// t_execution *expand_tokens(t_tokens *tokens, int nb)
-// {
-    // int             i;
-    // t_execution     *exec;
-    // char            **paths;
-
-    // i = -1;
-    // paths = get_paths();
-    // exec = malloc(sizeof(t_execution) * nb);
-    // if (exec == NULL)
-        // ft_error("MALLOC", 1);
-    // while (++i < nb)
-    // {
-        // exec[i].exec_path = get_exec_path(tokens[i], paths);
-        // exec[i].args = get_args(tokens[i]);
-        // // exec[i].redirections = get_redirections(tokens[i]);
-    // }
-    // free_paths(paths);
-    // return (exec);
-// }
-
 void        print_args(char **args)
 {
     int     i;
@@ -227,33 +188,136 @@ void        print_args(char **args)
 int         dollar_is_present(char *str)
 {
     int     i;
+    int     count;
 
     i = -1;
+    count = 0;
     while (str[++i])
     {
         if (str[i] == '$')
-            return (1);
+            count++;
     }
-    return (0);
+    return (count);
+}
+
+char    *ft_charjoin(char *str, char c)
+{
+    int     i;
+    int     len;
+    char    *ret;
+
+    i = -1;
+    len = ft_strlen(str);
+    if (c != '\0')
+        len++;
+    ret = malloc(sizeof(char) * len + 1);
+    if (ret == NULL)
+        ft_error("MALLOC", 1);
+    while (str[++i])
+        ret[i] = str[i];
+    if (c != '\0')
+        str[i++] = '\0';
+    str[i] = '\0';
+    free(str);
+    str = NULL;
+    return (ret);
+}
+
+char    dolla_handling(char *str, int index)
+{
+    int     i;
+    int     end;
+
+    i = index;
+    while (str[++i])
+    {
+        if (str[i] == ' ' || str[i] == '\t')
+            break ;
+    }
+//................................ LAST MODIFICATION ..........
+}
+
+char    *expand_dollars(char *str)
+{
+    int     i;
+    char    *content;
+
+    content = ft_strdup("");
+    while (str[++i])
+    {
+        if (str[i] != '$')
+        {
+            content = ft_charjoin(content, str[i]);
+        }
+        else
+        {
+            content = ft_strjoin(content, dollar_handling(str, i));
+        }
+    }
+}
+
+char *expand_quotes(char *content, int index)
+{
+    int     i;
+    int     nb_dollars;
+    char    *tmp;
+
+    i = -1;
+    tmp = ft_substr(content, index + 1, ft_strlen(content) - 2 - index);
+    nb_dollars = dollar_is_present(tmp);
+    if (content[index] == '\"' && nb_dollars != -1)
+    {
+        tmp = expand_dollars(tmp);
+    }
+    return (content);
+}
+
+t_tokens    select_quotes(t_tokens tokens)
+{
+    int     i;
+    int     dqIndex;
+
+    i =-1;
+    while (tokens.tokens[++i])
+    {
+        dqIndex = 0;
+        printf("DONE\n");
+        if (i != 0)
+            dqIndex++;
+        if (tokens.tokens[i][dqIndex] == '\"'
+            || tokens.tokens[i][dqIndex] == '\'')
+        {
+            tokens.tokens[i]
+            = expand_quotes(tokens.tokens[i], dqIndex);
+        }
+    }
+    return (tokens);
+}
+
+void        print_new(t_tokens tok)
+{
+    int     i;
+
+    i = -1;
+    while (++i < tok.nb)
+    {
+        printf("NEW TOKENS : [%s]\n", tok.tokens[i]);
+    }
 }
 
 void        to_execution(t_tokens *tokens, int nb)
 {
-    int i;
+    if (nb){}
+
+    int     i;
+    int     pipes;
 
     i = -1;
-    if (nb){}
-    while (++i < tokens[0].pipe)
+    pipes = tokens[0].pipe;
+    while (++i < pipes)
     {
-        expand_double_quotes(tokens[i]);
+        tokens[i] = select_quotes(tokens[i]);
+        print_new(tokens[i]);
+        // printf("new value : [%s]\n", tokens[i].);
     }
-    // print_toks(tokens[i + 1].tokens, 12);
-    // printf("NB : %d\n", tokens[i + 1].nb);
-    // while (++i < nb)
-    // {
-    // printf("**********************************************\n");
-            // printf("exec_paths : [%s]\n",exec[i].exec_path);
-            // print_args(exec[i].args);
-    // printf("----------------------------------------------\n\n");
-    // }
 }

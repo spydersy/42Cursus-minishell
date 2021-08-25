@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:28:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 09:13:49 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/25 00:12:00 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ void	extract_semicolon_line(char *line)
 	if (cl_separator.nb_separator == 0)
     {
 		cl_separator.content = ft_split(line, '\0');
-	    extract_pipe_line(cl_separator.content[0]);
-	    free(cl_separator.content[0]);
-	    cl_separator.content[0] = NULL;
-    	free(cl_separator.content);
+        extract_pipe_line(cl_separator.content[0]);
+        free(cl_separator.content[0]);
+        cl_separator.content[0] = NULL;
+        free(cl_separator.content);
     }
     else
 	{
         ft_error("This Shell does not support unspecified special characters \";\"", 0);
-    }    
+    }
 	free(line);
 	free(cl_separator.separator_index);
 	cl_separator.separator_index = NULL;

@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/24 12:56:48 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/08/24 16:12:28 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void    print_toks(char **str, int nb);
 # define PROTECTED0	9009 /*	protected arg	*/
 # define PROTECTED1	9010 /*	protected arg	*/
 # define SKIPED		9011 /*	skiped tok		*/
+
 typedef struct s_quote
 {
 	bool				s_quote;
