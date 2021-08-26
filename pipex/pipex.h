@@ -28,6 +28,7 @@
 # define INFILE 0
 # define OUTFILE 1
 # define APPFILE 2
+
 typedef struct s_data{
 	int		infd;
 	int		outfd;

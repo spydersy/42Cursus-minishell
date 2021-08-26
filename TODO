@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:34:43 by abelarif          #+#    #+#              #
-#    Updated: 2021/07/24 07:11:12 by abelarif         ###   ########.fr        #
+#    Updated: 2021/08/25 00:32:33 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ P - Expand tokens content :
         0 - char **outfiles, int *outype;
         WARNING - Protected values;
 
-LAST TODO : 
-	- ADD CMD Type if needed.
-	- EXPAND Content inside double quotes.
+LAST TODO :
+	1 - EXPAND Content inside double quotes.
+	2 - ADD CMD Type if needed.
+    3 -
 
