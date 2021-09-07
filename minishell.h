@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/24 16:12:28 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/07 08:39:47 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int						*get_bslash_index(char *line, int nb);
 int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
 
+void                	dollar_handling(char **tok, int index);
 void					prompt(int sig);
 void					to_execution(t_tokens *tokens, int nb);
 void					free_toks(t_tokens tok);
