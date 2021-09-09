@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/07 08:39:47 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 15:04:43 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "./libft/libft.h"
 # include "./line_reader/get_next_line.h"
 
+#include <readline/readline.h>
+#include <readline/history.h>
+	   
 		/*	COLORS		*/
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"

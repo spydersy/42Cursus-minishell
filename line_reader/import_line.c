@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:21:39 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/05 20:10:22 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 16:10:07 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,13 @@ void	prompt(int sig)
 	ft_putstr_fd(") > ", 1);
 	ft_putstr_fd(KWHT, 1);
 	free(buffer);
+	// return ();
 }
+
+// char	*prompt(void)
+// {
+// 	char	*pwd;
+
+// 	pwd = malloc(sizeof(char) * 500);
+		
+// }

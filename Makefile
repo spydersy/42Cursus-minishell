@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
+#    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/08/23 12:06:57 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/09 15:25:07 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,10 @@ SRCS=					$(LIBFT_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 
-FLAGS=					-Wall -Werror -Wextra
+FLAGS=					-Wall -Werror -Wextra -lreadline
 
 $(NAME): $(OBJS)
-		clang-9 -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 
@@ -75,4 +75,4 @@ fclean: clean
 re: fclean all
 
 fsanitize: fclean $(OBJS)
-		clang-9 $(FLAGS) -g3 -fsanitize=address $(SRCS) -o $(NAME)
+		gcc $(FLAGS) -g3 -fsanitize=address $(SRCS) -o $(NAME)

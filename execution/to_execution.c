@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/07 09:51:56 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 16:14:37 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,7 @@ t_tokens    select_quotes(t_tokens tokens)
     while (tokens.tokens[++i])
     {
         dqIndex = 0;
+        printf("checker :  [%s]\n", tokens.tokens[i]);
         if (i != 0)
             dqIndex++;
         if (tokens.tokens[i][dqIndex] == '\"'
@@ -329,6 +330,7 @@ t_tokens    select_quotes(t_tokens tokens)
         {
             tokens.tokens[i]
             = expand_quotes(tokens.tokens[i], dqIndex);
+            printf(">>%s<<\n", tokens.tokens[i]);
         }
     }
     return (tokens);
@@ -354,6 +356,7 @@ void        to_execution(t_tokens *tokens, int nb)
 
     i = -1;
     pipes = tokens[0].pipe;
+    printf("pipes : [%d]\n", pipes);
     printf("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL\n");
     while (++i < pipes)
     {

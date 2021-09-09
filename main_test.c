@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:15:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/07 08:20:44 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 15:25:17 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@
 }
 */
 
+int		main()
+{
+	char	*buffer;
+	while (1)
+	{
+		buffer = readline("PROMPT >>");
+		if (buffer == NULL)
+			exit(0);		
+		printf("[%s]\n", buffer);
+		add_history (buffer);
+		free(buffer);
+	}
+	return (0);
+}
 
 // char	*ft_substr(char const *s, unsigned int start, size_t len)
 // {
@@ -63,15 +77,15 @@
 // 	return (sub);
 // }
 
-int		main(int argc, char *argv[])
-{
-	char		*sub;
+// int		main(int argc, char *argv[])
+// {
+// 	char		*sub;
 
-	sub = ft_substr("   $SHELL vfsdv", 3, 6);
-	printf("[%s]\n", sub);
+// 	sub = ft_substr("   $SHELL vfsdv", 3, 6);
+// 	printf("[%s]\n", sub);
 
-	return (0);
-}
+// 	return (0);
+// }
 
 /*int		main()
 {

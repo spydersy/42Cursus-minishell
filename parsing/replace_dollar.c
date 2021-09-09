@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_dollar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:18:54 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/24 11:26:12 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 16:30:44 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ t_tokens	replace_dollar(t_tokens *tok)
 		presence = 0;
 		while (tok->tokens[++i])
 		{
-			if (tok->tokens[i][1] == '$'
+			if ((tok->tokens[i][1] == '$' && i)
 				|| (i == 0 && tok->tokens[i][0] == '$'))
 			{
 				dollar_handling(&(tok->tokens[i]), i);
