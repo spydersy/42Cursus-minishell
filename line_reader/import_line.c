@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:21:39 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 17:54:26 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:09:25 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 void	clear_window(void)
 {
 	write(1, "\e[1;1H\e[2J", ft_strlen("\e[1;1H\e[2J"));
+}
+
+int	empty_line(char *line)
+{
+	int		i;
+
+	i = -1;
+	while (line[++i])
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+		{
+			return (0);
+		}
+	}
+	return (1);
 }
 
 char	*read_line(void)
@@ -26,10 +41,12 @@ char	*read_line(void)
 	line = readline(prpt);
 	if (line == NULL)
 	{
+		//FREE();
 		exit(EXIT_SUCCESS);
 	}
 	printf("liiiiine [%s]\n", line);
-	add_history(line);
+	if (empty_line(line) == 0)
+		add_history(line);
 	free(prpt);
     return (line);
 }

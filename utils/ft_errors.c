@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:08:49 by abelarif          #+#    #+#             */
-/*   Updated: 2021/05/11 22:24:32 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 13:41:38 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_error(char *description, int exitstat)
 	}
 	else
 	{
-		/* GET DESCRIPTION USING ERRNO STRERROR */
+		write(STDERR, strerror(errno), ft_strlen(strerror(errno)));
 	}
 	write(2, "\n", 1);
 	write(1, KWHT, ft_strlen(KWHT));

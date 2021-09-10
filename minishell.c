@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:09:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 18:05:16 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:11:16 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void	terminal_view(void)
 			first_time = 0;
 		}
 		line = read_line();
-		extract_semicolon_line(line);
-	}	
+		if (empty_line(line) == 0)
+			extract_semicolon_line(line);
+		else	
+			free(line);
+	}
 }
 
 void	free_env(void)

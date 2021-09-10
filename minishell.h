@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 17:28:21 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:41:41 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void    print_toks(char **str, int nb);
 # define PROTECTED0	9009 /*	protected arg	*/
 # define PROTECTED1	9010 /*	protected arg	*/
 # define SKIPED		9011 /*	skiped tok		*/
+# define HEREDOC	9012 /*	heredocs		*/
+# define EOFHEREDOC	9013 /*	EOF Heredocs	*/
 
 typedef struct s_quote
 {
@@ -72,8 +74,6 @@ typedef struct s_env
 {
 	char				**env;
 	char				**sorted;
-	char				**history;
-	int					history_size;
 	int					size;
 }						t_env;
 
@@ -116,17 +116,19 @@ int						count_bs(char *line, int index);
 int						*get_bslash_index(char *line, int nb);
 int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
+int	empty_line(char *line);
 
-void                	dollar_handling(char **tok, int index);
 char					*prompt(void);
-void					to_execution(t_tokens *tokens, int nb);
-void					free_toks(t_tokens tok);
-void					init_env(char **env);
+void					sort_env(void);
 void					clear_window(void);
-void					extract_semicolon_line(char *line);
-void					minishell(int argc, char *argv[], char *envp[]);
+void					init_env(char **env);
+void					free_toks(t_tokens tok);
 void					extract_tokens(char **commands);
+void					extract_semicolon_line(char *line);
+void                	dollar_handling(char **tok, int index);
+void					to_execution(t_tokens *tokens, int nb);
 void					set_separator_type(int *type, char **toks);
+void					minishell(int argc, char *argv[], char *envp[]);
 
 char					*read_line(void);
 char					*builtin_pwd(int descriptor);
@@ -138,5 +140,12 @@ t_tokens				replace_dollar(t_tokens *tok);
 t_quote					init_quote(void);
 t_quote					set_quote_value(char quote_type, t_quote to_quote);
 t_separator				get_separator_index(char *line, char separator_type);
+
+
+
+
+
+
+void	print_types(int *types, int nb, char **tokens);
 
 #endif

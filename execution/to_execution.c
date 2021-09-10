@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 18:08:51 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:00:52 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,6 @@ void        to_execution(t_tokens *tokens, int nb)
     while (++i < pipes)
     {
         tokens[i] = select_quotes(tokens[i]);
-        print_new(tokens[i]);
+        print_types(tokens[i].type, tokens[i].nb, tokens[i].tokens);
     }
 }
