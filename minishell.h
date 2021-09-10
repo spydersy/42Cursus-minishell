@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 15:04:43 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:28:21 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
 
 void                	dollar_handling(char **tok, int index);
-void					prompt(int sig);
+char					*prompt(void);
 void					to_execution(t_tokens *tokens, int nb);
 void					free_toks(t_tokens tok);
 void					init_env(char **env);

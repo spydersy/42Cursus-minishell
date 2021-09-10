@@ -6,26 +6,35 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:09:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/06/11 17:05:12 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 18:05:16 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// void	signal_handler(int sig)
+// {
+// 	printf("signal : %d\n", sig);
+// 	if (sig == 2)
+// 	{
+// 		readline(prompt());
+// 	}
+// }
+
 void	terminal_view(void)
 {
 	static int	first_time = 1;
-
+	char		*line;
+	
 	while (1)
 	{
-		signal(SIGINT, prompt);
 		if (first_time)
 		{
 			clear_window();
 			first_time = 0;
 		}
-		prompt(0);
-		extract_semicolon_line(read_line());
+		line = read_line();
+		extract_semicolon_line(line);
 	}	
 }
 

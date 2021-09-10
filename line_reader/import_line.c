@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:21:39 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 16:10:07 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:54:26 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,33 @@ void	clear_window(void)
 char	*read_line(void)
 {
 	char	*line;
-
-	if (get_next_line(0, &line) < 0)
-		ft_error("Get Next Line", 1);
+	char	*prpt;
+	
+	prpt = prompt();
+	line = readline(prpt);
+	if (line == NULL)
+	{
+		exit(EXIT_SUCCESS);
+	}
+	printf("liiiiine [%s]\n", line);
+	add_history(line);
+	free(prpt);
     return (line);
 }
 
-void	prompt(int sig)
+char	*prompt(void)
 {
-	char	*buffer;
-
-	buffer = malloc(sizeof(char) * 500);
-	if (buffer == NULL)
-		ft_error("MALLOC", 1);
-	buffer = getcwd(buffer, 500);
-	if (sig == 2)
-		write(1, "\n", 1);	
-	ft_putstr_fd(KGRN, 1);
-	ft_putstr_fd("MINISHELL (", 1);
-	ft_putstr_fd(KBLU, 1);
-	ft_putstr_fd(buffer, 1);
-	ft_putstr_fd(KGRN, 1);
-	ft_putstr_fd(") > ", 1);
-	ft_putstr_fd(KWHT, 1);
-	free(buffer);
-	// return ();
+	char	*pwd;
+	char	*prompt;
+	char	*tmp;	
+	
+	pwd = malloc(sizeof(char) * 500);
+	pwd = getcwd(pwd, 500);
+	tmp = ft_strjoin("\x1B[32m MINISHELL ( \x1B[34m", pwd);
+	prompt = ft_strjoin(tmp, "\x1B[32m ) > ");
+	free(tmp);
+	tmp = ft_strjoin(prompt, "\x1B[37m");
+	free(prompt);
+	free(pwd);
+	return (tmp);
 }
-
-// char	*prompt(void)
-// {
-// 	char	*pwd;
-
-// 	pwd = malloc(sizeof(char) * 500);
-		
-// }

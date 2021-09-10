@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 16:14:37 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/09 18:08:51 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,7 +343,7 @@ void        print_new(t_tokens tok)
     i = -1;
     while (++i < tok.nb)
     {
-        printf("NEW TOKENS : [%s]\n", tok.tokens[i]);
+        printf("NEW TOKENS : [%s] [%d]\n", tok.tokens[i], tok.type[i]);
     }
 }
 

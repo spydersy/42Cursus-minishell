@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buil_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 14:36:48 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/17 17:51:35 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 12:20:33 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,5 @@ void        exec_cd(char *path)
 
 void        builtin_cd(char **path)
 {
-    int     i;
-
-    i = 0;
-    while (path[i])
-    {
-        i++;
-    }
-    if (i == 1)
-    {
-        exec_cd(path[0]);
-    }
-    ft_error(" cd: too many arguments", 0);
+    int ret
 }

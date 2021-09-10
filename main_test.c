@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:15:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 15:25:17 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/10 12:32:48 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,36 @@
 }
 */
 
-int		main()
+int	main(int argc, char *argv[])
 {
+	int		ret;
 	char	*buffer;
-	while (1)
+	
+	ret = 0;
+	ret = chdir(argv[1]);
+	printf("ret : [%d]\n", ret);
+	if (ret == -1)
 	{
-		buffer = readline("PROMPT >>");
-		if (buffer == NULL)
-			exit(0);		
-		printf("[%s]\n", buffer);
-		add_history (buffer);
-		free(buffer);
+		printf("[%d],[%s]\n", errno, strerror(errno));
+		// perror(buffer);
 	}
 	return (0);
 }
+
+// int		main()
+// {
+// 	char	*buffer;
+// 	while (1)
+// 	{
+// 		buffer = readline("PROMPT >>");
+// 		if (buffer == NULL)
+// 			exit(0);		
+// 		printf("[%s]\n", buffer);
+// 		add_history (buffer);
+// 		free(buffer);
+// 	}
+// 	return (0);
+// }
 
 // char	*ft_substr(char const *s, unsigned int start, size_t len)
 // {
