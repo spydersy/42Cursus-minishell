@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:15:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/11 15:39:24 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 18:27:05 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "minishell.h"
+
 /*char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
@@ -105,17 +106,17 @@
 // 	return (0);
 // }
 
-// int		main()
-// {
-// 	char	*args[] = {"/bin/ls", NULL};
-//     char    *buffer;
+int		main()
+{
+	char	*args[] = {"lvss", NULL};
+    char    *buffer;
 
-// 	int ret = execve(args[1], args, NULL);
-//     perror(buffer);
-// 	printf("FATAL %d\n", ret);
-// 	printf("[%s]\n", strerror(errno));
-// 	return (0);
-// }
+	int ret = execve("", args, NULL);
+    perror(buffer);
+	printf("FATAL %d\n", ret);
+	printf("[%s]\n", strerror(errno));
+	return (0);
+}
 
 /*
 int main()
