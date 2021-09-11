@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/11 16:49:59 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 18:39:48 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,11 @@ char        *get_exec_path(t_tokens token, char **paths)
         if (fd > 0)
         {
             close(fd);
+			free_paths(paths);
             return (token.tokens[i] + index);
         }
     }
+	free_paths(paths);
     return (exec_path);
 }
 
