@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/11 19:00:32 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 19:10:56 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,9 @@ char        *get_exec_path(t_tokens token, char **paths)
 
     i = -1;
     index = 0;
-	printf("Wa lpaaaaaath : %s\n", paths[0]);
-
     while (++i < token.nb)
-    {
         if (token.type[i] == CMD || token.type[i] == -CMD)
             break ;
-    }
     exec_path = join_paths(token, i, paths);
     if (exec_path == NULL)
     {
