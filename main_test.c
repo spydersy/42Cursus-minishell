@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 12:15:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/10 18:37:08 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 15:39:24 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,20 @@
 
 
 
-int		main()
-{
-	char	*buffer;
-	while (1)
-	{
-		buffer = readline("PROMPT >>");
-		if (buffer == NULL)
-			exit(0);		
-		printf("[%s]\n", buffer);
-		add_history (buffer);
-		free(buffer);
-	}
-	return (0);
-}
+// int		main()
+// {
+// 	char	*buffer;
+// 	while (1)
+// 	{
+// 		buffer = readline("PROMPT >>");
+// 		if (buffer == NULL)
+// 			exit(0);		
+// 		printf("[%s]\n", buffer);
+// 		add_history (buffer);
+// 		free(buffer);
+// 	}
+// 	return (0);
+// }
 
 // char	*ft_substr(char const *s, unsigned int start, size_t len)
 // {
@@ -129,3 +129,52 @@ int main()
     return (0);
 }
 */
+
+// char	*ft_strjoin(char *s1, char *s2)
+// {
+// 	int		len1;
+// 	int		len2;
+// 	char	*str;
+	
+// 	len1 = 0;
+// 	len2 = 0;
+// 	while (s1[len1])
+// 		len1++;
+// 	while (s2[len2])
+// 		len2++;
+// 	str = malloc(sizeof(char) * (len1 + len2 + 1));
+// 	len1 = 0;
+// 	while (s1[len1])
+// 	{
+// 		str[len1] = s1[len1];
+// 		len1++;
+// 	}
+// 	len2 = 0;
+// 	while (s2[len2])
+// 	{
+// 		str[len1] = s2[len2];
+// 		len1++;
+// 		len2++;
+// 	}
+// 	str[len1] = '\0';
+// 	return (str);
+// }
+
+// int	main(int argc, char *argv[])
+// {
+// 	int		i;
+// 	pid_t	pid;
+// 	char	*path = "/bin/";
+	
+// 	i = 0;
+// 	while (++i < argc)
+// 	{
+// 		pid = fork();
+// 		if (pid == 0)
+// 		{
+// 			int ret = execve(ft_strjoin(path, argv[i]), NULL, NULL);
+// 			printf("%d\n", ret);
+// 		}
+// 	}
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/09 16:06:41 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 16:44:24 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	extract_tokens(char **commands)
     }
     if (grammar_checker(commands, tok) == 1)
     {
-        to_execution(tok, nb);
+        expand_quotes_dollar(tok);
     }
     i = -1;
 	while (++i < nb)

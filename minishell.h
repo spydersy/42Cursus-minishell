@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/10 17:41:41 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:13:18 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,12 @@ typedef struct s_separator
 
 typedef struct s_execution
 {
-    int                 nb_commands;
+    int                 nb_pipelines;
     char                **args;
-    char                **redirections;
-    char                *exec_path;
+	char                **files;
+	int					*fds;
+	int					*types;
+	char                *exec_path;
 }                       t_execution;
 
 
@@ -126,15 +128,18 @@ void					free_toks(t_tokens tok);
 void					extract_tokens(char **commands);
 void					extract_semicolon_line(char *line);
 void                	dollar_handling(char **tok, int index);
-void					to_execution(t_tokens *tokens, int nb);
+void					expand_quotes_dollar(t_tokens *tokens);
 void					set_separator_type(int *type, char **toks);
 void					minishell(int argc, char *argv[], char *envp[]);
+void					execution(t_tokens *tokens);
 
 char					*read_line(void);
 char					*builtin_pwd(int descriptor);
 char					**split_tok(char *line, int nb);
 char					*get_token(char *line, int flag);
 char					**splitSep(char *line, int *sepIndex, int nbSep);
+char        			**get_paths(void);
+char        			*get_exec_path(t_tokens token, char **paths);
 
 t_tokens				replace_dollar(t_tokens *tok);
 t_quote					init_quote(void);

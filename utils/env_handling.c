@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:36:06 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/10 16:50:55 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/11 15:44:04 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	sort_env(void)
 
 	tmp = NULL;
 	repeat = 1;
-
 	arr_dup();
 	while (repeat)
 	{
@@ -45,7 +44,6 @@ void	sort_env(void)
 		repeat = 0;
 		while (g_env.sorted[++i])
 		{
-			printf("AAAAAAA\n");
 			if (g_env.sorted[i] && g_env.sorted[i + 1]
 				&& ft_strncmp(g_env.sorted[i], g_env.sorted[i + 1],
 					max_of(ft_strlen(g_env.sorted[i]),
@@ -58,7 +56,6 @@ void	sort_env(void)
 			}
 		}
 	}
-
 }
 
 void	init_env(char **env)

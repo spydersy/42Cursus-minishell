@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/10 11:58:23 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/11 16:45:29 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ LIBFT_SRCS=				./libft/ft_split.c\
 # BUILTINS_SRCS=			./builtins/buil_export.c\
 						
 
-EXECUTION_SRCS=			./execution/to_execution.c\
-						./execution/to_execution2.c\
+EXECUTION_SRCS=			./execution/exec_path.c\
+						./execution/execution.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
@@ -43,6 +43,7 @@ PARSING_SRCS=			./parsing/extraction.c\
 						./parsing/replace_dollar.c\
 						./parsing/extract_tokens.c\
 						./parsing/tokens_handling.c\
+						./parsing/expand_quotes.c\
 
 UTILS_SRCS=				./utils/max_of.c\
 						./utils/ft_errors.c\
