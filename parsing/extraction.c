@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:28:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/08/25 00:12:00 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/12 10:03:38 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,8 @@ void	extract_pipe_line(char *line)
 
 void	extract_semicolon_line(char *line)
 {
-	int				i;
-	int				flag;
 	t_separator		cl_separator;
 
-	i = -1;
-	flag = 0;
 	if (ft_strlen(line) == 0)
 	{
 		free(line);

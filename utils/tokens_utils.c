@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:06:45 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 10:08:38 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/12 10:02:00 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,8 @@ void	set_tok_value(int *type, char **content)
 
 int	    *set_tok_types(t_tokens tok)
 {
-	int			i;
 	int			*type;
 
-	i = -1;
 	type = malloc(sizeof(int) * tok.nb);
 	if (type == NULL)
 	{

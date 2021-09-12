@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/11 16:59:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/12 10:03:10 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,8 @@ void        print_args(char **args)
 void        expand_quotes_dollar(t_tokens *tokens)
 {
     int     i;
-    int     pipes;
 
     i = -1;
-    pipes = tokens[0].pipe;
     while (++i < tokens[0].pipe)
     {
         tokens[i] = select_quotes(tokens[i]);
