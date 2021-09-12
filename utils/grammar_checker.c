@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grammar_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/11 16:12:53 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/12 12:12:48 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ int	is_arg(int type)
 	if (type == ARG || type == -ARG)
 		return (1);
 	return (0);
+}
+
+int is_protected(int type)
+{
+    if (type == PROTECTED0 || type == -PROTECTED0)
+        return (1);
+    if (type == PROTECTED1 || type == -PROTECTED1)
+        return (1);
+    return (0);
 }
 
 int	is_cmd(int type)
