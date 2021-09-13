@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/12 10:28:46 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/13 12:34:43 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ char        *get_exec_path(t_tokens token, char **paths)
         if (token.type[i] == CMD || token.type[i] == -CMD)
             break ;
     if (is_builtin(token.tokens[i]) == 1)
+    {
+        free_paths(paths);
         return (ft_strdup("builtin"));
+    }
     exec_path = join_paths(token, i, paths);
     if (exec_path == NULL)
     {
@@ -149,6 +152,7 @@ char        *get_exec_path(t_tokens token, char **paths)
 		free_paths(paths);
 		return (ft_strdup(""));free_paths(paths);
 	}
+    free_paths(paths);
 	return (exec_path);
 }
 
