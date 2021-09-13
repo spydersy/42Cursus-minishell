@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
+#    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/12 10:22:48 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/13 11:11:30 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,14 +64,14 @@ SRCS=					$(LIBFT_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 
-FLAGS=					-Wall -Werror -Wextra
+# FLAGS=					-Wall -Werror -Wextra
 
-# FLAGS=					-Wall -Werror -Wextra -lreadline\
-# 					   #	-L ~/goinfre/.brew/opt/readline/lib \
-# 						-I ~/goinfre/.brew/opt/readline/include
+FLAGS=					-Wall -Werror -Wextra -lreadline\
+					   #	-L ~/goinfre/.brew/opt/readline/lib \
+						-I ~/goinfre/.brew/opt/readline/include
 
 $(NAME): $(OBJS)
-		clang-9 -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 
