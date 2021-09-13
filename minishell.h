@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 16:35:19 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/13 16:48:21 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,16 @@ typedef struct s_separator
 
 typedef struct s_execution
 {
-    int                 nb_pipelines;
-    char                **args;
+    int                 nb_pipelines;		// DONE
+	
+    char                **args;				// DONE
+	int					*args_type;			// DONE
+
 	char                **files;
-	int					*fds;
 	int					*files_type;
-	int					*args_type;
-	char                *exec_path;
+	int					*fds;
+
+	char                *exec_path;			// DONE
 }                       t_execution;
 
 
