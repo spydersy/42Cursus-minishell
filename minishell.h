@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 11:11:07 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/13 16:35:19 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ typedef struct s_execution
     char                **args;
 	char                **files;
 	int					*fds;
-	int					*types;
+	int					*files_type;
+	int					*args_type;
 	char                *exec_path;
 }                       t_execution;
 

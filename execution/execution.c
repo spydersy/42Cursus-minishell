@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 14:55:51 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:58:07 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ t_execution *init_execution(t_tokens *tokens)
 		execution[i].nb_pipelines = tokens[0].pipe;
 		execution[i].exec_path = get_exec_path(tokens[i], get_paths());
 		execution[i].args = get_execution_args(tokens[i]);
-		execution[i].types = get_execution_types(tokens[i]);
+		execution[i].args_type = get_execution_types(tokens[i]);
 		printf("exec_path : [%s]\n", execution[i].exec_path);
-		print_args2(execution[i].args, execution[i].types);
+		print_args2(execution[i].args, execution[i].args_type);
 		free(execution[i].exec_path);
 	}
 	free(execution);
