@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:21:39 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 11:09:41 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/13 11:42:56 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*prompt(void)
 
 	pwd = malloc(sizeof(char) * 500);
 	pwd = getcwd(pwd, 500);
-	tmp = ft_strjoin("\x1B[32m MINISHELL (\x1B[34m", pwd);
+	tmp = ft_strjoin("\x1B[32mLE PETIT SHELL (\x1B[34m", pwd);
 	prompt = ft_strjoin(tmp, "\x1B[32m) 🚀 ");
 	free(tmp);
 	tmp = ft_strjoin(prompt, "\x1B[37m");
