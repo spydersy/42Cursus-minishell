@@ -6,14 +6,14 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 16:59:11 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:35:50 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-void	print_args2(char **args, int *types, char **files)
+void	print_args2(char **args, int *types, char **files, int *files_type)
 {
 	int		i;
 
@@ -29,11 +29,13 @@ void	print_args2(char **args, int *types, char **files)
 	i = -1;
 	while (files[++i])
 	{
-		printf(" [%s] ", files[i]);
+		printf(" [%s, %d] ", files[i], files_type[i]);
 		free(files[i]);
 	}
 	printf("\n");
 	free(args);
+	free(types);
+	free(files_type);
 	free(files);
 }
 
@@ -95,6 +97,28 @@ int	*get_execution_types(t_tokens tokens)
 	return (types);
 }
 
+int	*get_execution_files_type(t_tokens tokens)
+{
+	int		i;
+	int		c;
+	int		*types;
+	
+	i = -1;
+	c = 0;
+	while (++i < tokens.nb)
+		if (tokens.type[i] == FILE || tokens.type[i] == -FILE)
+			c++;
+	types = malloc(sizeof(char *) * c);
+	i = -1;
+	c = 0;
+	while (++i < tokens.nb)
+	{
+		if (tokens.type[i] == FILE || tokens.type[i] == -FILE)
+			types[c++] = tokens.type[i - 1];
+	}
+	return (types);
+}
+
 char	**get_execution_files(t_tokens tokens)
 {
 	int		i;
@@ -133,8 +157,9 @@ t_execution *init_execution(t_tokens *tokens)
 		execution[i].args = get_execution_args(tokens[i]);
 		execution[i].args_type = get_execution_types(tokens[i]);
 		execution[i].files = get_execution_files(tokens[i]);
+		execution[i].files_type = get_execution_files_type(tokens[i]);
 		printf("exec_path : [%s]\n", execution[i].exec_path);
-		print_args2(execution[i].args, execution[i].args_type, execution[i].files);
+		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		free(execution[i].exec_path);
 	}
 	free(execution);
