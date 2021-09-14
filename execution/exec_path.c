@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 12:34:43 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/14 17:32:29 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,12 @@ char        *join_paths(t_tokens tokens, int index, char **paths)
 
 int is_builtin(char *cmd)
 {
+    // printf("ALOOOOOOOOOOOOOOOOHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA            [%s]\n", cmd);
+    if (cmd[0] == ' ' || cmd[0] == '\'' || cmd[0] == '\"')
+        cmd++;
     if (ft_strcmp(cmd, "echo") == 0)
-    {
-        printf("ALOOOOOOOOOOOOOOOOHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA            [%s]\n", cmd);
         return (1);
-    }if (ft_strcmp(cmd, "cd") == 0)
+    if (ft_strcmp(cmd, "cd") == 0)
         return (1);
     if (ft_strcmp(cmd, "pwd") == 0)
         return (1);
