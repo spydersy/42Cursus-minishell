@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:06:45 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/12 10:02:00 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/14 16:05:15 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,14 @@ void	set_tok_value(int *type, char **content)
 		else if (ft_strncmp(">>", content[i] + index,
 				max_of(1, ft_strlen(content[i] + index))) == 0)
 			type[i] *= REDO1;
+		else if (ft_strncmp("<<", content[i] + index,
+				max_of(1, ft_strlen(content[i] + index))) == 0)
+			type[i] *= HEREDOC;
 		else if (i && ((-REDI0 <= type[i - 1] && type[i - 1] <= -REDO0)
 				|| (REDO0 <= type[i - 1] && type[i - 1] <= REDI0)))
 			type[i] *= FILE;
+		else if (i && (type[i - 1] == HEREDOC || type[i - 1] == -HEREDOC))
+			type[i] *= EOFHEREDOC;
 		else if (cmd == 0)
 		{
 			cmd = 1;

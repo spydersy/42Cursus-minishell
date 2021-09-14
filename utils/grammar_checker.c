@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/13 11:10:50 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/14 17:12:05 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	is_redirection(int type)
 		return (1);
 	if (type == REDO1 || type == -REDO1)
 		return (1);
-	return (0);
+	if (type == HEREDOC || type == -HEREDOC)
+		return (1);	return (0);
 }
 
 int	redirection_grammar(t_tokens *tokens)
@@ -77,15 +78,17 @@ int	redirection_grammar(t_tokens *tokens)
 				if (tokens[i].tokens[j + 1])
 				{
 					if (!(tokens[i].type[j + 1] == FILE
-							|| tokens[i].type[j + 1] == -FILE))
+							|| tokens[i].type[j + 1] == -FILE
+							|| tokens[i].type[j + 1] == EOFHEREDOC
+							|| tokens[i].type[j + 1] == -EOFHEREDOC))
 					{
-						ft_error("No redirection File", 0);
+						ft_error("No redirection File0", 0);
 						return (0);
 					}
 				}
 				else
 				{
-					ft_error("No redirection File", 0);
+					ft_error("No redirection File1", 0);
 					return (0);
 				}
 			}

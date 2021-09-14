@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/14 15:35:50 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/14 17:06:32 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,16 @@ int	*get_execution_files_type(t_tokens tokens)
 	i = -1;
 	c = 0;
 	while (++i < tokens.nb)
-		if (tokens.type[i] == FILE || tokens.type[i] == -FILE)
+		if (tokens.type[i] == FILE || tokens.type[i] == -FILE
+			|| tokens.type[i] == EOFHEREDOC || tokens.type[i] == -EOFHEREDOC)
 			c++;
 	types = malloc(sizeof(char *) * c);
 	i = -1;
 	c = 0;
 	while (++i < tokens.nb)
 	{
-		if (tokens.type[i] == FILE || tokens.type[i] == -FILE)
+		if (tokens.type[i] == FILE || tokens.type[i] == -FILE
+			|| tokens.type[i] == EOFHEREDOC || tokens.type[i] == -EOFHEREDOC)
 			types[c++] = tokens.type[i - 1];
 	}
 	return (types);
@@ -128,7 +130,8 @@ char	**get_execution_files(t_tokens tokens)
 	i = -1;
 	c = 0;
 	while (++i < tokens.nb)
-		if (tokens.type[i] == FILE || tokens.type[i] == -FILE)
+		if (tokens.type[i] == FILE || tokens.type[i] == -FILE
+			|| tokens.type[i] == EOFHEREDOC || tokens.type[i] == -EOFHEREDOC)
 			c++;
 	files = malloc(sizeof(char *) * (c + 1));
 	files[c] = NULL;
@@ -136,7 +139,8 @@ char	**get_execution_files(t_tokens tokens)
 	c = 0;
 	while (++i < tokens.nb)
 	{
-		if (tokens.type[i] == FILE || tokens.type[i] == -FILE)
+		if (tokens.type[i] == FILE || tokens.type[i] == -FILE
+			|| tokens.type[i] == EOFHEREDOC || tokens.type[i] == -EOFHEREDOC)
 			files[c++] = ft_strdup(tokens.tokens[i] + 1);
 	}
 	return (files);

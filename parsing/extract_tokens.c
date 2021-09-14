@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/11 16:44:24 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/14 17:05:15 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ void	print_types(int *types, int nb, char **tokens)
 			printf("type[%d] , %d [%s]: [PROTEC0]\n", i, types[i], tokens[i]);
 		else if (types[i] == PROTECTED1 || types[i] == -PROTECTED1)
 			printf("type[%d] , %d [%s]: [PROTEC1]\n", i, types[i], tokens[i]);
+		else if (types[i] == HEREDOC || types[i] == -HEREDOC)
+			printf("type[%d] , %d [%s]: [HEREDOC]\n", i, types[i], tokens[i]);
+		else if (types[i] == EOFHEREDOC || types[i] == -EOFHEREDOC)
+			printf("type[%d] , %d [%s]: [EOF]\n", i, types[i], tokens[i]);
 		else
-			printf("type[%d] , %d [%s]: [random]\n", i, types[i], tokens[i]);
+			printf("type[%d] , %d [%s]: [RANDOM]\n", i, types[i], tokens[i]);
 	}
 }
 
