@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 16:14:39 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 16:50:54 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void					expand_quotes_dollar(t_tokens *tokens);
 void					set_separator_type(int *type, char **toks);
 void					minishell(int argc, char *argv[], char *envp[]);
 void        			builtin_cd(char **path);
+void			        builtin_echo(char **args, int *types);
 
 char					*prompt(void);
 char					*read_line(void);

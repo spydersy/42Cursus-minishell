@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/15 16:17:07 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/15 16:51:17 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ BUILTINS_SRCS=			./builtins/set_env.c\
 						./builtins/buil_pwd.c\
 						./builtins/buil_env.c\
 						./builtins/buil_exit.c\
-						
+						./builtins/buil_echo.c\
+
 EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
 
