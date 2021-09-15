@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/14 17:32:29 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 12:32:43 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,26 +96,26 @@ char        *join_paths(t_tokens tokens, int index, char **paths)
     return (NULL);
 }
 
-int is_builtin(char *cmd)
+char    *is_builtin(char *cmd)
 {
     // printf("ALOOOOOOOOOOOOOOOOHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA            [%s]\n", cmd);
     if (cmd[0] == ' ' || cmd[0] == '\'' || cmd[0] == '\"')
         cmd++;
     if (ft_strcmp(cmd, "echo") == 0)
-        return (1);
+        return ("builtin_echo");
     if (ft_strcmp(cmd, "cd") == 0)
-        return (1);
+        return ("builtin_cd");
     if (ft_strcmp(cmd, "pwd") == 0)
-        return (1);
+        return ("builtin_pwd");
     if (ft_strcmp(cmd, "export") == 0)
-        return (1);
+        return ("builtin_export");
     if (ft_strcmp(cmd, "unset") == 0)
-        return (1);
+        return ("builtin_unset");
     if (ft_strcmp(cmd, "env") == 0)
-        return (1);
+        return ("builtin_env");
     if (ft_strcmp(cmd, "exit") == 0)
-        return (1);
-    return (0);
+        return ("builtin_exit");
+    return ("go_back");
 }
 
 char        *get_exec_path(t_tokens token, char **paths)
@@ -130,10 +130,10 @@ char        *get_exec_path(t_tokens token, char **paths)
     while (++i < token.nb)
         if (token.type[i] == CMD || token.type[i] == -CMD)
             break ;
-    if (is_builtin(token.tokens[i]) == 1)
+    if (ft_strncmp(is_builtin(token.tokens[i]), "builtin", 6) == 0)
     {
         free_paths(paths);
-        return (ft_strdup("builtin"));
+        return (ft_strdup(is_builtin(token.tokens[i])));
     }
     exec_path = join_paths(token, i, paths);
     if (exec_path == NULL)

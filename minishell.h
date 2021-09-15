@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/14 15:11:21 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 12:28:33 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,31 +122,33 @@ int						count_bs(char *line, int index);
 int						*get_bslash_index(char *line, int nb);
 int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
-int	empty_line(char *line);
+int						empty_line(char *line);
 
-char					*prompt(void);
 void					sort_env(void);
 void					clear_window(void);
 void					init_env(char **env);
 void					free_toks(t_tokens tok);
+void					execution(t_tokens *tokens);
 void					extract_tokens(char **commands);
 void					extract_semicolon_line(char *line);
 void                	dollar_handling(char **tok, int index);
 void					expand_quotes_dollar(t_tokens *tokens);
 void					set_separator_type(int *type, char **toks);
 void					minishell(int argc, char *argv[], char *envp[]);
-void					execution(t_tokens *tokens);
+void        			builtin_cd(char **path);
 
+char					*prompt(void);
 char					*read_line(void);
+char        			**get_paths(void);
 char					*builtin_pwd(int descriptor);
 char					**split_tok(char *line, int nb);
 char					*get_token(char *line, int flag);
-char					**splitSep(char *line, int *sepIndex, int nbSep);
-char        			**get_paths(void);
+char					**set_env(char *variable, char *value);
 char        			*get_exec_path(t_tokens token, char **paths);
+char					**splitSep(char *line, int *sepIndex, int nbSep);
 
-t_tokens				replace_dollar(t_tokens *tok);
 t_quote					init_quote(void);
+t_tokens				replace_dollar(t_tokens *tok);
 t_quote					set_quote_value(char quote_type, t_quote to_quote);
 t_separator				get_separator_index(char *line, char separator_type);
 

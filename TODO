@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    TODO                                               :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
+#    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:34:43 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/12 10:33:29 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/15 12:05:02 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,19 +32,8 @@ BUILTINS :
             0 - (1) env     : $_
             0 - (1) exit    : $_, $?
 
-
-P - Expand tokens content :
-    HOW ?
-        1 - char **args.
-        1 - char **envp;
-        0 - char **infiles, int *intype;
-        0 - char **outfiles, int *outype;
-        WARNING - Protected values;
-
-LAST TODO :
-	1 - EXPAND Content inside double quotes.
-	2 - ADD CMD Type if needed.
-    3 -
+TODO 15/09/2021 :
+            1 - set_env(VARIABLE_NAME, VARIABLE_VALUE);
 
 NOTES :
     if PATH is not present in environement variable we must duplicate return value of `` char   *get_path(void);`` whith aan empty string ""

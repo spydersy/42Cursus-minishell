@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/13 11:11:30 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/15 12:39:11 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,10 @@ LIBFT_SRCS=				./libft/ft_split.c\
 						./libft/ft_putendl_fd.c\
 						./libft/ft_strcmp.c\
 
-# BUILTINS_SRCS=			./builtins/buil_export.c\
-
-
+BUILTINS_SRCS=			./builtins/set_env.c\
+						./builtins/buil_cd.c\
+						./builtins/buil_pwd.c\
+						
 EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
 
@@ -61,6 +62,7 @@ SRCS=					$(LIBFT_SRCS)\
 						$(EXECUTION_SRCS)\
 						$(MINISHELL_SRCS)\
 						$(LINE_READER_SRCS)\
+						$(BUILTINS_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 

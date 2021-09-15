@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/14 17:06:32 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 12:54:51 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,14 @@ t_execution *init_execution(t_tokens *tokens)
 		execution[i].files = get_execution_files(tokens[i]);
 		execution[i].files_type = get_execution_files_type(tokens[i]);
 		printf("exec_path : [%s]\n", execution[i].exec_path);
+		if (ft_strncmp(execution[i].exec_path, "builtin_cd", 10) == 0)
+		{
+			builtin_cd(execution[i].args);
+		}
 		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		free(execution[i].exec_path);
 	}
+	
 	free(execution);
 	printf("XXXXXXXX");
 	return (execution);
