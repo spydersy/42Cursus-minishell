@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 12:28:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:46:57 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
 int						empty_line(char *line);
 
+void					builtin_env(void);
 void					sort_env(void);
 void					clear_window(void);
 void					init_env(char **env);

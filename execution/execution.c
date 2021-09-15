@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 12:54:51 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:46:38 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,14 @@ t_execution *init_execution(t_tokens *tokens)
 		if (ft_strncmp(execution[i].exec_path, "builtin_cd", 10) == 0)
 		{
 			builtin_cd(execution[i].args);
+		}
+		if (ft_strncmp(execution[i].exec_path, "builtin_env", 11) == 0)
+		{
+			builtin_env();
+		}
+		if (ft_strncmp(execution[i].exec_path, "builtin_pwd", 11) == 0)
+		{
+			builtin_pwd(0);
 		}
 		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		free(execution[i].exec_path);

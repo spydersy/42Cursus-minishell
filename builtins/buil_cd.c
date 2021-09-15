@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 14:36:48 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 13:00:03 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:55:24 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ void        builtin_cd(char **path)
     char    *new_pwd;
 
     printf("cd DBG : [%s]\n", path[0]);
+    old_pwd = builtin_pwd(1);
     if (path[0] == NULL)
     {
         ret = chdir("/Users/abelarif");
-        if (ret == -1)
-            ft_error(NULL, 0);
         new_pwd = builtin_pwd(1);
-    old_pwd = builtin_pwd(1);
         set_env("OLDPWD", old_pwd);
         set_env("PWD", new_pwd);
         free(old_pwd);
@@ -47,16 +45,17 @@ void        builtin_cd(char **path)
         return ;
     }
     ret = chdir(path[0]);
+    new_pwd = builtin_pwd(1);
     if (ret == -1)
+    {
         ft_error(NULL, 0);
+    }
     else
     {
-        new_pwd = builtin_pwd(1);
 
-        old_pwd = builtin_pwd(1);
         set_env("OLDPWD", old_pwd);
         set_env("PWD", new_pwd);
-        free(old_pwd);
-        free(new_pwd);
     }
+    free(old_pwd);
+    free(new_pwd);
 }
