@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:36:06 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 11:58:32 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/16 12:00:09 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void	init_env(char **env)
 	g_env.env = malloc(sizeof(char *) * (c + 1));
 	if (g_env.env == NULL)
 		ft_error("malloc", 1);
-	g_env.size = c;
-	c = -1;
+		c = -1;
 	while (env[++c])
 	{
 		g_env.env[c] = ft_strdup(env[c]);

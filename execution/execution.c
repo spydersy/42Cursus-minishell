@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 16:50:26 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/16 11:59:42 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,10 @@ t_execution *init_execution(t_tokens *tokens)
 		if (ft_strcmp(execution[i].exec_path, "builtin_echo") == 0)
 		{
 			builtin_echo(execution[i].args, execution[i].args_type);
+		}
+		if (ft_strcmp(execution[i].exec_path, "builtin_unset") == 0)
+		{
+			builtin_unset(execution[i].args);
 		}
 		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		free(execution[i].exec_path);

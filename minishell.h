@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 16:50:54 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/16 12:00:27 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_env
 {
 	char				**env;
 	char				**sorted;
-	int					size;
 }						t_env;
 
 typedef struct s_tokens
@@ -123,6 +122,7 @@ int						*get_bslash_index(char *line, int nb);
 int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
 int						empty_line(char *line);
+int						count_arr(char **arr);
 
 void        			builtin_exit(char **args);
 void					builtin_env(void);
@@ -139,6 +139,8 @@ void					set_separator_type(int *type, char **toks);
 void					minishell(int argc, char *argv[], char *envp[]);
 void        			builtin_cd(char **path);
 void			        builtin_echo(char **args, int *types);
+void							free_arr(char **arr);
+void	builtin_unset(char **args);
 
 char					*prompt(void);
 char					*read_line(void);
