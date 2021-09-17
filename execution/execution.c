@@ -6,12 +6,11 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/16 11:59:42 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:10:24 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	print_args2(char **args, int *types, char **files, int *files_type)
 {
@@ -41,10 +40,10 @@ void	print_args2(char **args, int *types, char **files, int *files_type)
 
 char	**get_execution_args(t_tokens tokens)
 {
-	int     i;
-	int     c;
-	char    **args;
-	
+	int		i;
+	int		c;
+	char	**args;
+
 	i = -1;
 	c = 0;
 	while (++i < tokens.nb)
@@ -58,7 +57,9 @@ char	**get_execution_args(t_tokens tokens)
 	c = 0;
 	while (++i < tokens.nb)
 	{
-		if ((tokens.type[i] == ARG || tokens.type[i] == -ARG) && (tokens.tokens[i][0] == ' ' || tokens.tokens[i][0] == '\'' || tokens.tokens[i][0] == '\"'))
+		if ((tokens.type[i] == ARG || tokens.type[i] == -ARG)
+			&& (tokens.tokens[i][0] == ' '
+			|| tokens.tokens[i][0] == '\'' || tokens.tokens[i][0] == '\"'))
 		{
 			args[c++] = ft_strdup(tokens.tokens[i] + 1);
 		}
@@ -146,6 +147,19 @@ char	**get_execution_files(t_tokens tokens)
 	return (files);
 }
 
+char	*get_exec_command(t_tokens tokens)
+{
+	int		i;
+	
+	i = -1;
+	while (tokens.tokens[++i])
+	{
+		if (tokens.type[i] == CMD || tokens.type[i] == -CMD)
+			return (ft_strdup(tokens.tokens[i]));
+	}
+	return (NULL);
+}
+
 t_execution *init_execution(t_tokens *tokens)
 {
 	int             i;
@@ -155,50 +169,45 @@ t_execution *init_execution(t_tokens *tokens)
 	execution = malloc(sizeof(t_execution) * tokens[0].pipe);
 	while (++i < tokens[0].pipe)
 	{
-		printf("****************************************************\n");
 		execution[i].nb_pipelines = tokens[0].pipe;
+		execution[i].command = get_exec_command(tokens[i]);
 		execution[i].exec_path = get_exec_path(tokens[i], get_paths());
 		execution[i].args = get_execution_args(tokens[i]);
 		execution[i].args_type = get_execution_types(tokens[i]);
 		execution[i].files = get_execution_files(tokens[i]);
 		execution[i].files_type = get_execution_files_type(tokens[i]);
-		printf("exec_path : [%s]\n", execution[i].exec_path);
-		if (ft_strcmp(execution[i].exec_path, "builtin_cd") == 0)
-		{
-			builtin_cd(execution[i].args);
-		}
-		if (ft_strcmp(execution[i].exec_path, "builtin_env") == 0)
-		{
-			builtin_env();
-		}
-		if (ft_strcmp(execution[i].exec_path, "builtin_pwd") == 0)
-		{
-			builtin_pwd(0);
-		}
-		if (ft_strcmp(execution[i].exec_path, "builtin_exit") == 0)
-		{
-			builtin_exit(execution[i].args);
-		}
-		if (ft_strcmp(execution[i].exec_path, "builtin_echo") == 0)
-		{
-			builtin_echo(execution[i].args, execution[i].args_type);
-		}
-		if (ft_strcmp(execution[i].exec_path, "builtin_unset") == 0)
-		{
-			builtin_unset(execution[i].args);
-		}
-		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
-		free(execution[i].exec_path);
 	}
-	
-	free(execution);
-	printf("XXXXXXXX");
 	return (execution);
+}
+
+int	simple_builtin(t_execution *execution)
+{
+	if (execution[0].nb_pipelines == 1 && 
+		ft_strncmp(execution[0].exec_path, "builtin", 7) == 0)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 void    execution(t_tokens *tokens)
 {
-	// t_execution     *execution;
-
-	init_execution(tokens);
+	t_execution     *execution;
+	int		i = -1;
+	
+	execution = init_execution(tokens);
+	while (++i < tokens[0].pipe)
+	{
+		printf("****************************************************\n");
+		// printf("exec_path | command : [%s] | [%s]\n", execution[i].exec_path, execution[i].command);
+		// print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
+		// free(execution[i].exec_path);
+		
+	}
+	heredocs_parsing(execution);
+	free(execution);
+	// // if (simple_builtin(execution) == 0)
+	// // {
+		
+	// // }
 }

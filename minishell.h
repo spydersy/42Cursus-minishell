@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/16 12:00:27 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/17 17:44:34 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ typedef struct s_execution
 	int					*args_type;			// DONE
 
 	char                **files;			// DONE
-	int					*files_type;
-	int					*fds;
+	int					*files_type;		// DONE
+	int					*fds;				
 
 	char                *exec_path;			// DONE
+	char				*command;			
 }                       t_execution;
 
 
@@ -139,8 +140,9 @@ void					set_separator_type(int *type, char **toks);
 void					minishell(int argc, char *argv[], char *envp[]);
 void        			builtin_cd(char **path);
 void			        builtin_echo(char **args, int *types);
-void							free_arr(char **arr);
-void	builtin_unset(char **args);
+void					free_arr(char **arr);
+void					builtin_unset(char **args);
+void					heredocs_parsing(t_execution *execution);
 
 char					*prompt(void);
 char					*read_line(void);

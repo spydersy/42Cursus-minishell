@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/14 17:12:05 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/17 14:03:17 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ int	redirection_grammar(t_tokens *tokens)
 							|| tokens[i].type[j + 1] == EOFHEREDOC
 							|| tokens[i].type[j + 1] == -EOFHEREDOC))
 					{
-						ft_error("No redirection File0", 0);
+						ft_error("No redirection File", 0);
 						return (0);
 					}
 				}
 				else
 				{
-					ft_error("No redirection File1", 0);
+					ft_error("No redirection File", 0);
 					return (0);
 				}
 			}

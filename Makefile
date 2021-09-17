@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/16 12:00:04 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/17 17:44:59 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ BUILTINS_SRCS=			./builtins/set_env.c\
 
 EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
+						./execution/heredocs.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\

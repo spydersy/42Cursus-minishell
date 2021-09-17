@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 12:32:43 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/17 14:16:39 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,15 @@ char        *get_exec_path(t_tokens token, char **paths)
     i = -1;
     index = 0;
     while (++i < token.nb)
+    {
         if (token.type[i] == CMD || token.type[i] == -CMD)
             break ;
+    }
+    if (token.tokens[i] == NULL)
+    {
+        free_paths(paths);
+        return (NULL);
+    }
     if (ft_strncmp(is_builtin(token.tokens[i]), "builtin", 6) == 0)
     {
         free_paths(paths);
@@ -156,52 +163,3 @@ char        *get_exec_path(t_tokens token, char **paths)
     free_paths(paths);
 	return (exec_path);
 }
-
-// char    *ft_replace(t_tokens token, int index)
-// {
-//     if (is_cmd(token.type[index]))
-//     {
-//         if (index == 0)
-//             return (ft_strdup(token.tokens[index]));
-//         else
-//             return (ft_strdup(token.tokens[index] + 1));
-//     }
-//     else if (is_arg(token.type[index]))
-//     {
-//         return (ft_strdup(token.tokens[index] + 1));
-//     }
-//     if (is_protected(token.type[index]))
-//     {
-//         return (ft_strdup(token.tokens[index]));
-//     }
-//     return (NULL);
-// }
-
-// char    **get_args(t_tokens tokens)
-// {
-//     int     i;
-//     int     c;
-//     char    **args;
-
-//     c = 0;
-//     i = -1;
-//     while (tokens.tokens[++i])
-//     {
-//         if (is_arg(tokens.type[i]) || is_cmd(tokens.type[i])
-//             || is_protected(tokens.type[i]))
-//             c++;
-//     }
-//     args = malloc(sizeof(char *) * (c + 1));
-//     if (args == NULL)
-//         ft_error("MALLOC", 1);
-//     i = -1;
-//     c = -1;
-//     while (tokens.tokens[++i])
-//     {
-//         if (is_cmd(tokens.type[i]) || is_arg(tokens.type[i])
-//             || is_protected(tokens.type[i]))
-//             args[++c] = ft_replace(tokens, i);
-//     }
-//     args[c + 1] = NULL;
-//     return (args);
-// }

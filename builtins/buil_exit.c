@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 15:46:53 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 16:38:40 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/17 14:28:14 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int	str_is_digit(char *str)
 	i = 0;
 	if (!(str[i] && (str[i] == '-' || ('0' <= str[i] && str[i] <= '9'))))
 	{
-		return (0);		
+		return (0);
 	}
 	while (str[++i])
 	{
-		
 		if (!('0' <= str[i] && str[i] <= '9'))
 		{
 			return (0);
@@ -32,7 +31,7 @@ int	str_is_digit(char *str)
 	return (1);
 }
 
-void        builtin_exit(char **args)
+void	builtin_exit(char **args)
 {
 	int		counter;
 
@@ -40,7 +39,7 @@ void        builtin_exit(char **args)
 	while (args[counter])
 		counter++;
 	if (args[0] == NULL)
-		exit(0);	
+		exit(0);
 	if (str_is_digit(args[0]) == 0)
 	{
 		ft_error("exit: numeric argument required", 0);
