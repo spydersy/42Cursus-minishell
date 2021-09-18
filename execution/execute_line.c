@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:59:02 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/18 19:10:18 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/18 19:19:55 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,23 @@ void	child_process(int index, t_execution *execution, int *pipes)
 	i = -1;
 	if (index != 0)
 	{
-		flag = 1;
+		flag = pipes[index * 2 - 1];
 	}
-	fds_index[0] = pipes[index * 2 - flag]; 
-	fds_index[1] = pipes[index * 2 + 1 - flag]; 
+	// 0 : 
+	
+	fds_index[0] = pipes[index * 2]; 
+	fds_index[1] = pipes[index * 2 + 1]; 
 
-	if (index != execution[0].nb_pipelines  -1)
+	if (index == 0)
 		dup2(pipes[fds_index[0]], STDIN);
+	else
+		dup2(flag, fds_index[0]);
+	// if (index != execution[0].nb_pipelines  -1)
+	// 	dup2(pipes[fds_index[0]], STDIN);
 	if (index != 0)
 		dup2(pipes[fds_index[1]], STDOUT);
 	while (++i < execution[0].nb_pipelines * 2)
-		if (!(i == fds_index[0] || i == fds_index[1]))
+		// if (!(i == fds_index[0] || i == fds_index[1]))
 			close(pipes[i]);
 	ret_execve = execve(execution[index].exec_path, execution[index].args, g_env.env);
 	printf("RET EXECVE : [%d] %sFATAAAAAAAAAAAAL A ZOOOBI%s\n", ret_execve, KRED, KWHT);
@@ -69,6 +75,7 @@ void	create_childs(t_execution *execution, int *pipes)
 		{
 			child_process(i, execution, pipes);
 		}
+		close(pipes[i]);
 	}
 	i = -1;
 	while (++i < execution[0].nb_pipelines)
