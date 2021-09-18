@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:59:02 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/18 17:28:27 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/18 19:10:18 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,17 @@ void	child_process(int index, t_execution *execution, int *pipes)
 	int		i;
 	int		fds_index[2];
 	int		ret_execve;
+	int		flag;
 	
+	flag = 0;
 	i = -1;
-	fds_index[0] = index * 2; 
-	fds_index[1] = index * 2 + 1; 
+	if (index != 0)
+	{
+		flag = 1;
+	}
+	fds_index[0] = pipes[index * 2 - flag]; 
+	fds_index[1] = pipes[index * 2 + 1 - flag]; 
+
 	if (index != execution[0].nb_pipelines  -1)
 		dup2(pipes[fds_index[0]], STDIN);
 	if (index != 0)

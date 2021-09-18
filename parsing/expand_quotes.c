@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/12 10:03:10 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/18 18:43:03 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_tokens    select_quotes(t_tokens tokens)
     while (tokens.tokens[++i])
     {
         dqIndex = 0;
-        printf("checker :  [%s]\n", tokens.tokens[i]);
+        // printf("checker :  [%s]\n", tokens.tokens[i]);
         if (i != 0)
             dqIndex++;
         if (tokens.tokens[i][dqIndex] == '\"'
