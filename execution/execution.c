@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/17 18:10:24 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/18 17:40:13 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_args2(char **args, int *types, char **files, int *files_type)
 	free(files);
 }
 
-char	**get_execution_args(t_tokens tokens)
+char	**get_execution_args(t_tokens tokens, char *command)
 {
 	int		i;
 	int		c;
@@ -51,8 +51,9 @@ char	**get_execution_args(t_tokens tokens)
 			|| tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
 			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
 			c++;
-	args = malloc(sizeof(char *) * (c + 1));
-	args[c] = NULL;
+	args = malloc(sizeof(char *) * (c + 2));
+	args[0] = ft_strdup(command);
+	args[c + 1] = NULL;
 	i = -1;
 	c = 0;
 	while (++i < tokens.nb)
@@ -61,14 +62,14 @@ char	**get_execution_args(t_tokens tokens)
 			&& (tokens.tokens[i][0] == ' '
 			|| tokens.tokens[i][0] == '\'' || tokens.tokens[i][0] == '\"'))
 		{
-			args[c++] = ft_strdup(tokens.tokens[i] + 1);
+			args[++c] = ft_strdup(tokens.tokens[i] + 1);
 		}
 		else if (tokens.type[i] == -ARG || tokens.type[i] == ARG)
-			args[c++] = ft_strdup(tokens.tokens[i]);
+			args[++c] = ft_strdup(tokens.tokens[i]);
 		else if (tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
 			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
 		{
-			args[c++] = ft_strdup(tokens.tokens[i]);
+			args[++c] = ft_strdup(tokens.tokens[i]);
 		}
 	}
 	return (args);
@@ -87,14 +88,15 @@ int	*get_execution_types(t_tokens tokens)
 			|| tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
 			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
 			c++;
-	types = malloc(sizeof(int) * c);
+	types = malloc(sizeof(int) * (c + 1));
 	i = -1;
 	c = 0;
+	types[0] = CMD;
 	while (++i < tokens.nb)
 		if (tokens.type[i] == ARG || tokens.type[i] == -ARG
 			|| tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
 			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
-			types[c++] = tokens.type[i];
+			types[++c] = tokens.type[i];
 	return (types);
 }
 
@@ -172,7 +174,7 @@ t_execution *init_execution(t_tokens *tokens)
 		execution[i].nb_pipelines = tokens[0].pipe;
 		execution[i].command = get_exec_command(tokens[i]);
 		execution[i].exec_path = get_exec_path(tokens[i], get_paths());
-		execution[i].args = get_execution_args(tokens[i]);
+		execution[i].args = get_execution_args(tokens[i], execution[i].command);
 		execution[i].args_type = get_execution_types(tokens[i]);
 		execution[i].files = get_execution_files(tokens[i]);
 		execution[i].files_type = get_execution_files_type(tokens[i]);
@@ -180,14 +182,17 @@ t_execution *init_execution(t_tokens *tokens)
 	return (execution);
 }
 
-int	simple_builtin(t_execution *execution)
+t_execution	*cases_redirection(t_execution *execution)
 {
-	if (execution[0].nb_pipelines == 1 && 
-		ft_strncmp(execution[0].exec_path, "builtin", 7) == 0)
+	if (execution[0].exec_path
+		&& ft_strncmp(execution[0].exec_path, "builtin", 7) == 0
+		&& execution[0].nb_pipelines == 1)
 	{
-		return (1);
+		printf("BBBBBBBBBBBBBBBBBBBBBBB\n");
+		return (simple_builtin(execution));
 	}
-	return (0);
+	else
+		return (execute_line(execution));
 }
 
 void    execution(t_tokens *tokens)
@@ -198,16 +203,12 @@ void    execution(t_tokens *tokens)
 	execution = init_execution(tokens);
 	while (++i < tokens[0].pipe)
 	{
-		printf("****************************************************\n");
-		// printf("exec_path | command : [%s] | [%s]\n", execution[i].exec_path, execution[i].command);
+		// printf("****************************************************\n");
+		printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
 		// print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		// free(execution[i].exec_path);
-		
 	}
 	heredocs_parsing(execution);
+	execution = cases_redirection(execution);
 	free(execution);
-	// // if (simple_builtin(execution) == 0)
-	// // {
-		
-	// // }
 }

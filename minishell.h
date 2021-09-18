@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/17 17:44:34 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/18 16:47:04 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_execution
 
 	char                *exec_path;			// DONE
 	char				*command;			
+
+	int					*exit_status;
 }                       t_execution;
 
 
@@ -158,9 +160,11 @@ t_quote					init_quote(void);
 t_tokens				replace_dollar(t_tokens *tok);
 t_quote					set_quote_value(char quote_type, t_quote to_quote);
 t_separator				get_separator_index(char *line, char separator_type);
+t_execution	*simple_builtin(t_execution *execution);
 
 
-
+t_execution	*execute_line(t_execution *execution);
+void	create_childs(t_execution *execution, int *pipes);
 
 
 
