@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+         #
+#    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/18 16:45:33 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/20 07:44:54 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,9 @@ BUILTINS_SRCS=			./builtins/set_env.c\
 
 EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
-						./execution/heredocs.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
+						# ./execution/heredocs.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
@@ -76,12 +76,13 @@ OBJS=					$(SRCS:.c=.o)
 
 # FLAGS=					-Wall -Werror -Wextra
 
-FLAGS=					-Wall -Werror -Wextra -lreadline\
+FLAGS=					-Wall -Werror -Wextra\
+						# -lreadline\
 					   #	-L ~/goinfre/.brew/opt/readline/lib \
 						-I ~/goinfre/.brew/opt/readline/include
 
 $(NAME): $(OBJS)
-		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		clang-9 -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 

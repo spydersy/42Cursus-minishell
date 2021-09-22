@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/18 16:47:04 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/09/22 08:23:55 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 # include <signal.h>
 # include <sys/errno.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 # include "./libft/libft.h"
 # include "./line_reader/get_next_line.h"
 
-#include <readline/readline.h>
-#include <readline/history.h>
+// #include <readline/readline.h>
+// #include <readline/history.h>
 
 		/*	COLORS		*/
 # define KNRM  "\x1B[0m"
@@ -164,7 +165,7 @@ t_execution	*simple_builtin(t_execution *execution);
 
 
 t_execution	*execute_line(t_execution *execution);
-void	create_childs(t_execution *execution, int *pipes);
+void	create_childs(t_execution *execution);
 
 
 
