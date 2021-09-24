@@ -88,7 +88,6 @@ void	extract_tokens(char **commands)
 	i = -1;
 	while (commands[++i])
 	{
-        printf("repeat : %d\n", i);
 		tok[i].pipe = nb;
 		tok[i].nb = count_tokens(commands[i]);
 		tok[i].tokens = split_tok(commands[i], tok[i].nb);

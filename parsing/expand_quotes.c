@@ -176,7 +176,7 @@ void        expand_quotes_dollar(t_tokens *tokens)
     while (++i < tokens[0].pipe)
     {
         tokens[i] = select_quotes(tokens[i]);
-        print_types(tokens[i].type, tokens[i].nb, tokens[i].tokens);
+        // print_types(tokens[i].type, tokens[i].nb, tokens[i].tokens);
     }
     execution(tokens);
 }

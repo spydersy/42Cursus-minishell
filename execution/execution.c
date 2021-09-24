@@ -204,7 +204,7 @@ void    execution(t_tokens *tokens)
 	while (++i < tokens[0].pipe)
 	{
 		// printf("****************************************************\n");
-		printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
+		// printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
 		// print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		// free(execution[i].exec_path);
 	}

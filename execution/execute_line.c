@@ -81,7 +81,7 @@ void   create_childs(t_execution *execution)
         }
     }
     close_all_fds(pipes, execution[0].nb_pipelines - 1);
-    waitpid(-1, &status, 0);
+    waitpid(pid, &status, 0);
 }
 
 t_execution	*execute_line(t_execution *execution)

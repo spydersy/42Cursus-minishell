@@ -43,7 +43,7 @@ EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
-						./execution/heredocs.c\
+						# ./execution/heredocs.c\ 
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\

@@ -60,13 +60,14 @@ char	*read_line(void)
 	char	*prpt;
 
 	prpt = prompt();
+	rl_on_new_line();
 	line = readline(prpt);
 	if (line == NULL)
 	{
 		//FREE();
 		exit(EXIT_SUCCESS);
 	}
-	printf("liiiiine [%s]\n", line);
+	// printf("liiiiine [%s]\n", line);
 	if (empty_line(line) == 0)
 		add_history(line);
 	free(prpt);
@@ -82,7 +83,7 @@ char	*prompt(void)
 	pwd = malloc(sizeof(char) * 500);
 	pwd = getcwd(pwd, 500);
 	tmp = ft_strjoin("\x1B[32mMINISHELL (\x1B[34m", pwd);
-	prompt = ft_strjoin(tmp, "\x1B[32m) 🚀 ");
+	prompt = ft_strjoin(tmp, "\x1B[32m) > ");
 	free(tmp);
 	tmp = ft_strjoin(prompt, "\x1B[37m");
 	free(prompt);

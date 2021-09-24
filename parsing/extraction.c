@@ -31,8 +31,8 @@ void	extract_pipe_line(char *line)
 	{
 		if (c_separator.content[i][0] == '|' || c_separator.content[i][0] == ';')
 			error = 1;
-		printf("     command %d : [%s]\n", i, c_separator.content[i]);
-		printf("\n");
+		// printf("     command %d : [%s]\n", i, c_separator.content[i]);
+		// printf("\n");
 	}
 	if (error == 0)
 		extract_tokens(c_separator.content);
