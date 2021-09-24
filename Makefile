@@ -43,7 +43,7 @@ EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
-						# ./execution/heredocs.c\
+						./execution/heredocs.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
@@ -77,12 +77,12 @@ OBJS=					$(SRCS:.c=.o)
 # FLAGS=					-Wall -Werror -Wextra
 
 FLAGS=					-Wall -Werror -Wextra\
-						# -lreadline\
-					   #	-L ~/goinfre/.brew/opt/readline/lib \
+						-lreadline\
+					   	-L ~/goinfre/.brew/opt/readline/lib \
 						-I ~/goinfre/.brew/opt/readline/include
 
 $(NAME): $(OBJS)
-		clang-9 -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 

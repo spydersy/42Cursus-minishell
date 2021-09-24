@@ -43,18 +43,18 @@ void    child_process(int index, int *pipes, t_execution *execution)
     
     if (index == 0) //  FIRST
     {
-        printf("%sFIRST\n%s", KYEL, KWHT);
+        // printf("%sFIRST\n%s", KYEL, KWHT);
         dup2(pipes[index * 2 + 1], STDOUT);
     }
     else if (index == execution[0].nb_pipelines - 1) // LAST
     {
-        printf("%sLAST\n%s", KYEL, KWHT);
+        // printf("%sLAST\n%s", KYEL, KWHT);
         dup2(pipes[index * 2 - 2], STDIN);
         // dup2(pipes[index * 2 + 1], STDOUT);
     }
     else    // MIDDLE
     {
-        printf("%sMIDDLE\n%s", KYEL, KWHT);
+        // printf("%sMIDDLE\n%s", KYEL, KWHT);
         dup2(pipes[index * 2 - 2], STDIN);
         dup2(pipes[index * 2 + 1], STDOUT);
     }
@@ -88,6 +88,6 @@ t_execution	*execute_line(t_execution *execution)
 {
 
     create_childs(execution);
-    printf("%sEND OF EXECUTION%s\n", KYEL, KWHT);
+    // printf("%sEND OF EXECUTION%s\n", KYEL, KWHT);
 	return (execution);
 }

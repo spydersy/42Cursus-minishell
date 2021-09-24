@@ -24,8 +24,8 @@
 # include "./libft/libft.h"
 # include "./line_reader/get_next_line.h"
 
-// #include <readline/readline.h>
-// #include <readline/history.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 		/*	COLORS		*/
 # define KNRM  "\x1B[0m"
