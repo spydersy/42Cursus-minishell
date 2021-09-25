@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	print_args2(char **args, int *types, char **files, int *files_type)
+void	print_args2(char **args, int *types, char **files, int *files_type, int *fds)
 {
 	int		i;
 
@@ -21,21 +21,21 @@ void	print_args2(char **args, int *types, char **files, int *files_type)
 	while (args[++i])
 	{
 		printf(" [%s, %d] ", args[i], types[i]);
-		free(args[i]);
+		// free(args[i]);
 	}
 	printf("\n");
 	printf("FILES :");
 	i = -1;
 	while (files[++i])
 	{
-		printf(" [%s, %d] ", files[i], files_type[i]);
-		free(files[i]);
+		printf(" [%s, %d, %d] ", files[i], files_type[i], fds[i]);
+		// free(files[i]);
 	}
 	printf("\n");
-	free(args);
-	free(types);
-	free(files_type);
-	free(files);
+	// free(args);
+	// free(types);
+	// free(files_type);
+	// free(files);
 }
 
 char	**get_execution_args(t_tokens tokens, char *command)

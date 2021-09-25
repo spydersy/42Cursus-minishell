@@ -127,6 +127,7 @@ int						ft_error(char *description, int exitstat);
 int                     grammar_checker(char **commands, t_tokens *tokens);
 int						empty_line(char *line);
 int						count_arr(char **arr);
+int abs_value(int nb);
 
 void        			builtin_exit(char **args);
 void					builtin_env(void);
@@ -162,6 +163,7 @@ t_tokens				replace_dollar(t_tokens *tok);
 t_quote					set_quote_value(char quote_type, t_quote to_quote);
 t_separator				get_separator_index(char *line, char separator_type);
 t_execution	*simple_builtin(t_execution *execution);
+t_execution    input_output_duplication(int index, int *pipes, t_execution *execution);
 
 
 t_execution	*execute_line(t_execution *execution);
@@ -170,5 +172,6 @@ void	create_childs(t_execution *execution);
 
 
 void	print_types(int *types, int nb, char **tokens);
+void	print_args2(char **args, int *types, char **files, int *files_type, int *fds);
 
 #endif

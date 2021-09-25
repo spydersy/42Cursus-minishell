@@ -41,9 +41,10 @@ BUILTINS_SRCS=			./builtins/set_env.c\
 
 EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\
+						./execution/input_output_dup.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
-						# ./execution/heredocs.c\ 
+						./execution/heredocs.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
@@ -63,6 +64,7 @@ UTILS_SRCS=				./utils/max_of.c\
 						./utils/grammar_checker.c\
 						./utils/backslash_handling.c\
 						./utils/line_handler_utils.c\
+						./utils/abs_value.c\
 
 SRCS=					$(LIBFT_SRCS)\
 						$(UTILS_SRCS)\

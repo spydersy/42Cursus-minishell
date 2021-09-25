@@ -12,13 +12,25 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include "minishell.h"
+
+// int	main()
+// {
+// 	char *arr[] = { "Makefile", NULL};
+// 	char *path = "/bin/cat";
+
+// 	int ret = execve(path, arr, NULL);
+// 	printf("%d", ret);
+// 	return (0);
+// }
 
 int	main()
 {
-	char *arr[] = { "Makefile", NULL};
-	char *path = "/bin/cat";
+	int fd;
+	char	*buffer;
 
-	int ret = execve(path, arr, NULL);
-	printf("%d", ret);
-	return (0);
+	fd = open("main.c", O_RDONLY);
+	printf("fd : %d\n", fd);
+	printf("%s\n", strerror(errno));
 }

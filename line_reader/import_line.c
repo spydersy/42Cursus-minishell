@@ -83,7 +83,7 @@ char	*prompt(void)
 	pwd = malloc(sizeof(char) * 500);
 	pwd = getcwd(pwd, 500);
 	tmp = ft_strjoin("\x1B[32mMINISHELL (\x1B[34m", pwd);
-	prompt = ft_strjoin(tmp, "\x1B[32m) > ");
+	prompt = ft_strjoin(tmp, "\x1B[32m) 🚀 ");
 	free(tmp);
 	tmp = ft_strjoin(prompt, "\x1B[37m");
 	free(prompt);

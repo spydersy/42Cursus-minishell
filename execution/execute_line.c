@@ -41,6 +41,16 @@ void    child_process(int index, int *pipes, t_execution *execution)
 {
     int     ret;
     
+    execution[index].fds = input_output_duplication(index, pipes, execution);
+    
+    int     i = -1;
+	while (++i < execution[index].nb_pipelines)
+	{
+		// printf("****************************************************\n");
+		// printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
+		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
+		// free(execution[i].exec_path);
+	}
     if (index == 0) //  FIRST
     {
         // printf("%sFIRST\n%s", KYEL, KWHT);
@@ -82,6 +92,7 @@ void   create_childs(t_execution *execution)
     }
     close_all_fds(pipes, execution[0].nb_pipelines - 1);
     waitpid(pid, &status, 0);
+    waitpid(-1, &status, 0);
 }
 
 t_execution	*execute_line(t_execution *execution)
