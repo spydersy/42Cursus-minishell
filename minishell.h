@@ -168,6 +168,7 @@ t_execution    input_output_duplication(int index, int *pipes, t_execution *exec
 
 t_execution	*execute_line(t_execution *execution);
 void	create_childs(t_execution *execution);
+int get_fd(int index, t_execution *execution, int i);
 
 
 

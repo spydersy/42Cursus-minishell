@@ -208,7 +208,7 @@ void    execution(t_tokens *tokens)
 		// print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type);
 		// free(execution[i].exec_path);
 	}
-	// heredocs_parsing(execution);
+	heredocs_parsing(execution);
 	execution = cases_redirection(execution);
 	free(execution);
 }

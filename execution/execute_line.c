@@ -37,40 +37,59 @@ void    close_all_fds(int *pipes, int nb_pipes)
     }
 }
 
+int *get_fds_files(int index, t_execution *execution)
+{
+    int     i;
+    int     *fds;
+
+    i = 0;
+    while (execution[index].files[i])
+        i++;
+    if (i)    
+        fds = malloc(sizeof(int) * i);
+    else
+        return (NULL);
+    i = -1;
+    while (execution[index].files[++i])
+    {
+        fds[i] = get_fd(index, execution, i);
+    }
+    return (fds);
+}
+
 void    child_process(int index, int *pipes, t_execution *execution)
 {
     int     ret;
-    
-    execution[index].fds = input_output_duplication(index, pipes, execution);
-    
-    int     i = -1;
-	while (++i < execution[index].nb_pipelines)
-	{
-		// printf("****************************************************\n");
-		// printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
-		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
-		// free(execution[i].exec_path);
-	}
-    if (index == 0) //  FIRST
-    {
-        // printf("%sFIRST\n%s", KYEL, KWHT);
-        dup2(pipes[index * 2 + 1], STDOUT);
-    }
-    else if (index == execution[0].nb_pipelines - 1) // LAST
-    {
-        // printf("%sLAST\n%s", KYEL, KWHT);
-        dup2(pipes[index * 2 - 2], STDIN);
-        // dup2(pipes[index * 2 + 1], STDOUT);
-    }
-    else    // MIDDLE
-    {
-        // printf("%sMIDDLE\n%s", KYEL, KWHT);
-        dup2(pipes[index * 2 - 2], STDIN);
-        dup2(pipes[index * 2 + 1], STDOUT);
-    }
-    close_all_fds(pipes, execution[0].nb_pipelines - 1);
-    ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
-    printf("ERROR EXECVE : %d\n", ret);
+    execution[index].fds = get_fds_files(index, execution);
+
+
+    int     i = 0;
+	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
+
+
+
+
+    // if (index == 0) //  FIRST
+    // {
+    //     // printf("%sFIRST\n%s", KYEL, KWHT);
+    //     dup2(pipes[index * 2 + 1], STDOUT);
+    // }
+    // else if (index == execution[0].nb_pipelines - 1) // LAST
+    // {
+    //     // printf("%sLAST\n%s", KYEL, KWHT);
+    //     dup2(pipes[index * 2 - 2], STDIN);
+    //     // dup2(pipes[index * 2 + 1], STDOUT);
+    // }
+    // else    // MIDDLE
+    // {
+    //     // printf("%sMIDDLE\n%s", KYEL, KWHT);
+    //     dup2(pipes[index * 2 - 2], STDIN);
+    //     dup2(pipes[index * 2 + 1], STDOUT);
+    // }
+    // close_all_fds(pipes, execution[0].nb_pipelines - 1);
+    // ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
+    ret = 7;// printf("ERROR EXECVE : %d\n", ret);
+    if (pipes || ret == 6){}
 }
 
 void   create_childs(t_execution *execution)
