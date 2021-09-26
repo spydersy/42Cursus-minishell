@@ -43,7 +43,6 @@ int *open_files(int index, t_execution *execution)
         fds = malloc(sizeof(int) * i);
     else
         return (0);
-    i = -1;
     while (execution[index].files[++i])
     {
         fds[i] = get_fd(index, execution, i);
