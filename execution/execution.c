@@ -28,9 +28,10 @@ void	print_args2(char **args, int *types, char **files, int *files_type, int *fd
 	i = -1;
 	while (files[++i])
 	{
-		printf(" [%s, %d, %d] ", files[i], files_type[i], fds[i]);
+		printf(" [%s, %d] ", files[i], files_type[i]);
 		// free(files[i]);
 	}
+	if (fds){}
 	printf("\n");
 	// free(args);
 	// free(types);
@@ -201,16 +202,17 @@ t_execution	*cases_redirection(t_execution *execution)
 void    execution(t_tokens *tokens)
 {
 	t_execution     *execution;
-	// int				i = -1;
+	int				i = -1;
 	
 	execution = init_execution(tokens);
-		// while (++i < execution[0].nb_pipelines)
-	// {
-	// 	printf("****************************************************\n");
-	// 	printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
-	// 	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
-	// 	// free(execution[i].exec_path);
-	// }
+	
+	while (++i < execution[0].nb_pipelines)
+	{
+		printf("****************************************************\n");
+		printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
+		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
+		// free(execution[i].exec_path);
+	}
 	heredocs_parsing(execution);
 	execution = cases_redirection(execution);
 	free(execution);

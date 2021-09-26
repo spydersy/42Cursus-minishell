@@ -81,7 +81,7 @@ OBJS=					$(SRCS:.c=.o)
 FLAGS=					-Wall -Werror -Wextra\
 						-lreadline\
 					   	-L ~/goinfre/.brew/opt/readline/lib \
-						-I ~/goinfre/.brew/opt/readline/include
+						-I ~/goinfre/.brew/opt/readline/include\
 
 $(NAME): $(OBJS)
 		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)

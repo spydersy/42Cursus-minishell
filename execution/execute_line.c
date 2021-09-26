@@ -104,12 +104,12 @@ void    dup_input(int index, int input_fd, int *pipes, t_execution *execution)
     if (input_fd == -1 && index != 0)
     {
         
-        printf("DUP IN PIPE : %s%d%s\n", KGRN, pipes[index * 2 - 2], KWHT);
+        printf("DUP IN PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 - 2], index, KWHT);
         dup2(pipes[index * 2 - 2], STDIN);
     }
     else if (input_fd != -1)
     {
-        printf("DUP IN FDS : %s%d%s\n", KGRN, execution[index].fds[input_fd], KWHT);
+        printf("DUP IN FDS : %s%d | %d%s\n", KGRN, execution[index].fds[input_fd], index, KWHT);
         dup2(execution[index].fds[input_fd], STDIN);
     }
 }
@@ -118,12 +118,12 @@ void    dup_output(int index, int output_fd, int *pipes, t_execution *execution)
 {
     if (output_fd == -1 && index != execution[0].nb_pipelines - 1)
     {
-        printf("DUP OUT PIPE : %s%d%s\n", KGRN, pipes[index * 2 + 1], KWHT);
+        printf("DUP OUT PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 + 1], index, KWHT);
         dup2(pipes[index * 2 + 1], STDOUT);
     }
     else if (output_fd != -1)
     {
-        printf("DUP OUT FDS : %s%d%s\n", KGRN, execution[index].fds[output_fd], KWHT);
+        printf("DUP OUT FDS : %s%d | %d%s\n", KGRN, execution[index].fds[output_fd], index, KWHT);
         dup2(execution[index].fds[output_fd], STDOUT);
     }
 }
@@ -159,6 +159,15 @@ void    child_process(int index, int *pipes, t_execution *execution)
     int     ret;
     execution[index].fds = get_fds_files(index, execution);
 
+	// int i = -1;
+    // while (++i < execution[0].nb_pipelines)
+	// {
+	// 	printf("%s****************************************************\n", KRED);
+	// 	printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
+	// 	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
+	// 	// free(execution[i].exec_path);
+	// }
+    // printf("%s", KWHT);
     if (check_redirections_errors(index, execution) != -1)
     {
         dup_in_out(index, pipes, execution);
@@ -188,9 +197,10 @@ void    child_process(int index, int *pipes, t_execution *execution)
     //     dup2(pipes[index * 2 - 2], STDIN);
     //     dup2(pipes[index * 2 + 1], STDOUT);
     // }
-    // close_all_fds(pipes, execution[0].nb_pipelines - 1);
+    close_all_fds(pipes, execution[0].nb_pipelines - 1);
     ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
-    // ret = 7;// printf("ERROR EXECVE : %d\n", ret);
+    // ret = 7;
+    printf("ERROR EXECVE : %d\n", ret);
     // if (pipes || ret == 6){}
 }
 
@@ -220,6 +230,6 @@ t_execution	*execute_line(t_execution *execution)
 {
 
     create_childs(execution);
-    // printf("%sEND OF EXECUTION%s\n", KYEL, KWHT);
+    printf("%sEND OF EXECUTION%s\n", KYEL, KWHT);
 	return (execution);
 }

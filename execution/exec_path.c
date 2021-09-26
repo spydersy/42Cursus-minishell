@@ -45,7 +45,7 @@ char        **get_paths(void)
 		return (ft_split("", '\0'));
 	else
 	{
-		paths = ft_split(g_env.env[i] + 6, ':');
+		paths = ft_split(g_env.env[i] + 5, ':'); // last mod
 		if (paths == NULL)
 			ft_error(NULL, 1);
         join_bs(paths);
@@ -158,7 +158,7 @@ char        *get_exec_path(t_tokens token, char **paths)
 	if (paths[0] == NULL)
 	{
 		free_paths(paths);
-		return (ft_strdup(""));free_paths(paths);
+		return (ft_strdup(""));
 	}
     free_paths(paths);
 	return (exec_path);

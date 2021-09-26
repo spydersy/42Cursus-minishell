@@ -1,0 +1,4 @@
+ARGS  : [wc, 9001]  [-l, 9002] 
+FILES : [ouuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu, 9003, 7] 
+ERROR EXECVE : -1
+[32mMINISHELL ([34m/Users/abelarif/Desktop/minishell[32m) 🚀 [37m
