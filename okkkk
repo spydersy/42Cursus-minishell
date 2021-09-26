@@ -1,0 +1,3 @@
+ARGS  : [/bin/echo, 9001]  [hello, 9002] 
+FILES : [okkkk, 9003, 3] 
+hello
