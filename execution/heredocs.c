@@ -41,7 +41,7 @@ void	write_fd_heredocs(int fd, char **eof, int *done)
 		{
 			done[index_done++] = 1;
 		}
-		else
+		else if (done[c - 2] == 1)
 		{
 			ft_putendl_fd(line, fd);
 		}
@@ -109,7 +109,6 @@ void	heredocs_parsing(t_execution *execution)
 			if (execution[i].files_type[j] == HEREDOC
 				|| execution[i].files_type[j] == -HEREDOC)
 			{
-	printf("%sAAAAAAAAAA%s\n", KRED, KWHT);
 				expand_heredocs(execution, i);
 				break ;
 			}
