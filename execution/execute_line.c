@@ -57,17 +57,52 @@ int *get_fds_files(int index, t_execution *execution)
     return (fds);
 }
 
+void    input_file_error(char *file)
+{
+    ft_putstr_fd(KRED, 2);
+    ft_putstr_fd(file, 2);
+    ft_putendl_fd(": No such file or directory", 2);
+    ft_putstr_fd(KWHT, 2);
+}
+
+int check_redirections_errors(int index, t_execution *execution)
+{
+    int     i;
+
+    i = -1;
+    while (execution[index].files[++i])
+    {
+        if (abs_value(execution[index].files_type[i]) == REDI0 && execution[index].fds[i] == -1)
+        {
+            input_file_error(execution[index].files[i]);
+            return (-1);
+        }
+    }
+    return (0);
+}
+
+void    dup_in_out(int index, int *pipes, t_execution *execution)
+{
+    int     i;
+    // LAST MODIFICATION ;
+}
+
 void    child_process(int index, int *pipes, t_execution *execution)
 {
     int     ret;
     execution[index].fds = get_fds_files(index, execution);
 
-
-    int     i = 0;
-	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
-
-
-
+    if (check_redirections_errors(index, execution) != -1)
+    {
+        dup_in_out(index, pipes, execution);
+    }
+    else
+    {
+        // do something ;
+        return ;
+    }
+	print_args2(execution[index].args, execution[index].args_type,
+        execution[index].files, execution[index].files_type, execution[index].fds);
 
     // if (index == 0) //  FIRST
     // {

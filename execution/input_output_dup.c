@@ -28,10 +28,6 @@ int get_fd(int index, t_execution *execution, int i)
             fd = open(execution[index].files[i], O_WRONLY | O_CREAT | O_APPEND, 0644);
         printf("%sHADA HWA LFILE DESCRITOR (4): %d%s\n", KYEL, fd, KWHT);
     }
-    if (fd == -1)
-    {
-        ft_error(NULL, 0);
-    }
     return (fd);
 }
 
