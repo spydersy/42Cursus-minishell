@@ -149,7 +149,7 @@ void    dup_in_out(int index, int *pipes, t_execution *execution)
     // DUP_IN
     dup_input(index, in_index, pipes, execution);
     dup_output(index, out_index, pipes, execution);
-    close_all_fds(execution[index].fds, i);
+    // close_all_fds(execution[index].fds, i);
     // DUP_OUT
     // LAST MODIFICATION ;
 }
