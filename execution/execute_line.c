@@ -81,9 +81,76 @@ int check_redirections_errors(int index, t_execution *execution)
     return (0);
 }
 
+int is_input_redir(int file_type)
+{
+    if (abs_value(file_type) == REDI0)
+        return (1);
+    if (abs_value(file_type) == HEREDOC)
+        return (1);
+    return (0);
+}
+
+int is_output_redir(int file_type)
+{
+    if (abs_value(file_type) == REDO0)
+        return (1);
+    if (abs_value(file_type) == REDO1)
+        return (1);
+    return (0);
+}
+
+void    dup_input(int index, int input_fd, int *pipes, t_execution *execution)
+{
+    if (input_fd == -1 && index != 0)
+    {
+        
+        printf("DUP IN PIPE : %s%d%s\n", KGRN, pipes[index * 2 - 2], KWHT);
+        dup2(pipes[index * 2 - 2], STDIN);
+    }
+    else if (input_fd != -1)
+    {
+        printf("DUP IN FDS : %s%d%s\n", KGRN, execution[index].fds[input_fd], KWHT);
+        dup2(execution[index].fds[input_fd], STDIN);
+    }
+}
+
+void    dup_output(int index, int output_fd, int *pipes, t_execution *execution)
+{
+    if (output_fd == -1 && index != execution[0].nb_pipelines - 1)
+    {
+        printf("DUP OUT PIPE : %s%d%s\n", KGRN, pipes[index * 2 + 1], KWHT);
+        dup2(pipes[index * 2 + 1], STDOUT);
+    }
+    else if (output_fd != -1)
+    {
+        printf("DUP OUT FDS : %s%d%s\n", KGRN, execution[index].fds[output_fd], KWHT);
+        dup2(execution[index].fds[output_fd], STDOUT);
+    }
+}
+
 void    dup_in_out(int index, int *pipes, t_execution *execution)
 {
     int     i;
+    int     in_index;
+    int     out_index;
+
+    i = -1;
+    in_index = -1;
+    out_index = -1;
+    while (execution[index].files[++i])
+    {
+        if (is_input_redir(execution[index].files_type[i])
+            && execution[index].fds[i] != -1)
+            in_index = i;
+        else if (is_output_redir(execution[index].files_type[i])
+            && execution[index].fds[i] != -1)
+            out_index = i;
+    }
+    // DUP_IN
+    dup_input(index, in_index, pipes, execution);
+    dup_output(index, out_index, pipes, execution);
+    close_all_fds(execution[index].fds, i);
+    // DUP_OUT
     // LAST MODIFICATION ;
 }
 
@@ -121,10 +188,10 @@ void    child_process(int index, int *pipes, t_execution *execution)
     //     dup2(pipes[index * 2 - 2], STDIN);
     //     dup2(pipes[index * 2 + 1], STDOUT);
     // }
-    // close_all_fds(pipes, execution[0].nb_pipelines - 1);
-    // ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
-    ret = 7;// printf("ERROR EXECVE : %d\n", ret);
-    if (pipes || ret == 6){}
+    close_all_fds(pipes, execution[0].nb_pipelines - 1);
+    ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
+    // ret = 7;// printf("ERROR EXECVE : %d\n", ret);
+    // if (pipes || ret == 6){}
 }
 
 void   create_childs(t_execution *execution)
