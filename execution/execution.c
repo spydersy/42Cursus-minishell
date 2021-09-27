@@ -202,17 +202,17 @@ t_execution	*cases_redirection(t_execution *execution)
 void    execution(t_tokens *tokens)
 {
 	t_execution     *execution;
-	int				i = -1;
+	// int				i = -1;
 	
 	execution = init_execution(tokens);
 	
-	while (++i < execution[0].nb_pipelines)
-	{
-		printf("****************************************************\n");
-		printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
-		print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
-		// free(execution[i].exec_path);
-	}
+	// while (++i < execution[0].nb_pipelines)
+	// {
+	// 	printf("****************************************************\n");
+	// 	printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
+	// 	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
+	// 	// free(execution[i].exec_path);
+	// }
 	heredocs_parsing(execution);
 	execution = cases_redirection(execution);
 	free(execution);

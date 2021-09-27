@@ -104,12 +104,12 @@ void    dup_input(int index, int input_fd, int *pipes, t_execution *execution)
     if (input_fd == -1 && index != 0)
     {
         
-        printf("DUP IN PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 - 2], index, KWHT);
+        // printf("DUP IN PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 - 2], index, KWHT);
         dup2(pipes[index * 2 - 2], STDIN);
     }
     else if (input_fd != -1)
     {
-        printf("DUP IN FDS : %s%d | %d%s\n", KGRN, execution[index].fds[input_fd], index, KWHT);
+        // printf("DUP IN FDS : %s%d | %d%s\n", KGRN, execution[index].fds[input_fd], index, KWHT);
         dup2(execution[index].fds[input_fd], STDIN);
     }
 }
@@ -118,12 +118,12 @@ void    dup_output(int index, int output_fd, int *pipes, t_execution *execution)
 {
     if (output_fd == -1 && index != execution[0].nb_pipelines - 1)
     {
-        printf("DUP OUT PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 + 1], index, KWHT);
+        // printf("DUP OUT PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 + 1], index, KWHT);
         dup2(pipes[index * 2 + 1], STDOUT);
     }
     else if (output_fd != -1)
     {
-        printf("DUP OUT FDS : %s%d | %d%s\n", KGRN, execution[index].fds[output_fd], index, KWHT);
+        // printf("DUP OUT FDS : %s%d | %d%s\n", KGRN, execution[index].fds[output_fd], index, KWHT);
         dup2(execution[index].fds[output_fd], STDOUT);
     }
 }
@@ -177,26 +177,9 @@ void    child_process(int index, int *pipes, t_execution *execution)
         // do something ;
         return ;
     }
-	print_args2(execution[index].args, execution[index].args_type,
-        execution[index].files, execution[index].files_type, execution[index].fds);
+	// print_args2(execution[index].args, execution[index].args_type,
+        // execution[index].files, execution[index].files_type, execution[index].fds);
 
-    // if (index == 0) //  FIRST
-    // {
-    //     // printf("%sFIRST\n%s", KYEL, KWHT);
-    //     dup2(pipes[index * 2 + 1], STDOUT);
-    // }
-    // else if (index == execution[0].nb_pipelines - 1) // LAST
-    // {
-    //     // printf("%sLAST\n%s", KYEL, KWHT);
-    //     dup2(pipes[index * 2 - 2], STDIN);
-    //     // dup2(pipes[index * 2 + 1], STDOUT);
-    // }
-    // else    // MIDDLE
-    // {
-    //     // printf("%sMIDDLE\n%s", KYEL, KWHT);
-    //     dup2(pipes[index * 2 - 2], STDIN);
-    //     dup2(pipes[index * 2 + 1], STDOUT);
-    // }
     close_all_fds(pipes, execution[0].nb_pipelines - 1);
     ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
     // ret = 7;
@@ -230,6 +213,5 @@ t_execution	*execute_line(t_execution *execution)
 {
 
     create_childs(execution);
-    printf("%sEND OF EXECUTION%s\n", KYEL, KWHT);
 	return (execution);
 }
