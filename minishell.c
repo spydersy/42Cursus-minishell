@@ -26,7 +26,10 @@ void	terminal_view(void)
 		}
 		line = read_line();
 		if (empty_line(line) == 0)
+		{
 			extract_semicolon_line(line);
+			// free(line);
+		}
 		else
 			free(line);
 	}

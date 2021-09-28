@@ -12,206 +12,222 @@
 
 #include "../minishell.h"
 
-int *init_pipes(int nb_pipes)
+int	*init_pipes(int nb_pipes)
 {
-    int     i;
-    int     *pipes;
-    
-    i = -1;
-    pipes = malloc(sizeof(int) * 2 * nb_pipes);
-    while (++i < nb_pipes)
-    {
-        pipe(pipes + i * 2);
-    }
-    return (pipes);
+	int		i;
+	int		*pipes;
+
+	i = -1;
+	pipes = malloc(sizeof(int) * 2 * nb_pipes);
+	while (++i < nb_pipes)
+	{
+		pipe(pipes + i * 2);
+	}
+	return (pipes);
 }
 
-void    close_all_fds(int *pipes, int nb_pipes)
+void	close_all_fds(int *pipes, int nb_pipes)
 {
-    int     i;
+	int		i;
 
-    i = -1;
-    while (++i < nb_pipes * 2)
-    {
-        close(pipes[i]);
-    }
+	i = -1;
+	while (++i < nb_pipes * 2)
+	{
+		close(pipes[i]);
+	}
 }
 
-int *get_fds_files(int index, t_execution *execution)
+int	*get_fds_files(int index, t_execution *execution)
 {
-    int     i;
-    int     *fds;
+	int		i;
+	int		*fds;
 
-    i = 0;
-    while (execution[index].files[i])
-        i++;
-    if (i)    
-        fds = malloc(sizeof(int) * i);
-    else
-        return (NULL);
-    i = -1;
-    while (execution[index].files[++i])
-    {
-        fds[i] = get_fd(index, execution, i);
-    }
-    return (fds);
+	i = 0;
+	while (execution[index].files[i])
+		i++;
+	if (i)
+		fds = malloc(sizeof(int) * i);
+	else
+		return (NULL);
+	i = -1;
+	while (execution[index].files[++i])
+	{
+		fds[i] = get_fd(index, execution, i);
+	}
+	return (fds);
 }
 
-void    input_file_error(char *file)
+void	input_file_error(char *file)
 {
-    ft_putstr_fd(KRED, 2);
-    ft_putstr_fd(file, 2);
-    ft_putendl_fd(": No such file or directory", 2);
-    ft_putstr_fd(KWHT, 2);
+	ft_putstr_fd(KRED, 2);
+	ft_putstr_fd(file, 2);
+	ft_putendl_fd(": No such file or directory", 2);
+	ft_putstr_fd(KNRM, 2);
 }
 
-int check_redirections_errors(int index, t_execution *execution)
+int	check_redirections_errors(int index, t_execution *execution)
 {
-    int     i;
+	int		i;
 
-    i = -1;
-    while (execution[index].files[++i])
-    {
-        if (abs_value(execution[index].files_type[i]) == REDI0 && execution[index].fds[i] == -1)
-        {
-            input_file_error(execution[index].files[i]);
-            return (-1);
-        }
-    }
-    return (0);
+	i = -1;
+	while (execution[index].files[++i])
+	{
+		if (abs_value(execution[index].files_type[i]) == REDI0 && execution[index].fds[i] == -1)
+		{
+			input_file_error(execution[index].files[i]);
+			return (-1);
+		}
+	}
+	return (0);
 }
 
-int is_input_redir(int file_type)
+int	is_input_redir(int file_type)
 {
-    if (abs_value(file_type) == REDI0)
-        return (1);
-    if (abs_value(file_type) == HEREDOC)
-        return (1);
-    return (0);
+	if (abs_value(file_type) == REDI0)
+		return (1);
+	if (abs_value(file_type) == HEREDOC)
+		return (1);
+	return (0);
 }
 
-int is_output_redir(int file_type)
+int	is_output_redir(int file_type)
 {
-    if (abs_value(file_type) == REDO0)
-        return (1);
-    if (abs_value(file_type) == REDO1)
-        return (1);
-    return (0);
+	if (abs_value(file_type) == REDO0)
+		return (1);
+	if (abs_value(file_type) == REDO1)
+		return (1);
+	return (0);
 }
 
-void    dup_input(int index, int input_fd, int *pipes, t_execution *execution)
+void	dup_input(int index, int input_fd, int *pipes, t_execution *execution)
 {
-    if (input_fd == -1 && index != 0)
-    {
-        
-        // printf("DUP IN PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 - 2], index, KWHT);
-        dup2(pipes[index * 2 - 2], STDIN);
-    }
-    else if (input_fd != -1)
-    {
-        // printf("DUP IN FDS : %s%d | %d%s\n", KGRN, execution[index].fds[input_fd], index, KWHT);
-        dup2(execution[index].fds[input_fd], STDIN);
-    }
+	if (input_fd == -1 && index != 0)
+	{
+		dup2(pipes[index * 2 - 2], STDIN);
+	}
+	else if (input_fd != -1)
+	{
+		dup2(execution[index].fds[input_fd], STDIN);
+	}
 }
 
-void    dup_output(int index, int output_fd, int *pipes, t_execution *execution)
+void	dup_output(int index, int output_fd, int *pipes, t_execution *execution)
 {
-    if (output_fd == -1 && index != execution[0].nb_pipelines - 1)
-    {
-        // printf("DUP OUT PIPE : %s%d | %d%s\n", KGRN, pipes[index * 2 + 1], index, KWHT);
-        dup2(pipes[index * 2 + 1], STDOUT);
-    }
-    else if (output_fd != -1)
-    {
-        // printf("DUP OUT FDS : %s%d | %d%s\n", KGRN, execution[index].fds[output_fd], index, KWHT);
-        dup2(execution[index].fds[output_fd], STDOUT);
-    }
+	if (output_fd == -1 && index != execution[0].nb_pipelines - 1)
+	{
+		dup2(pipes[index * 2 + 1], STDOUT);
+	}
+	else if (output_fd != -1)
+	{
+		dup2(execution[index].fds[output_fd], STDOUT);
+	}
 }
 
-void    dup_in_out(int index, int *pipes, t_execution *execution)
+void	dup_in_out(int index, int *pipes, t_execution *execution)
 {
-    int     i;
-    int     in_index;
-    int     out_index;
+	int		i;
+	int		in_index;
+	int		out_index;
 
-    i = -1;
-    in_index = -1;
-    out_index = -1;
-    while (execution[index].files[++i])
-    {
-        if (is_input_redir(execution[index].files_type[i])
-            && execution[index].fds[i] != -1)
-            in_index = i;
-        else if (is_output_redir(execution[index].files_type[i])
-            && execution[index].fds[i] != -1)
-            out_index = i;
-    }
-    // DUP_IN
-    dup_input(index, in_index, pipes, execution);
-    dup_output(index, out_index, pipes, execution);
-    // close_all_fds(execution[index].fds, i);
-    // DUP_OUT
-    // LAST MODIFICATION ;
+	i = -1;
+	in_index = -1;
+	out_index = -1;
+	while (execution[index].files[++i])
+	{
+		if (is_input_redir(execution[index].files_type[i])
+			&& execution[index].fds[i] != -1)
+			in_index = i;
+		else if (is_output_redir(execution[index].files_type[i])
+			&& execution[index].fds[i] != -1)
+			out_index = i;
+	}
+	dup_input(index, in_index, pipes, execution);
+	dup_output(index, out_index, pipes, execution);
+	// close_all_fds(execution[index].fds, i);
 }
 
-void    child_process(int index, int *pipes, t_execution *execution)
+void	command_not_found_error(char *command)
 {
-    int     ret;
-    execution[index].fds = get_fds_files(index, execution);
-
-	// int i = -1;
-    // while (++i < execution[0].nb_pipelines)
-	// {
-	// 	printf("%s****************************************************\n", KRED);
-	// 	printf("exec_path : [%s] | command : [%s]\n", execution[i].exec_path, execution[i].command);
-	// 	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
-	// 	// free(execution[i].exec_path);
-	// }
-    // printf("%s", KWHT);
-    if (check_redirections_errors(index, execution) != -1)
-    {
-        dup_in_out(index, pipes, execution);
-    }
-    else
-    {
-        // do something ;
-        return ;
-    }
-	// print_args2(execution[index].args, execution[index].args_type,
-        // execution[index].files, execution[index].files_type, execution[index].fds);
-
-    close_all_fds(pipes, execution[0].nb_pipelines - 1);
-    ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
-    // ret = 7;
-    printf("ERROR EXECVE : %d\n", ret);
-    // if (pipes || ret == 6){}
+	ft_putstr_fd(KRED, 2);
+	ft_putstr_fd(command, 2);
+	ft_putendl_fd(": command not found", 2);
+	ft_putstr_fd(KNRM, 2);
 }
 
-void   create_childs(t_execution *execution)
+void	no_such_file_error(char *command)
 {
-    int     i;
-    int     *pipes;
-    pid_t   pid;
-    int     status;
-    
-    i = -1;
-    pipes = init_pipes(execution[0].nb_pipelines - 1);
-    while (++i < execution[0].nb_pipelines)
-    {
-        pid = fork();
-        if (pid == 0)
-        {
-            child_process(i, pipes, execution);
-        }
-    }
-    close_all_fds(pipes, execution[0].nb_pipelines - 1);
-    waitpid(pid, &status, 0);
-    waitpid(-1, &status, 0);
+	ft_putstr_fd(KRED, 2);
+	ft_putstr_fd(command, 2);
+	ft_putendl_fd(": No such file or directory", 2);
+	ft_putstr_fd(KNRM, 2);
+}
+
+void	child_process(int index, int *pipes, t_execution *execution)
+{
+	int     ret;
+	ret = 0;
+
+	execution[index].fds = get_fds_files(index, execution);
+	if (check_redirections_errors(index, execution) != -1)
+	{
+		dup_in_out(index, pipes, execution);
+	}
+	else
+	{
+		// do something ;
+		return ;
+	}
+	close_all_fds(pipes, execution[0].nb_pipelines - 1);
+	if (execution[index].exec_path == NULL)
+	{
+		command_not_found_error(execution[index].command);
+		exit(127);
+	}
+	else if (ft_strlen(execution[index].exec_path) == 0)
+	{
+		no_such_file_error(execution[index].command);
+		exit(0);
+	}
+	else if (ft_strncmp("builtin", execution[index].exec_path, 7) == 0 && execution[index].exec_path)
+	{
+		exit(simple_builtin(execution + index, 1));
+	}
+	else
+	{
+		ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
+		ft_putstr_fd("ERROR EXECVE\n", 2);
+	}
+}
+
+void	create_childs(t_execution *execution)
+{
+	int		i;
+	int		*pipes;
+	int		status;
+	pid_t	pid;
+
+	i = -1;
+	pipes = init_pipes(execution[0].nb_pipelines - 1);
+	while (++i < execution[0].nb_pipelines)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			child_process(i, pipes, execution);
+		}
+	}
+	close_all_fds(pipes, execution[0].nb_pipelines - 1);
+	waitpid(pid, &status, 0);
+	waitpid(-1, &status, 0);
+	if (WIFEXITED(status))
+	{
+		g_env.exit_status = WEXITSTATUS(status);
+	}
+	printf("exit_status : %d\n", g_env.exit_status);
 }
 
 t_execution	*execute_line(t_execution *execution)
 {
-
-    create_childs(execution);
+	create_childs(execution);
 	return (execution);
 }

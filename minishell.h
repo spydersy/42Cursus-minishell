@@ -75,6 +75,7 @@ typedef struct s_env
 {
 	char				**env;
 	char				**sorted;
+	int					exit_status;
 }						t_env;
 
 typedef struct s_tokens
@@ -129,8 +130,8 @@ int						empty_line(char *line);
 int						count_arr(char **arr);
 int abs_value(int nb);
 
-void        			builtin_exit(char **args);
-void					builtin_env(void);
+int        			builtin_exit(char **args, int is_a_child_process);
+int					builtin_env(void);
 void					sort_env(void);
 void					clear_window(void);
 void					init_env(char **env);
@@ -142,10 +143,10 @@ void                	dollar_handling(char **tok, int index);
 void					expand_quotes_dollar(t_tokens *tokens);
 void					set_separator_type(int *type, char **toks);
 void					minishell(int argc, char *argv[], char *envp[]);
-void        			builtin_cd(char **path);
-void			        builtin_echo(char **args, int *types);
+int        			builtin_cd(char **path);
+int			        builtin_echo(char **args, int *types);
 void					free_arr(char **arr);
-void					builtin_unset(char **args);
+int					builtin_unset(char **args);
 void					heredocs_parsing(t_execution *execution);
 
 char					*prompt(void);
@@ -162,7 +163,7 @@ t_quote					init_quote(void);
 t_tokens				replace_dollar(t_tokens *tok);
 t_quote					set_quote_value(char quote_type, t_quote to_quote);
 t_separator				get_separator_index(char *line, char separator_type);
-t_execution	*simple_builtin(t_execution *execution);
+int	simple_builtin(t_execution *execution, int exit_flag);
 t_execution    input_output_duplication(int index, int *pipes, t_execution *execution);
 
 

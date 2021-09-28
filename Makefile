@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/20 07:44:54 by abelarif         ###   ########.fr        #
+#    Updated: 2021/09/28 13:40:24 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,8 +80,8 @@ OBJS=					$(SRCS:.c=.o)
 
 FLAGS=					-Wall -Werror -Wextra\
 						-lreadline\
-					   	-L ~/goinfre/.brew/opt/readline/lib \
-						-I ~/goinfre/.brew/opt/readline/include\
+					   	-L /goinfre/abelarif/.brew/opt/readline/lib\
+						-I /goinfre/abelarif/.brew/opt/readline/include\
 
 $(NAME): $(OBJS)
 		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)

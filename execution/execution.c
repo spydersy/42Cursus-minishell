@@ -186,17 +186,16 @@ t_execution *init_execution(t_tokens *tokens)
 	return (execution);
 }
 
-t_execution	*cases_redirection(t_execution *execution)
+void	cases_redirection(t_execution *execution)
 {
 	if (execution[0].exec_path
 		&& ft_strncmp(execution[0].exec_path, "builtin", 7) == 0
 		&& execution[0].nb_pipelines == 1)
 	{
-		printf("BBBBBBBBBBBBBBBBBBBBBBB\n");
-		return (simple_builtin(execution));
+		simple_builtin(execution, 0);
 	}
 	else
-		return (execute_line(execution));
+		execute_line(execution);
 }
 
 void    execution(t_tokens *tokens)
@@ -214,6 +213,6 @@ void    execution(t_tokens *tokens)
 	// 	// free(execution[i].exec_path);
 	// }
 	heredocs_parsing(execution);
-	execution = cases_redirection(execution);
+	cases_redirection(execution);
 	free(execution);
 }

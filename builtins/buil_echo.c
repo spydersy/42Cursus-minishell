@@ -39,7 +39,7 @@ int	skip_new_line(char **args)
 	return (i);
 }
 
-void	builtin_echo(char **args, int *types)
+int	builtin_echo(char **args, int *types)
 {
 	int		i;
 	int		counter;
@@ -60,4 +60,5 @@ void	builtin_echo(char **args, int *types)
 	}
 	if (new_line == 1)
 		printf("\n");
+	return (0);
 }

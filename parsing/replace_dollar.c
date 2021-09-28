@@ -95,9 +95,9 @@ char	**split_dollar_signe(char **old, int index)
 
 	i = -1;
 	content = ft_split(old[index], ' ');
-    printf("COUNT CONTENT : %d\n", count(content));
-    printf("COUNT OLD     : %d\n", count(old));
-    printf("------- INDEX : %d\n", index);
+    // printf("COUNT CONTENT : %d\n", count(content));
+    // printf("COUNT OLD     : %d\n", count(old));
+    // printf("------- INDEX : %d\n", index);
 	new = malloc(sizeof(char *) * (count(old) + count(content)));
 	while (++i < index)
 		new[i] = ft_strdup(old[i]);

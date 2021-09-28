@@ -1,0 +1,8 @@
+cd      : DONE
+echo    : DONE
+env     : DONE
+exit    : DONE
+pwd     : DONE
+export  : PROG
+unset   : DONE
+

@@ -28,7 +28,7 @@ void	join_bs(char **paths)
 	}
 }
 
-char        **get_paths(void)
+char	**get_paths(void)
 {
 	int		i;
 	int		cmp;
@@ -45,39 +45,39 @@ char        **get_paths(void)
 		return (ft_split("", '\0'));
 	else
 	{
-		paths = ft_split(g_env.env[i] + 5, ':'); // last mod
+		paths = ft_split(g_env.env[i] + 5, ':');
 		if (paths == NULL)
 			ft_error(NULL, 1);
-        join_bs(paths);
+		join_bs(paths);
 		return (paths);
 	}
 }
 
-void        free_paths(char **paths)
+void	free_paths(char **paths)
 {
-    int     i;
+	int		i;
 
-    i = -1;
-    while (paths[++i])
-    {
-        free(paths[i]);
-        paths[i] = NULL;
-    }
-    free(paths);
-    paths = NULL;
+	i = -1;
+	while (paths[++i])
+	{
+		free(paths[i]);
+		paths[i] = NULL;
+	}
+	free(paths);
+	paths = NULL;
 }
 
-char        *join_paths(t_tokens tokens, int index, char **paths)
+char	*join_paths(t_tokens tokens, int index, char **paths)
 {
-    int     i;
-    int     fd;
-    char    *tmp;
-    char    *cmd;
+	int		i;
+	int		fd;
+	char	*tmp;
+	char	*cmd;
 
-    i = -1;
-    cmd = tokens.tokens[index];
-    if (index != 0)
-        cmd = tokens.tokens[index] + 1;
+	i = -1;
+	cmd = tokens.tokens[index];
+	if (index != 0)
+		cmd = tokens.tokens[index] + 1;
 	while (paths[++i])
 	{
 		tmp = ft_strjoin(paths[i], cmd);
@@ -93,73 +93,72 @@ char        *join_paths(t_tokens tokens, int index, char **paths)
 			return (tmp);
 		}
 	}
-    return (NULL);
+	return (NULL);
 }
 
-char    *is_builtin(char *cmd)
+char	*is_builtin(char *cmd)
 {
-    // printf("ALOOOOOOOOOOOOOOOOHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA            [%s]\n", cmd);
-    if (cmd[0] == ' ' || cmd[0] == '\'' || cmd[0] == '\"')
-        cmd++;
-    if (ft_strcmp(cmd, "echo") == 0)
-        return ("builtin_echo");
-    if (ft_strcmp(cmd, "cd") == 0)
-        return ("builtin_cd");
-    if (ft_strcmp(cmd, "pwd") == 0)
-        return ("builtin_pwd");
-    if (ft_strcmp(cmd, "export") == 0)
-        return ("builtin_export");
-    if (ft_strcmp(cmd, "unset") == 0)
-        return ("builtin_unset");
-    if (ft_strcmp(cmd, "env") == 0)
-        return ("builtin_env");
-    if (ft_strcmp(cmd, "exit") == 0)
-        return ("builtin_exit");
-    return ("go_back");
+	if (cmd[0] == ' ' || cmd[0] == '\'' || cmd[0] == '\"')
+		cmd++;
+	if (ft_strcmp(cmd, "echo") == 0)
+		return ("builtin_echo");
+	if (ft_strcmp(cmd, "cd") == 0)
+		return ("builtin_cd");
+	if (ft_strcmp(cmd, "pwd") == 0)
+		return ("builtin_pwd");
+	if (ft_strcmp(cmd, "export") == 0)
+		return ("builtin_export");
+	if (ft_strcmp(cmd, "unset") == 0)
+		return ("builtin_unset");
+	if (ft_strcmp(cmd, "env") == 0)
+		return ("builtin_env");
+	if (ft_strcmp(cmd, "exit") == 0)
+		return ("builtin_exit");
+	return ("go_back");
 }
 
-char        *get_exec_path(t_tokens token, char **paths)
+char	*get_exec_path(t_tokens token, char **paths)
 {
-    int     i;
-    int     fd;
-    int     index;
-    char    *exec_path;
+	int		i;
+	int		fd;
+	int		index;
+	char	*exec_path;
 
-    i = -1;
-    index = 0;
-    while (++i < token.nb)
-    {
-        if (token.type[i] == CMD || token.type[i] == -CMD)
-            break ;
-    }
-    if (token.tokens[i] == NULL)
-    {
-        free_paths(paths);
-        return (NULL);
-    }
-    if (ft_strncmp(is_builtin(token.tokens[i]), "builtin", 6) == 0)
-    {
-        free_paths(paths);
-        return (ft_strdup(is_builtin(token.tokens[i])));
-    }
-    exec_path = join_paths(token, i, paths);
-    if (exec_path == NULL)
-    {
-        if (i != 0)
-            index++;
-        fd = open(token.tokens[i] + index, O_RDONLY, 0666);
-        if (fd > 0)
-        {
-            close(fd);
+	i = -1;
+	index = 0;
+	while (++i < token.nb)
+	{
+		if (token.type[i] == CMD || token.type[i] == -CMD)
+			break ;
+	}
+	if (token.tokens[i] == NULL)
+	{
+		free_paths(paths);
+		return (NULL);
+	}
+	if (ft_strncmp(is_builtin(token.tokens[i]), "builtin", 6) == 0)
+	{
+		free_paths(paths);
+		return (ft_strdup(is_builtin(token.tokens[i])));
+	}
+	exec_path = join_paths(token, i, paths);
+	if (exec_path == NULL)
+	{
+		if (i != 0)
+			index++;
+		fd = open(token.tokens[i] + index, O_RDONLY, 0666);
+		if (fd > 0)
+		{
+			close(fd);
 			free_paths(paths);
-            return (ft_strdup(token.tokens[i] + index));
-        }
-    }
+			return (ft_strdup(token.tokens[i] + index));
+		}
+	}
 	if (paths[0] == NULL)
 	{
 		free_paths(paths);
 		return (ft_strdup(""));
 	}
-    free_paths(paths);
+	free_paths(paths);
 	return (exec_path);
 }

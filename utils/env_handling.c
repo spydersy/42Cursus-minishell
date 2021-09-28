@@ -60,6 +60,7 @@ void	init_env(char **env)
 	int		c;
 
 	c = 0;
+	g_env.exit_status = 0;
 	while (env[c])
 		c++;
 	g_env.env = malloc(sizeof(char *) * (c + 1));

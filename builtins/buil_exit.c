@@ -31,7 +31,7 @@ int	str_is_digit(char *str)
 	return (1);
 }
 
-void	builtin_exit(char **args)
+int	builtin_exit(char **args, int is_a_child_process)
 {
 	int		counter;
 
@@ -43,7 +43,10 @@ void	builtin_exit(char **args)
 	if (str_is_digit(args[0]) == 0)
 	{
 		ft_error("exit: numeric argument required", 0);
+		if (is_a_child_process == 1)
+			return (255);
 		exit(255);
+
 	}
 	else
 	{
@@ -53,7 +56,10 @@ void	builtin_exit(char **args)
 		}
 		else
 		{
+			if (is_a_child_process == 1)
+				return ((unsigned char)ft_atoi(args[0]));
 			exit((unsigned char)ft_atoi(args[0]));
 		}
 	}
+	return (0);
 }

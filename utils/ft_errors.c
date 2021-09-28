@@ -26,7 +26,7 @@ int	ft_error(char *description, int exitstat)
 		write(STDERR, strerror(errno), ft_strlen(strerror(errno)));
 	}
 	write(2, "\n", 1);
-	write(1, KWHT, ft_strlen(KWHT));
+	write(1, KNRM, ft_strlen(KNRM));
 	if (exitstat == 1)
 		exit(EXIT_FAILURE);
 	return (errno);

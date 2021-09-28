@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	builtin_env(void)
+int	builtin_env(void)
 {
 	int		i;
 
@@ -21,4 +21,5 @@ void	builtin_env(void)
 	{
 		printf("%s\n", g_env.env[i]);
 	}
+	return (0);
 }

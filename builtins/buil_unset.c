@@ -52,7 +52,7 @@ void	rm_variable(int index)
 	sort_env();
 }
 
-void	builtin_unset(char **args)
+int	builtin_unset(char **args)
 {
 	int		i;
 	int		index;
@@ -66,4 +66,5 @@ void	builtin_unset(char **args)
 			rm_variable(index);
 		}
 	}
+	return (0);
 }
