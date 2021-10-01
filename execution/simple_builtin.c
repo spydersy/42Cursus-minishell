@@ -14,22 +14,29 @@
 
 int	simple_builtin(t_execution *execution, int exit_flag)
 {
+	int		ret;
+	char	*str_exit;
+
+	ret = 0;
 	if (!ft_strcmp(execution[0].exec_path, "builtin_cd"))
-		return (builtin_cd(execution[0].args + 1));
+		ret = builtin_cd(execution[0].args + 1);
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_echo"))
-		return (builtin_echo(execution[0].args + 1, execution[0].args_type + 1));
+		ret = builtin_echo(execution[0].args + 1, execution[0].args_type + 1);
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_env"))
-		return (builtin_env());
+		ret = builtin_env();
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_exit"))
-		return (builtin_exit(execution[0].args + 1, exit_flag));
+		ret = builtin_exit(execution[0].args + 1, exit_flag);
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_pwd"))
 	{
 		builtin_pwd(0);
-		return (0);
+		ret = 0;
 	}
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_unset"))
-		return (builtin_unset(execution[0].args + 1));
-        return (0);
+		ret = builtin_unset(execution[0].args + 1);
+	str_exit = ft_itoa(ret);
+	set_env("?", str_exit);
+	free(str_exit);
+	return (ret);
 	// else
 		// return (builtin_export(execution[0].args, execution[0].args_type));
 }

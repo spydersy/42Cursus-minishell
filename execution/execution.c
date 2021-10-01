@@ -198,6 +198,52 @@ void	cases_redirection(t_execution *execution)
 		execute_line(execution);
 }
 
+void	free_execution(t_execution *execution)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < execution[0].nb_pipelines)
+	{
+		j = -1;
+		while (execution[i].args[++j])
+		{
+			printf(" free1 : %s\n", execution[i].args[j]);
+			free(execution[i].args[j]);
+		}
+		free(execution[i].args);
+		free(execution[i].args_type);
+		j = -1;
+		while (execution[i].files[++j])
+		{
+			printf(" free2 : %s\n", execution[i].files[j]);
+			free(execution[i].files[j]);
+		}
+		free(execution[i].files);
+		// free(execution[i].files_type);
+		if (execution[i].command != NULL)
+		{
+			printf(" free3 : %s\n", execution[i].command);
+			free(execution[i].command);
+		}
+		if (execution[i].exec_path != NULL)
+		{
+			printf(" free4 : %s\n", execution[i].exec_path);
+			free(execution[i].exec_path);
+		}
+		printf(">>A<<\n");
+		// if (execution[i].fds != NULL)	
+			// free(execution[i].fds);
+		printf(">>B<<\n");
+		free(execution[i].files_type);
+		printf(">>C<<\n");
+	}
+		printf(">>D<<\n");
+	free(execution);
+		printf(">>E<<\n");
+}
+
 void    execution(t_tokens *tokens)
 {
 	t_execution     *execution;
@@ -212,7 +258,7 @@ void    execution(t_tokens *tokens)
 	// 	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
 	// 	// free(execution[i].exec_path);
 	// }
-	// heredocs_parsing(execution);
+	heredocs_parsing(execution);
 	cases_redirection(execution);
-	free(execution);
+	free_execution(execution);
 }

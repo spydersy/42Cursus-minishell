@@ -65,10 +65,8 @@ char	*read_line(void)
 	line = readline(prpt);
 	if (line == NULL)
 	{
-		//FREE();
 		exit(EXIT_SUCCESS);
 	}
-	// printf("liiiiine [%s]\n", line);
 	if (empty_line(line) == 0)
 		add_history(line);
 	free(prpt);

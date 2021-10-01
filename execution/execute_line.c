@@ -175,38 +175,29 @@ void	child_process(int index, int *pipes, t_execution *execution)
 	}
 	else
 	{
-		// do something ;
-		return ;
+		exit(1);
 	}
 	close_all_fds(pipes, execution[0].nb_pipelines - 1);
-	if (execution[index].exec_path == NULL)
+	if (execution[index].exec_path == NULL && ft_strlen(execution[index].command))
 	{
-		printf(">>A<<\n");
 		command_not_found_error(execution[index].command);
-		set_env("?", "127");
 		exit(127);
 	}
 	else if (ft_strlen(execution[index].exec_path) == 0)
 	{
-		printf(">>B<<\n");
 		no_such_file_error(execution[index].command);
-		set_env("?", "127");
 		exit(127);
 	}
 	else if (ft_strncmp("builtin", execution[index].exec_path, 7) == 0 && execution[index].exec_path)
 	{
-		printf(">>C<<\n");
 		str_exit = ft_itoa(simple_builtin(execution + index, 1));
-		set_env("?", str_exit);
 		free(str_exit);
 		exit(simple_builtin(execution + index, 1));
 	}
 	else
 	{
-		printf(">>D<<\n");
 		ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
 		ft_error(NULL, 0);
-		set_env("?", "126");
 		exit(126);
 	}
 }
@@ -217,6 +208,7 @@ void	create_childs(t_execution *execution)
 	int		*pipes;
 	int		status;
 	pid_t	pid;
+	char	*str_exit;
 
 	i = -1;
 	pipes = init_pipes(execution[0].nb_pipelines - 1);
@@ -234,6 +226,9 @@ void	create_childs(t_execution *execution)
 	if (WIFEXITED(status))
 	{
 		g_env.exit_status = WEXITSTATUS(status);
+		str_exit = ft_itoa(g_env.exit_status);
+		set_env("?", str_exit);
+		free(str_exit);
 	}
 }
 

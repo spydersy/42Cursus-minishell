@@ -53,17 +53,5 @@ t_execution    input_output_duplication(int index, int *pipes, t_execution *exec
     
     execution[index].fds = open_files(index, execution);
 
-    // if (index == 0) //  FIRST
-    // {
-    //     fd_to_dup = open_files(index, execution);
-    // }
-    // else if (index == execution[0].nb_pipelines - 1)    //  LASTT
-    // {
-    //     fd_to_dup = open_files(index, execution);
-    // }
-    // else    //  MIDDLE
-    // {
-    //     fd_to_dup = open_files(index, execution);
-    // }
     return (execution[index]);  
 }
