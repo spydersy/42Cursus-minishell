@@ -210,7 +210,6 @@ void	free_execution(t_execution *execution)
 		j = -1;
 		while (execution[i].args[++j])
 		{
-			printf(" free1 : %s\n", execution[i].args[j]);
 			free(execution[i].args[j]);
 		}
 		free(execution[i].args[j]);//new
@@ -219,7 +218,6 @@ void	free_execution(t_execution *execution)
 		j = -1;
 		while (execution[i].files[++j])
 		{
-			printf(" free2 : %s\n", execution[i].files[j]);
 			free(execution[i].files[j]);
 		}
 			free(execution[i].files[j]);//new
@@ -227,24 +225,17 @@ void	free_execution(t_execution *execution)
 		// free(execution[i].files_type);
 		if (execution[i].command != NULL)
 		{
-			printf(" free3 : %s\n", execution[i].command);
 			free(execution[i].command);
 		}
 		if (execution[i].exec_path != NULL)
 		{
-			printf(" free4 : %s\n", execution[i].exec_path);
 			free(execution[i].exec_path);
 		}
-		printf(">>A<<\n");
 		// if (execution[i].fds != NULL)	
 			// free(execution[i].fds);
-		printf(">>B<<\n");
 		free(execution[i].files_type);
-		printf(">>C<<\n");
 	}
-		printf(">>D<<\n");
 	free(execution);
-		printf(">>E<<\n");
 }
 
 void    execution(t_tokens *tokens)

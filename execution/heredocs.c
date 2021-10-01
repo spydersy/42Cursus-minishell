@@ -70,6 +70,7 @@ void	heredocs_prompt(char **eof)
 	write_fd_heredocs(fd, eof, done);
 	close(fd);
 	free(done);
+	free(file_path);
 }
 
 void	expand_heredocs(t_execution *execution, int index)
