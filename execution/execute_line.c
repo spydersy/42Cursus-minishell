@@ -165,8 +165,9 @@ void	no_such_file_error(char *command)
 void	child_process(int index, int *pipes, t_execution *execution)
 {
 	int     ret;
-	ret = 0;
+	char	*str_exit;
 
+	ret = 0;
 	execution[index].fds = get_fds_files(index, execution);
 	if (check_redirections_errors(index, execution) != -1)
 	{
@@ -180,22 +181,33 @@ void	child_process(int index, int *pipes, t_execution *execution)
 	close_all_fds(pipes, execution[0].nb_pipelines - 1);
 	if (execution[index].exec_path == NULL)
 	{
+		printf(">>A<<\n");
 		command_not_found_error(execution[index].command);
+		set_env("?", "127");
 		exit(127);
 	}
 	else if (ft_strlen(execution[index].exec_path) == 0)
 	{
+		printf(">>B<<\n");
 		no_such_file_error(execution[index].command);
-		exit(0);
+		set_env("?", "127");
+		exit(127);
 	}
 	else if (ft_strncmp("builtin", execution[index].exec_path, 7) == 0 && execution[index].exec_path)
 	{
+		printf(">>C<<\n");
+		str_exit = ft_itoa(simple_builtin(execution + index, 1));
+		set_env("?", str_exit);
+		free(str_exit);
 		exit(simple_builtin(execution + index, 1));
 	}
 	else
 	{
+		printf(">>D<<\n");
 		ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
-		ft_putstr_fd("ERROR EXECVE\n", 2);
+		ft_error(NULL, 0);
+		set_env("?", "126");
+		exit(126);
 	}
 }
 
@@ -223,11 +235,11 @@ void	create_childs(t_execution *execution)
 	{
 		g_env.exit_status = WEXITSTATUS(status);
 	}
-	printf("exit_status : %d\n", g_env.exit_status);
 }
 
 t_execution	*execute_line(t_execution *execution)
 {
 	create_childs(execution);
+	printf("%sexit_status :%s %d\n", KYEL, KNRM, g_env.exit_status);
 	return (execution);
 }

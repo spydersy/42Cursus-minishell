@@ -30,6 +30,7 @@ LIBFT_SRCS=				./libft/ft_split.c\
 						./libft/ft_putendl_fd.c\
 						./libft/ft_strcmp.c\
 						./libft/ft_atoi.c\
+						./libft/ft_itoa.c\
 
 BUILTINS_SRCS=			./builtins/set_env.c\
 						./builtins/buil_cd.c\
@@ -44,7 +45,7 @@ EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/input_output_dup.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
-						# ./execution/heredocs.c\
+						./execution/heredocs.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
@@ -76,15 +77,15 @@ SRCS=					$(LIBFT_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 
-FLAGS=					-Wall -Werror -Wextra
+# FLAGS=					-Wall -Werror -Wextra
 
-# FLAGS=					-Wall -Werror -Wextra\
-						# -lreadline\
-					   	# -L /goinfre/abelarif/.brew/opt/readline/lib\
-						# -I /goinfre/abelarif/.brew/opt/readline/include\
+FLAGS=					-Wall -Werror -Wextra\
+						-lreadline\
+					   	-L /goinfre/abelarif/.brew/opt/readline/lib\
+						-I /goinfre/abelarif/.brew/opt/readline/include\
 
 $(NAME): $(OBJS)
-		clang-9 -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 
@@ -98,3 +99,9 @@ re: fclean all
 
 fsanitize: fclean $(OBJS)
 		gcc $(FLAGS) -g3 -fsanitize=address $(SRCS) -o $(NAME)
+
+
+# TO-DO:
+# FIX -- < >
+# FIX exit_code status dial exit
+# FIX exit code dial redirections

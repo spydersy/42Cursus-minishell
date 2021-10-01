@@ -63,13 +63,14 @@ void	init_env(char **env)
 	g_env.exit_status = 0;
 	while (env[c])
 		c++;
-	g_env.env = malloc(sizeof(char *) * (c + 1));
+	g_env.env = malloc(sizeof(char *) * (c + 2));
 	if (g_env.env == NULL)
 		ft_error("malloc", 1);
 		c = -1;
+	g_env.env[++c] = ft_strdup("?=0");
 	while (env[++c])
 	{
-		g_env.env[c] = ft_strdup(env[c]);
+		g_env.env[c] = ft_strdup(env[c - 1]);
 		if (g_env.env[c] == NULL)
 			ft_error("malloc", 1);
 	}

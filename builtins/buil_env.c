@@ -16,7 +16,7 @@ int	builtin_env(void)
 {
 	int		i;
 
-	i = -1;
+	i = 0;
 	while (g_env.env[++i])
 	{
 		printf("%s\n", g_env.env[i]);

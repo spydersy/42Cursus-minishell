@@ -32,48 +32,48 @@ int	empty_line(char *line)
 	return (1);
 }
 
-    //FOR DEBIAN
+    // //FOR DEBIAN
+// char	*read_line(void)
+// {
+	// char	*line;
+	// char	*prpt;
+
+	// prpt = prompt();
+	// // line = readline(prpt);
+    // printf("%s", prpt);
+    // get_next_line(1, &line);
+	// if (line == NULL)
+	// {
+		// //FREE();
+		// exit(EXIT_SUCCESS);
+	// }
+	// printf("liiiiine [%s]\n", line);
+	// // if (empty_line(line) == 0)
+		// // add_history(line);
+	// free(prpt);
+    // return (line);
+// }
+
+    //FOR MACOS
 char	*read_line(void)
 {
 	char	*line;
 	char	*prpt;
 
 	prpt = prompt();
-	// line = readline(prpt);
-    printf("%s", prpt);
-    get_next_line(1, &line);
+	rl_on_new_line();
+	line = readline(prpt);
 	if (line == NULL)
 	{
 		//FREE();
 		exit(EXIT_SUCCESS);
 	}
-	printf("liiiiine [%s]\n", line);
-	// if (empty_line(line) == 0)
-		// add_history(line);
+	// printf("liiiiine [%s]\n", line);
+	if (empty_line(line) == 0)
+		add_history(line);
 	free(prpt);
     return (line);
 }
-
-//     //FOR MACOS
-// char	*read_line(void)
-// {
-// 	char	*line;
-// 	char	*prpt;
-
-// 	prpt = prompt();
-// 	rl_on_new_line();
-// 	line = readline(prpt);
-// 	if (line == NULL)
-// 	{
-// 		//FREE();
-// 		exit(EXIT_SUCCESS);
-// 	}
-// 	// printf("liiiiine [%s]\n", line);
-// 	if (empty_line(line) == 0)
-// 		add_history(line);
-// 	free(prpt);
-//     return (line);
-// }
 
 char	*prompt(void)
 {
