@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/09/28 13:40:24 by abelarif         ###   ########.fr        #
+#    Updated: 2021/10/01 06:12:45 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/input_output_dup.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
-						./execution/heredocs.c\
+						# ./execution/heredocs.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
 						./line_reader/get_next_line.c\
@@ -76,15 +76,15 @@ SRCS=					$(LIBFT_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 
-# FLAGS=					-Wall -Werror -Wextra
+FLAGS=					-Wall -Werror -Wextra
 
-FLAGS=					-Wall -Werror -Wextra\
-						-lreadline\
-					   	-L /goinfre/abelarif/.brew/opt/readline/lib\
-						-I /goinfre/abelarif/.brew/opt/readline/include\
+# FLAGS=					-Wall -Werror -Wextra\
+						# -lreadline\
+					   	# -L /goinfre/abelarif/.brew/opt/readline/lib\
+						# -I /goinfre/abelarif/.brew/opt/readline/include\
 
 $(NAME): $(OBJS)
-		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		clang-9 -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 

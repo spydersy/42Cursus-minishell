@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/20 07:43:05 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/01 06:14:56 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void    execution(t_tokens *tokens)
 	// 	print_args2(execution[i].args, execution[i].args_type, execution[i].files, execution[i].files_type, execution[i].fds);
 	// 	// free(execution[i].exec_path);
 	// }
-	heredocs_parsing(execution);
+	// heredocs_parsing(execution);
 	cases_redirection(execution);
 	free(execution);
 }

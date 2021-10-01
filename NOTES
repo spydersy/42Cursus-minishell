@@ -6,3 +6,5 @@ pwd     : DONE
 export  : PROG
 unset   : DONE
 
+TODO : Permission denied and exit status (126)
+TODO : No Such file or sirectory (1)

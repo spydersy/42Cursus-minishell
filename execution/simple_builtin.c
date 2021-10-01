@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:26:02 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/18 17:35:38 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/01 06:14:05 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	simple_builtin(t_execution *execution, int exit_flag)
 	}
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_unset"))
 		return (builtin_unset(execution[0].args + 1));
-	else
-		return (builtin_export(execution[0].args, execution[0].args_type));
+        return (0);
+	// else
+		// return (builtin_export(execution[0].args, execution[0].args_type));
 }
