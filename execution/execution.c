@@ -196,6 +196,7 @@ void	cases_redirection(t_execution *execution)
 	}
 	else
 		execute_line(execution);
+	
 }
 
 void	free_execution(t_execution *execution)
@@ -212,6 +213,7 @@ void	free_execution(t_execution *execution)
 			printf(" free1 : %s\n", execution[i].args[j]);
 			free(execution[i].args[j]);
 		}
+		free(execution[i].args[j]);//new
 		free(execution[i].args);
 		free(execution[i].args_type);
 		j = -1;
@@ -220,6 +222,7 @@ void	free_execution(t_execution *execution)
 			printf(" free2 : %s\n", execution[i].files[j]);
 			free(execution[i].files[j]);
 		}
+			free(execution[i].files[j]);//new
 		free(execution[i].files);
 		// free(execution[i].files_type);
 		if (execution[i].command != NULL)

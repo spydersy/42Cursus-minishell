@@ -64,13 +64,12 @@ void	heredocs_prompt(char **eof)
 	while (++i < c)
 	{
 		done[i] = 0;
-		printf("////////////////////////////////	eof : {%s}\n", eof[i]);
 	}
 	file_path = ft_strjoin("/tmp/", eof[c - 1]);
 	fd = open(file_path, O_CREAT | O_RDWR, S_IRWXU);
-	printf("fdffffffffffffffff : [%d] | PATH {%s}\n", fd, file_path);
 	write_fd_heredocs(fd, eof, done);
 	close(fd);
+	free(done);
 }
 
 void	expand_heredocs(t_execution *execution, int index)
@@ -89,10 +88,10 @@ void	expand_heredocs(t_execution *execution, int index)
 		if (execution[index].files_type[i] == HEREDOC
 			|| execution[index].files_type[i] == -HEREDOC)
 			{
-				printf(">>%s<<\n", execution[index].files[i]);
 				eof[c++] = ft_strdup(execution[index].files[i]);
 			}
 	heredocs_prompt(eof);
+	free_arr(eof);
 }
 
 void	heredocs_parsing(t_execution *execution)

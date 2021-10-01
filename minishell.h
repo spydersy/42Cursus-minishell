@@ -84,7 +84,6 @@ typedef struct s_tokens
 	int					pipe;
 	int					*type;
 	char				**tokens;
-	char				*exec_path;
 }						t_tokens;
 
 typedef struct s_separator
@@ -108,7 +107,6 @@ typedef struct s_execution
 	char                *exec_path;			// DONE
 	char				*command;			
 
-	int					*exit_status;
 }                       t_execution;
 
 

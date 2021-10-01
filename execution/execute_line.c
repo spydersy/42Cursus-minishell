@@ -211,6 +211,8 @@ void	create_childs(t_execution *execution)
 	char	*str_exit;
 
 	i = -1;
+
+	
 	pipes = init_pipes(execution[0].nb_pipelines - 1);
 	while (++i < execution[0].nb_pipelines)
 	{
@@ -230,11 +232,18 @@ void	create_childs(t_execution *execution)
 		set_env("?", str_exit);
 		free(str_exit);
 	}
+	free(pipes);
+	// printf("%sFIRST LEAKS CHECKER%s\n", KGRN, KNRM);
+	// system("leaks minishell");
+	// sleep(10);
 }
 
 t_execution	*execute_line(t_execution *execution)
 {
+
+	
 	create_childs(execution);
+
 	printf("%sexit_status :%s %d\n", KYEL, KNRM, g_env.exit_status);
 	return (execution);
 }
