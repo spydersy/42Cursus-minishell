@@ -216,6 +216,7 @@ void	create_childs(t_execution *execution)
 	pipes = init_pipes(execution[0].nb_pipelines - 1);
 	while (++i < execution[0].nb_pipelines)
 	{
+		g_env.child_flag = 1;
 		pid = fork();
 		if (pid == 0)
 		{

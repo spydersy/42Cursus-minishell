@@ -76,6 +76,7 @@ typedef struct s_env
 	char				**env;
 	char				**sorted;
 	int					exit_status;
+	int					child_flag;
 }						t_env;
 
 typedef struct s_tokens

@@ -12,32 +12,25 @@
 
 #include "minishell.h"
 
-void	ctrl_c(int sig)
-{
-	write(1, "\n", 1);
-	printf("SIIIIIIIIIIIIIGNAL : [%d]\n", sig);
-	terminal_view();
-	sig = 0;
-}
-
 void	signal_handler(int sig)
 {
-	// if (signal(SIGINT, ctrl_c) == SIG_ERR)
-		// exit(1);
-	// ctrl_c(sig);
-	char	*prpt;
 	if (sig == SIGINT)
 	{
-		prpt = prompt();
 		ft_putchar_fd('\n', 1);
-		ft_putstr_fd(prpt, 1);
+		// ft_putstr_fd(prpt, 1);
 		// ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		if (g_env.child_flag == 0)
+			set_env("?", "1");
+		else	
+			set_env("?", "130");
 	}
 	else if (sig == SIGQUIT)
 	{
+		
+		// ft_putchar_fd('f', 1);
 		ft_putchar_fd('\r', 1);
 		rl_on_new_line();
 		rl_redisplay();
@@ -51,6 +44,7 @@ void	terminal_view(void)
 
 	while (1)
 	{
+		g_env.child_flag = 0;
 		if (first_time)
 		{
 			clear_window();
