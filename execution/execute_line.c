@@ -233,6 +233,18 @@ void	create_childs(t_execution *execution)
 		set_env("?", str_exit);
 		free(str_exit);
 	}
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+		{
+			set_env("?","131");
+			ft_putendl_fd("\\Quit",2);
+		}
+		else if (WTERMSIG(status) == SIGINT)
+		{
+			set_env("?","130");
+		}
+	}
 	free(pipes);
 	// printf("%sFIRST LEAKS CHECKER%s\n", KGRN, KNRM);
 	// system("leaks minishell");
@@ -245,6 +257,6 @@ t_execution	*execute_line(t_execution *execution)
 	
 	create_childs(execution);
 
-	printf("%sexit_status :%s %d\n", KYEL, KNRM, g_env.exit_status);
+	// printf("%sexit_status :%s %d\n", KYEL, KNRM, g_env.exit_status);
 	return (execution);
 }

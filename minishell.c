@@ -16,24 +16,24 @@ void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		ft_putchar_fd('\n', 1);
 		// ft_putstr_fd(prpt, 1);
 		// ft_putchar_fd('\n', 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
 		if (g_env.child_flag == 0)
-			set_env("?", "1");
-		else	
-			set_env("?", "130");
+		{
+			ft_putchar_fd('\n', 1);
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+		 if (g_env.child_flag == 0)
+		 	set_env("?", "1");
+	
 	}
 	else if (sig == SIGQUIT)
 	{
-		
-		// ft_putchar_fd('f', 1);
 		ft_putchar_fd('\r', 1);
 		rl_on_new_line();
-		rl_redisplay();
+	//	rl_redisplay();
 	}
 }
 
