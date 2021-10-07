@@ -131,6 +131,8 @@ int abs_value(int nb);
 int        			builtin_exit(char **args, int is_a_child_process);
 int					builtin_env(void);
 void					sort_env(void);
+void	terminal_view(void);
+
 void					clear_window(void);
 void					init_env(char **env);
 void					free_toks(t_tokens tok);
