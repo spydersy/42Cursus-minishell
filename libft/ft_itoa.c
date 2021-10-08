@@ -26,7 +26,7 @@ char	*if_neg(long j)
 		c = c / 10;
 		i++;
 	}
-	dest = (char*)malloc(sizeof(char ) * (i + 2));
+	dest = (char *)malloc(sizeof(char ) * (i + 2));
 	if (dest == NULL)
 		return (NULL);
 	i++;
@@ -43,10 +43,10 @@ char	*if_neg(long j)
 
 char	*if_zero(long j)
 {
-	char *dest;
+	char	*dest;
 
 	j = 0;
-	dest = (char*)malloc(sizeof(char) * 2);
+	dest = (char *)malloc(sizeof(char) * 2);
 	if (dest == NULL)
 		return (NULL);
 	dest[j] = '0';
@@ -67,7 +67,7 @@ char	*if_pos(long j)
 		c = c / 10;
 		i++;
 	}
-	dest = (char*)malloc(sizeof(char) * (i + 1));
+	dest = (char *)malloc(sizeof(char) * (i + 1));
 	if (dest == NULL)
 		return (NULL);
 	dest[i] = '\0';

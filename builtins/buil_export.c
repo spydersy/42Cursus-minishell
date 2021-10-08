@@ -14,63 +14,63 @@
 
 void        print_export(void)
 {
-    int     i;
+	int     i;
 
-    i = -1;
-    while (g_env.sorted[++i])
-    {
-        ft_putstr_fd("declare -x ", 1);
-        ft_putstr_fd(g_env.sorted[i], 1);
-    }
+	i = -1;
+	while (g_env.sorted[++i])
+	{
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(g_env.sorted[i], 1);
+	}
 }
 
 int export_checker(char **arg, int *types, int index)
 {
-    if ((arg[index][0] == ' ' || arg[0] == '\t') 
-        & arg[index][1] == '=')
-    {
-        return (index);
-    }
-    return (-1);
+	if ((arg[index][0] == ' ' || arg[0] == '\t') 
+		& arg[index][1] == '=')
+	{
+		return (index);
+	}
+	return (-1);
 }
 
 void    export_error(char **args, int index)
 {
-    ft_putstr_fd(KRED, STDERR);
-    ft_putstr_fd("export: `", STDERR);
-    ft_putstr_fd(args[index], STDERR);
-    ft_putendl_fd("': not a valid identifier", STDERR);    
+	ft_putstr_fd(KRED, STDERR);
+	ft_putstr_fd("export: `", STDERR);
+	ft_putstr_fd(args[index], STDERR);
+	ft_putendl_fd("': not a valid identifier", STDERR);    
 }
 
 void    export_args(char **args, int *types)
 {
-    int     i;
+	int     i;
 
-    i  -1;
-    while (args[++i])
-    {
-        if (export_checker(args, types, i) == -1)
-        {
+	i  -1;
+	while (args[++i])
+	{
+		if (export_checker(args, types, i) == -1)
+		{
 
-        }
-        else
-        {
-            export_error(args, i);
-        }
-    }    
+		}
+		else
+		{
+			export_error(args, i);
+		}
+	}    
 }
 
 void        builtin_export(char **args, int *types)
 {
-    int     count;
-    int     i;
+	int     count;
+	int     i;
 
-    i = -1;
-    count = 0;
-    while (args[count])
-        count++;
-    if (count == 0)
-        print_export();
-    else
-        export_args(args, types);
+	i = -1;
+	count = 0;
+	while (args[count])
+		count++;
+	if (count == 0)
+		print_export();
+	else
+		export_args(args, types);
 }

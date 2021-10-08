@@ -59,7 +59,20 @@ int	is_redirection(int type)
 	if (type == REDO1 || type == -REDO1)
 		return (1);
 	if (type == HEREDOC || type == -HEREDOC)
-		return (1);	return (0);
+		return (1);
+	return (0);
+}
+
+int	no_redirection_file_error(int file_type)
+{
+	if (!(file_type == FILE || file_type == -FILE
+		|| file_type == EOFHEREDOC
+		|| file_type == -EOFHEREDOC))
+	{
+		ft_error("No redirection File", 0);
+		return (1);
+	}
+	return (0);
 }
 
 int	redirection_grammar(t_tokens *tokens)
@@ -77,14 +90,8 @@ int	redirection_grammar(t_tokens *tokens)
 			{
 				if (tokens[i].tokens[j + 1])
 				{
-					if (!(tokens[i].type[j + 1] == FILE
-							|| tokens[i].type[j + 1] == -FILE
-							|| tokens[i].type[j + 1] == EOFHEREDOC
-							|| tokens[i].type[j + 1] == -EOFHEREDOC))
-					{
-						ft_error("No redirection File", 0);
+					if (no_redirection_file_error(tokens[i].type[j + 1]) == 1)
 						return (0);
-					}
 				}
 				else
 				{

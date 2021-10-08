@@ -25,7 +25,7 @@ int	simple_builtin(t_execution *execution, int exit_flag)
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_env"))
 		ret = builtin_env();
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_exit"))
-		ret = builtin_exit(execution[0].args + 1, exit_flag);
+		ret = builtin_exit(execution[0].args + 1, exit_flag, 0);
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_pwd"))
 	{
 		builtin_pwd(0);

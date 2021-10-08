@@ -16,8 +16,6 @@ void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		// ft_putstr_fd(prpt, 1);
-		// ft_putchar_fd('\n', 1);
 		if (g_env.child_flag == 0)
 		{
 			ft_putchar_fd('\n', 1);
@@ -25,15 +23,13 @@ void	signal_handler(int sig)
 			rl_on_new_line();
 			rl_redisplay();
 		}
-		 if (g_env.child_flag == 0)
-		 	set_env("?", "1");
-	
+		if (g_env.child_flag == 0)
+			set_env("?", "1");
 	}
 	else if (sig == SIGQUIT)
 	{
 		ft_putchar_fd('\r', 1);
 		rl_on_new_line();
-	//	rl_redisplay();
 	}
 }
 
@@ -54,7 +50,6 @@ void	terminal_view(void)
 		if (empty_line(line) == 0)
 		{
 			extract_semicolon_line(line);
-			// free(line);
 		}
 		else
 			free(line);

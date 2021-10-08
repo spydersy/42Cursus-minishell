@@ -45,11 +45,25 @@ void	free_toks(t_tokens tok)
 	tok.tokens = NULL;
 }
 
+int		is_redirection_value(char *content, int len)
+{
+	if (ft_strncmp(">", content, max_of(1, len)) == 0)
+		return (REDO0);
+	else if (ft_strncmp("<", content, max_of(1, len)) == 0)
+		return (REDI0);
+	else if (ft_strncmp(">>", content, max_of(1, len)) == 0)
+		return (REDO1);
+	else if (ft_strncmp("<<", content, max_of(1, len)) == 0)
+		return (HEREDOC);
+	return (0);
+}
+
 void	set_tok_value(int *type, char **content)
 {
 	int		i;
 	int		cmd;
 	int		index;
+	int		len;
 
 	i = -1;
 	cmd = 0;
@@ -59,18 +73,9 @@ void	set_tok_value(int *type, char **content)
 			index = 0;
 		else
 			index = 1;
-		if (ft_strncmp(">", content[i] + index,
-				max_of(1, ft_strlen(content[i] + index))) == 0)
-			type[i] *= REDO0;
-		else if (ft_strncmp("<", content[i] + index,
-				max_of(1, ft_strlen(content[i] + index))) == 0)
-			type[i] *= REDI0;
-		else if (ft_strncmp(">>", content[i] + index,
-				max_of(1, ft_strlen(content[i] + index))) == 0)
-			type[i] *= REDO1;
-		else if (ft_strncmp("<<", content[i] + index,
-				max_of(1, ft_strlen(content[i] + index))) == 0)
-			type[i] *= HEREDOC;
+		len = ft_strlen(content[i] + index);
+		if (is_redirection_value(content[i] + index, len))
+			type[i] *= is_redirection_value(content[i] + index, len);
 		else if (i && ((-REDI0 <= type[i - 1] && type[i - 1] <= -REDO0)
 				|| (REDO0 <= type[i - 1] && type[i - 1] <= REDI0)))
 			type[i] *= FILE;
@@ -86,7 +91,7 @@ void	set_tok_value(int *type, char **content)
 	}
 }
 
-int	    *set_tok_types(t_tokens tok)
+int	*set_tok_types(t_tokens tok)
 {
 	int			*type;
 

@@ -30,10 +30,10 @@ void	free_arr(char **arr)
 void	add_env(char *variable, char *value, int size)
 {
 	int		i;
-	char 	**new_env;
+	char	**new_env;
 	char	*new_var;
 	char	*tmp;
-	
+
 	i = -1;
 	new_env = malloc(sizeof(char *) * (size + 2));
 	while (g_env.env[++i])
@@ -54,25 +54,23 @@ char	**set_env(char *variable, char *value)
 	int		len;
 	char	*new;
 	char	*tmp;
-	
+
 	index = -1;
 	len = ft_strlen(variable);
 	while (g_env.env[++index])
 		if (strncmp(g_env.env[index], variable, len - 1) == 0
 			&& g_env.env[index][len] == '=')
-			break;		
+			break ;
 	free_arr(g_env.sorted);
 	if (g_env.env[index] == NULL)
-	{
 		add_env(variable, value, index);
-	}
 	else
 	{
 		free(g_env.env[index]);
 		tmp = ft_strjoin(variable, "=");
 		new = ft_strjoin(tmp, value);
 		free(tmp);
-		g_env.env[index] = new;	
+		g_env.env[index] = new;
 	}
 	sort_env();
 	return (g_env.env);

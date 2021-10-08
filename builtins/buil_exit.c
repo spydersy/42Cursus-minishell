@@ -31,10 +31,8 @@ int	str_is_digit(char *str)
 	return (1);
 }
 
-int	builtin_exit(char **args, int is_a_child_process)
+int	builtin_exit(char **args, int is_a_child_process, int counter)
 {
-	int		counter;
-
 	counter = 0;
 	while (args[counter])
 		counter++;
@@ -46,14 +44,11 @@ int	builtin_exit(char **args, int is_a_child_process)
 		if (is_a_child_process == 1)
 			return (255);
 		exit(255);
-
 	}
 	else
 	{
 		if (counter != 1)
-		{
 			ft_error("exit: too many arguments", 0);
-		}
 		else
 		{
 			if (is_a_child_process == 1)

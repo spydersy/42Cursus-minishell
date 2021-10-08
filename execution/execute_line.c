@@ -72,7 +72,8 @@ int	check_redirections_errors(int index, t_execution *execution)
 	i = -1;
 	while (execution[index].files[++i])
 	{
-		if (abs_value(execution[index].files_type[i]) == REDI0 && execution[index].fds[i] == -1)
+		if (abs_value(execution[index].files_type[i]) == REDI0
+			&& execution[index].fds[i] == -1)
 		{
 			input_file_error(execution[index].files[i]);
 			return (-1);
@@ -143,7 +144,6 @@ void	dup_in_out(int index, int *pipes, t_execution *execution)
 	}
 	dup_input(index, in_index, pipes, execution);
 	dup_output(index, out_index, pipes, execution);
-	// close_all_fds(execution[index].fds, i);
 }
 
 void	command_not_found_error(char *command)
@@ -164,7 +164,7 @@ void	no_such_file_error(char *command)
 
 void	child_process(int index, int *pipes, t_execution *execution)
 {
-	int     ret;
+	int		ret;
 	char	*str_exit;
 
 	ret = 0;
@@ -178,7 +178,8 @@ void	child_process(int index, int *pipes, t_execution *execution)
 		exit(1);
 	}
 	close_all_fds(pipes, execution[0].nb_pipelines - 1);
-	if (execution[index].exec_path == NULL && ft_strlen(execution[index].command))
+	if (execution[index].exec_path == NULL
+		&& ft_strlen(execution[index].command))
 	{
 		command_not_found_error(execution[index].command);
 		exit(127);
@@ -188,7 +189,8 @@ void	child_process(int index, int *pipes, t_execution *execution)
 		no_such_file_error(execution[index].command);
 		exit(127);
 	}
-	else if (ft_strncmp("builtin", execution[index].exec_path, 7) == 0 && execution[index].exec_path)
+	else if (ft_strncmp("builtin", execution[index].exec_path, 7) == 0
+		&& execution[index].exec_path)
 	{
 		str_exit = ft_itoa(simple_builtin(execution + index, 1));
 		free(str_exit);
@@ -196,7 +198,8 @@ void	child_process(int index, int *pipes, t_execution *execution)
 	}
 	else
 	{
-		ret = execve(execution[index].exec_path, execution[index].args, g_env.env);
+		ret = execve(execution[index].exec_path,
+				execution[index].args, g_env.env);
 		ft_error(NULL, 0);
 		exit(126);
 	}
@@ -211,8 +214,6 @@ void	create_childs(t_execution *execution)
 	char	*str_exit;
 
 	i = -1;
-
-	
 	pipes = init_pipes(execution[0].nb_pipelines - 1);
 	while (++i < execution[0].nb_pipelines)
 	{
@@ -237,26 +238,19 @@ void	create_childs(t_execution *execution)
 	{
 		if (WTERMSIG(status) == SIGQUIT)
 		{
-			set_env("?","131");
-			ft_putendl_fd("\\Quit",2);
+			set_env("?", "131");
+			ft_putendl_fd("\\Quit", 2);
 		}
 		else if (WTERMSIG(status) == SIGINT)
 		{
-			set_env("?","130");
+			set_env("?", "130");
 		}
 	}
 	free(pipes);
-	// printf("%sFIRST LEAKS CHECKER%s\n", KGRN, KNRM);
-	// system("leaks minishell");
-	// sleep(10);
 }
 
 t_execution	*execute_line(t_execution *execution)
 {
-
-	
 	create_childs(execution);
-
-	// printf("%sexit_status :%s %d\n", KYEL, KNRM, g_env.exit_status);
 	return (execution);
 }

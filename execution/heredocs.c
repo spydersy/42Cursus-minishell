@@ -31,8 +31,8 @@ void	write_fd_heredocs(int fd, char **eof, int *done)
 	int		c;
 	char	*line;
 	int		index_done;
-	
-	c = count_arr(eof);	
+
+	c = count_arr(eof);
 	index_done = 0;
 	while (done[c - 1] != 1)
 	{
@@ -56,11 +56,10 @@ void	heredocs_prompt(char **eof)
 	int		*done;
 	char	*file_path;
 	int		fd;
-	
+
 	i = -1;
 	c = count_arr(eof);
 	done = malloc(sizeof(int) * c);
-
 	while (++i < c)
 	{
 		done[i] = 0;
@@ -78,7 +77,7 @@ void	expand_heredocs(t_execution *execution, int index)
 	int		i;
 	int		c;
 	char	**eof;
-	
+
 	i = -1;
 	c = count_heredocs(execution, index);
 	eof = malloc(sizeof(char *) * (c + 1));
@@ -86,11 +85,13 @@ void	expand_heredocs(t_execution *execution, int index)
 	i = -1;
 	c = 0;
 	while (execution[index].files[++i])
+	{
 		if (execution[index].files_type[i] == HEREDOC
 			|| execution[index].files_type[i] == -HEREDOC)
-			{
-				eof[c++] = ft_strdup(execution[index].files[i]);
-			}
+		{
+			eof[c++] = ft_strdup(execution[index].files[i]);
+		}
+	}
 	heredocs_prompt(eof);
 	free_arr(eof);
 }
@@ -99,7 +100,7 @@ void	heredocs_parsing(t_execution *execution)
 {
 	int		i;
 	int		j;
-	
+
 	i = -1;
 	while (++i < execution[0].nb_pipelines)
 	{
