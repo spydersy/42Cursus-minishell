@@ -166,6 +166,9 @@ t_quote					set_quote_value(char quote_type, t_quote to_quote);
 t_separator				get_separator_index(char *line, char separator_type);
 int	simple_builtin(t_execution *execution, int exit_flag);
 t_execution    input_output_duplication(int index, int *pipes, t_execution *execution);
+int	*get_fds_files(int index, t_execution *execution);
+int	check_redirections_errors(int index, t_execution *execution);
+void	dup_in_out(int index, int *pipes, t_execution *execution);
 
 
 t_execution	*execute_line(t_execution *execution);

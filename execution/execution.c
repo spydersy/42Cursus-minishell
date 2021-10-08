@@ -188,7 +188,32 @@ t_execution *init_execution(t_tokens *tokens)
 
 void	cases_redirection(t_execution *execution)
 {
+	char	*str_exit;
+	int 	tmp_input_fd;
+	int 	tmp_output_fd;
+
 	if (execution[0].exec_path
+		&& ft_strncmp(execution[0].exec_path, "builtin", 7) == 0
+		&& execution[0].nb_pipelines == 1 && execution[0].files[0])
+	{
+		printf("AAAAAAAAA\n");
+		execution[0].fds = get_fds_files(0, execution);
+		if (check_redirections_errors(0, execution) != -1)
+		{
+				tmp_input_fd = dup(STDIN);
+				tmp_output_fd = dup(STDOUT);
+				dup_in_out(0, NULL, execution);
+		}
+		else
+			exit(1);
+		str_exit = ft_itoa(simple_builtin(execution, 0));
+		set_env("?", str_exit);
+		dup2(tmp_input_fd, STDIN);
+		dup2(tmp_output_fd, STDOUT);
+		free(str_exit);
+		return ;
+	}
+	else if (execution[0].exec_path
 		&& ft_strncmp(execution[0].exec_path, "builtin", 7) == 0
 		&& execution[0].nb_pipelines == 1)
 	{
