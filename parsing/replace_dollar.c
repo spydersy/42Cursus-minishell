@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 11:18:54 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/01 06:37:09 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/08 15:28:52 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,6 @@ char	**split_dollar_signe(char **old, int index)
 
 	i = -1;
 	content = ft_split(old[index], ' ');
-    // printf("COUNT CONTENT : %d\n", count(content));
-    // printf("COUNT OLD     : %d\n", count(old));
-    // printf("------- INDEX : %d\n", index);
 	new = malloc(sizeof(char *) * (count(old) + count(content)));
 	while (++i < index)
 		new[i] = ft_strdup(old[i]);

@@ -6,13 +6,13 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 21:16:03 by abelarif          #+#    #+#             */
-/*   Updated: 2021/07/15 10:14:54 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 07:20:44 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int						skip_spaces(char *line, int index)
+int	skip_spaces(char *line, int index)
 {
 	while (line[index])
 	{
@@ -24,56 +24,57 @@ int						skip_spaces(char *line, int index)
 	return (index);
 }
 
-int						token_dollar(char *line, int index)
+int	token_dollar(char *line, int index)
 {
 	if (line[index + 1] && line[index + 1] == '$')
-        return (index + 2);
-    index++;
-    while (line[index])
-    {
-        if (line[index] == '$' || line[index] == ' ' || line[index] == '\t'
-            || line[index] == '\'' || line[index] == '\"' || line[index] == '>'
-            || line[index] == '<' || line[index] == '\0')
-            return (index);
-        else
-            index++;
-    }
-    return (index);
-}
-
-int						token_word(char *line, int index)
-{
+		return (index + 2);
+	index++;
 	while (line[index])
-    {
-        if (line[index] == '$' || line[index] == ' ' || line[index] == '\t'
-			|| line[index] == '>'
-            || line[index] == '<' || line[index] == '\0')
-                return (index);
-        else if ((line[index] == '\'' || line[index] == '\"') && (count_bs(line, index) % 2 == 0))
+	{
+		if (line[index] == '$' || line[index] == ' ' || line[index] == '\t'
+			|| line[index] == '\'' || line[index] == '\"' || line[index] == '>'
+			|| line[index] == '<' || line[index] == '\0')
 			return (index);
 		else
-            index++;
-    }
-    return (index);
+			index++;
+	}
+	return (index);
 }
 
-int						token_quotes(char *line, int index)
+int	token_word(char *line, int index)
 {
-    int         i;
-
-    i = index + 1;
-	while (line[i])
-    {
-		if (line[i] == line[index] && line[index] == '\'')
-            return (i + 1);
-        if (line[i] == line[index] && (count_bs(line, i) % 2 == 0))
-            return (i + 1);
-		i++;
-    }
-    return (-1);
+	while (line[index])
+	{
+		if (line[index] == '$' || line[index] == ' ' || line[index] == '\t'
+			|| line[index] == '>'
+			|| line[index] == '<' || line[index] == '\0')
+			return (index);
+		else if ((line[index] == '\'' || line[index] == '\"')
+			&& (count_bs(line, index) % 2 == 0))
+			return (index);
+		else
+			index++;
+	}
+	return (index);
 }
 
-int						token_redir(char *line, int index)
+int	token_quotes(char *line, int index)
+{
+	int	i;
+
+	i = index + 1;
+	while (line[i])
+	{
+		if (line[i] == line[index] && line[index] == '\'')
+			return (i + 1);
+		if (line[i] == line[index] && (count_bs(line, i) % 2 == 0))
+			return (i + 1);
+		i++;
+	}
+	return (-1);
+}
+
+int	token_redir(char *line, int index)
 {
 	int					i;
 
@@ -90,24 +91,23 @@ int						token_redir(char *line, int index)
 	return (i);
 }
 
-int						get_end(char *line, int index)
+int	get_end(char *line, int index)
 {
-
 	if ((line[index] == '>' || line[index] == '<')
-	&& count_bs(line, index) % 2 == 0)
+		&& count_bs(line, index) % 2 == 0)
 	{
 		index = token_redir(line, index);
 	}
 	else if (line[index] == '$'
-	&& count_bs(line, index) % 2 == 0)
+		&& count_bs(line, index) % 2 == 0)
 	{
 		index = token_dollar(line, index);
 	}
 	else if (line[index] == '\'' || line[index] == '\"')
 	{
 		index = token_quotes(line, index);
-        if (index == -1)
-            ft_error("This Shell does not support unclosed quotes.", 0);
+		if (index == -1)
+			ft_error("This Shell does not support unclosed quotes.", 0);
 	}
 	else
 	{
@@ -116,7 +116,7 @@ int						get_end(char *line, int index)
 	return (index);
 }
 
-int						count_tokens(char *line)
+int	count_tokens(char *line)
 {
 	int		i;
 	int		c;
@@ -131,7 +131,7 @@ int						count_tokens(char *line)
 		}
 		if (line[i])
 		{
-			i = get_end(line , i);
+			i = get_end(line, i);
 			if (i == -1)
 				return (c);
 			c++;
@@ -139,14 +139,14 @@ int						count_tokens(char *line)
 		else
 			return (c);
 	}
-    return (c);
+	return (c);
 }
 
-char					*get_token(char *line, int flag)
+char	*get_token(char *line, int flag)
 {
-	static int 			start = 0;
+	static int			start = 0;
 	char				*token;
-	int					end = 0;
+	int					end;
 	int					bef;
 
 	token = NULL;

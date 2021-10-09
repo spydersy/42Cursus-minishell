@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 16:21:39 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/01 06:16:33 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/08 15:28:12 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,6 @@ int	empty_line(char *line)
 	return (1);
 }
 
-    // //FOR DEBIAN
-// char	*read_line(void)
-// {
-	// char	*line;
-	// char	*prpt;
-
-	// prpt = prompt();
-	// // line = readline(prpt);
-    // printf("%s", prpt);
-    // get_next_line(1, &line);
-	// if (line == NULL)
-	// {
-		// //FREE();
-		// exit(EXIT_SUCCESS);
-	// }
-	// printf("liiiiine [%s]\n", line);
-	// // if (empty_line(line) == 0)
-		// // add_history(line);
-	// free(prpt);
-    // return (line);
-// }
-
-    //FOR MACOS
 char	*read_line(void)
 {
 	char	*line;
@@ -70,7 +47,7 @@ char	*read_line(void)
 	if (empty_line(line) == 0)
 		add_history(line);
 	free(prpt);
-    return (line);
+	return (line);
 }
 
 char	*prompt(void)

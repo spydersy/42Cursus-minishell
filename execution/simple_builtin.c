@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 15:26:02 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/01 06:14:05 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 07:22:40 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,4 @@ int	simple_builtin(t_execution *execution, int exit_flag)
 	set_env("?", str_exit);
 	free(str_exit);
 	return (ret);
-	// else
-		// return (builtin_export(execution[0].args, execution[0].args_type));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:06:45 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/14 16:05:15 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 07:23:35 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_toks(t_tokens tok)
 	tok.tokens = NULL;
 }
 
-int		is_redirection_value(char *content, int len)
+int	is_redirection_value(char *content, int len)
 {
 	if (ft_strncmp(">", content, max_of(1, len)) == 0)
 		return (REDO0);
