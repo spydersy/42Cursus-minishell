@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 16:18:08 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/16 14:17:34 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:13:39 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void        print_export(void)
 int export_checker(char **arg, int *types, int index)
 {
 	if ((arg[index][0] == ' ' || arg[0] == '\t') 
-		& arg[index][1] == '=')
+			& arg[index][1] == '=')
 	{
 		return (index);
 	}

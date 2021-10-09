@@ -6,68 +6,17 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 19:47:59 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/17 14:03:17 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:33:02 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_empty(char *str)
-{
-	int		i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] != ' ' && str[i] != '\t')
-			return (0);
-	}
-	return (1);
-}
-
-int	is_protected(int type)
-{
-	if (type == PROTECTED0 || type == -PROTECTED0)
-		return (1);
-	if (type == PROTECTED1 || type == -PROTECTED1)
-		return (1);
-	return (0);
-}
-
-int	is_arg(int type)
-{
-	if (type == ARG || type == -ARG)
-		return (1);
-	return (0);
-}
-
-int	is_cmd(int type)
-{
-	if (type == CMD || type == -CMD)
-		return (1);
-	return (0);
-}
-
-int	is_redirection(int type)
-{
-	if (type == REDI0 || type == -REDI0)
-		return (1);
-	if (type == REDI1 || type == -REDI1)
-		return (1);
-	if (type == REDO0 || type == -REDO0)
-		return (1);
-	if (type == REDO1 || type == -REDO1)
-		return (1);
-	if (type == HEREDOC || type == -HEREDOC)
-		return (1);
-	return (0);
-}
-
 int	no_redirection_file_error(int file_type)
 {
 	if (!(file_type == FILE || file_type == -FILE
-		|| file_type == EOFHEREDOC
-		|| file_type == -EOFHEREDOC))
+			|| file_type == EOFHEREDOC
+			|| file_type == -EOFHEREDOC))
 	{
 		ft_error("No redirection File", 0);
 		return (1);

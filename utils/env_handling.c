@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:36:06 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/16 12:00:09 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:51:43 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	init_env(char **env)
 	g_env.env = malloc(sizeof(char *) * (c + 2));
 	if (g_env.env == NULL)
 		ft_error("malloc", 1);
-		c = -1;
+	c = -1;
 	g_env.env[++c] = ft_strdup("?=0");
 	while (env[++c])
 	{

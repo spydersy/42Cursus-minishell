@@ -6,13 +6,13 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 21:36:12 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 16:16:30 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:30:40 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long	res;
 	int		nav;

@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:06:45 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 07:23:35 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:10:27 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,22 @@ int	is_redirection_value(char *content, int len)
 	return (0);
 }
 
+void	set_tok_value_helper(int i, int *cmd, int *type)
+{
+	if (i && ((-REDI0 <= type[i - 1] && type[i - 1] <= -REDO0)
+			|| (REDO0 <= type[i - 1] && type[i - 1] <= REDI0)))
+		type[i] *= FILE;
+	else if (i && (type[i - 1] == HEREDOC || type[i - 1] == -HEREDOC))
+		type[i] *= EOFHEREDOC;
+	else if (*cmd == 0)
+	{
+		*cmd = 1;
+		type[i] *= CMD;
+	}
+	else
+		type[i] *= ARG;
+}
+
 void	set_tok_value(int *type, char **content)
 {
 	int		i;
@@ -76,18 +92,8 @@ void	set_tok_value(int *type, char **content)
 		len = ft_strlen(content[i] + index);
 		if (is_redirection_value(content[i] + index, len))
 			type[i] *= is_redirection_value(content[i] + index, len);
-		else if (i && ((-REDI0 <= type[i - 1] && type[i - 1] <= -REDO0)
-				|| (REDO0 <= type[i - 1] && type[i - 1] <= REDI0)))
-			type[i] *= FILE;
-		else if (i && (type[i - 1] == HEREDOC || type[i - 1] == -HEREDOC))
-			type[i] *= EOFHEREDOC;
-		else if (cmd == 0)
-		{
-			cmd = 1;
-			type[i] *= CMD;
-		}
 		else
-			type[i] *= ARG;
+			set_tok_value_helper(i, &cmd, type);
 	}
 }
 

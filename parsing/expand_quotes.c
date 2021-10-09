@@ -27,65 +27,6 @@ int	dollar_is_present(char *str)
 	return (count);
 }
 
-char	*ft_charjoin(char *str, char c)
-{
-	int		i;
-	int		len;
-	char	*ret;
-
-	i = -1;
-	len = ft_strlen(str) + 1;
-	if (c != '\0')
-		len++;
-	ret = malloc(sizeof(char) * len);
-	while (str[++i])
-	{
-		ret[i] = str[i];
-	}
-	if (c != '\0')
-		ret[i++] = c;
-	ret[i] = '\0';
-	free(str);
-	return (ret);
-}
-
-char	*sub_dollar(char *str, int index)
-{
-	int		i;
-	char	*tmp;
-
-	i = index;
-	while (str[++i])
-	{
-		if ((str[i] == ' ' || str[i] == '\t') && i == index + 1)
-			return (ft_strdup("$"));
-		else if ((str[i] == ' ' || str[i] == '\t'))
-		{
-			tmp = ft_substr(str, index, i - index);
-			dollar_handling(&tmp, 0);
-			return (tmp);
-		}
-	}
-	if (str[i - 1] == '$')
-		return (ft_strdup("$"));
-	tmp = ft_substr(str, index, i - index);
-	dollar_handling(&tmp, 0);
-	return (tmp);
-}
-
-int	dollar_len(char *str, int index)
-{
-	int	i;
-
-	i = index;
-	while (str[++i])
-	{
-		if (str[i] == ' ' || str[i] == '\t')
-			return (i - index);
-	}
-	return (i - index);
-}
-
 char	*expand_dollars(char *str)
 {
 	int		i;

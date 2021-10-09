@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/08 15:41:21 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:00:42 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@ void	set_separator_type(int *type, char **toks)
 	}
 }
 
+void	extract_tokens_helper(char **commands, t_tokens **tok, int nb)
+{
+	int		i;
+	
+	i = -1;
+	while (commands[++i])
+	{
+		(*tok)[i].pipe = nb;
+		(*tok)[i].nb = count_tokens(commands[i]);
+		(*tok)[i].tokens = split_tok(commands[i], (*tok)[i].nb);
+		(*tok)[i].type = set_tok_types((*tok)[i]);
+		*tok[i] = replace_dollar(*tok + i);
+	}
+}
+
 void	extract_tokens(char **commands)
 {
 	int			i;
@@ -39,22 +54,10 @@ void	extract_tokens(char **commands)
 		i++;
 	nb = i;
 	tok = malloc(sizeof(t_tokens) * i);
-	if (tok == NULL)
-		ft_error("malloc", 1);
-	i = -1;
-	while (commands[++i])
-	{
-		tok[i].pipe = nb;
-		tok[i].nb = count_tokens(commands[i]);
-		tok[i].tokens = split_tok(commands[i], tok[i].nb);
-		tok[i].type = set_tok_types(tok[i]);
-		tok[i] = replace_dollar(tok + i);
-	}
-	i = 0;
+	extract_tokens_helper(commands, &tok, nb);
 	bs = bs_position(commands);
 	if (bs == 0)
-		ft_error("This Shell does not support unspecified \
-		special characters \"\\\"", 0);
+		ft_error(BS_ERR, 0);
 	if (grammar_checker(commands, tok) == 1)
 		expand_quotes_dollar(tok);
 	i = -1;

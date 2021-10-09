@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 07:36:38 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:53:02 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <sys/errno.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include "./libft/libft.h"
-# include "./line_reader/get_next_line.h"
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "./libft/libft.h"
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"
@@ -52,6 +52,9 @@
 # define SKIPED		9011
 # define HEREDOC	9012
 # define EOFHEREDOC	9013
+
+# define BS_ERR		"This Shell does not support unspecified \
+					special characters \"\\\""
 
 typedef struct s_quote
 {
@@ -96,8 +99,21 @@ typedef struct s_execution
 
 t_env					g_env;
 
+int				*init_pipes(int nb_pipes);
+int				is_empty(char *str);
+int				is_redirection(int type);
 int				is_arg(int type);
 int				is_cmd(int type);
+int				is_input_redir(int file_type);
+int				get_end(char *line, int index);
+int				is_output_redir(int file_type);
+int				count(char **str);
+int				skip_spaces(char *line, int index);
+int				dollar_len(char *str, int index);
+int				token_quotes(char *line, int index);
+int				token_word(char *line, int index);
+int				token_redir(char *line, int index);
+int				token_dollar(char *line, int index);
 int				max_of(int i, int j);
 int				is_protected(int type);
 int				count_bslash(char *line);
@@ -125,6 +141,11 @@ void			sort_env(void);
 void			terminal_view(void);
 void			clear_window(void);
 void			init_env(char **env);
+void			no_such_file_error(char *command);
+void			command_not_found_error(char *command);
+void			free_dollar(char **old, char **content);
+void			close_all_fds(int *pipes, int nb_pipes);
+void			free_execution(t_execution *execution);
 void			free_toks(t_tokens tok);
 void			execution(t_tokens *tokens);
 void			extract_tokens(char **commands);
@@ -144,6 +165,9 @@ char			**get_paths(void);
 char			*builtin_pwd(int descriptor);
 char			**split_tok(char *line, int nb);
 char			*get_token(char *line, int flag);
+char			*is_builtin(char *cmd);
+char			*ft_charjoin(char *str, char c);
+char			*sub_dollar(char *str, int index);
 char			**set_env(char *variable, char *value);
 char			*get_exec_path(t_tokens token, char **paths);
 char			**splitSep(char *line, int *sepIndex, int nbSep);

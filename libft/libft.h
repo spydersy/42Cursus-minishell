@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:53:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/15 16:16:52 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:29:21 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char			**ft_split(char const *s, char c);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_subtoken(char const *s, unsigned int start, size_t len);
-char	        *ft_itoa(int n);
+char			*ft_itoa(int n);
 
 void			ft_putnbr_fd(int nb, int fd);
 void			ft_putchar_fd(char c, int fd);

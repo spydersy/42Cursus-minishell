@@ -6,11 +6,32 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/01 06:14:56 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:49:44 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	get_execution_args_helper(t_tokens tokens, char ***args)
+{
+	int	i;
+	int	c;
+
+	i = -1;
+	c = 0;
+	while (++i < tokens.nb)
+	{
+		if ((tokens.type[i] == ARG || tokens.type[i] == -ARG)
+			&& (tokens.tokens[i][0] == ' '
+			|| tokens.tokens[i][0] == '\'' || tokens.tokens[i][0] == '\"'))
+			(*args)[++c] = ft_strdup(tokens.tokens[i] + 1);
+		else if (tokens.type[i] == -ARG || tokens.type[i] == ARG)
+			(*args)[++c] = ft_strdup(tokens.tokens[i]);
+		else if (tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
+			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
+			(*args)[++c] = ft_strdup(tokens.tokens[i]);
+	}	
+}
 
 char	**get_execution_args(t_tokens tokens, char *command)
 {
@@ -31,20 +52,7 @@ char	**get_execution_args(t_tokens tokens, char *command)
 	else
 		args[0] = ft_strdup("");
 	args[c + 1] = NULL;
-	i = -1;
-	c = 0;
-	while (++i < tokens.nb)
-	{
-		if ((tokens.type[i] == ARG || tokens.type[i] == -ARG)
-			&& (tokens.tokens[i][0] == ' '
-			|| tokens.tokens[i][0] == '\'' || tokens.tokens[i][0] == '\"'))
-			args[++c] = ft_strdup(tokens.tokens[i] + 1);
-		else if (tokens.type[i] == -ARG || tokens.type[i] == ARG)
-			args[++c] = ft_strdup(tokens.tokens[i]);
-		else if (tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
-			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
-			args[++c] = ft_strdup(tokens.tokens[i]);
-	}
+	get_execution_args_helper(tokens, &args);
 	return (args);
 }
 
@@ -185,40 +193,11 @@ void	cases_redirection(t_execution *execution)
 			tmp_input_fd, tmp_output_fd);
 		return ;
 	}
-	else if (execution[0].exec_path
-		&& ft_strncmp(execution[0].exec_path, "builtin", 7) == 0
-		&& execution[0].nb_pipelines == 1)
+	else if (execution[0].exec_path && ft_strncmp(execution[0].exec_path,
+			"builtin", 7) == 0 && execution[0].nb_pipelines == 1)
 		simple_builtin(execution, 0);
 	else
 		execute_line(execution);
-}
-
-void	free_execution(t_execution *execution)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < execution[0].nb_pipelines)
-	{
-		j = -1;
-		while (execution[i].args[++j])
-			free(execution[i].args[j]);
-		free(execution[i].args[j]);
-		free(execution[i].args);
-		free(execution[i].args_type);
-		j = -1;
-		while (execution[i].files[++j])
-			free(execution[i].files[j]);
-		free(execution[i].files[j]);
-		free(execution[i].files);
-		if (execution[i].command != NULL)
-			free(execution[i].command);
-		if (execution[i].exec_path != NULL)
-			free(execution[i].exec_path);
-		free(execution[i].files_type);
-	}
-	free(execution);
 }
 
 void	execution(t_tokens *tokens)

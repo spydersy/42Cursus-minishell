@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/10/01 06:12:45 by abelarif         ###   ########.fr        #
+#    Updated: 2021/10/09 16:57:27 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execute_line.c\
 						./execution/simple_builtin.c\
 						./execution/heredocs.c\
+						./execution/init_pipes.c\
 
 LINE_READER_SRCS=		./line_reader/import_line.c\
-						./line_reader/get_next_line.c\
 
 
 PARSING_SRCS=			./parsing/extraction.c\
@@ -61,11 +61,19 @@ UTILS_SRCS=				./utils/max_of.c\
 						./utils/ft_errors.c\
 						./utils/tokens_utils.c\
 						./utils/env_handling.c\
-						./utils/splitByIndex.c\
+						./utils/split_by_index.c\
 						./utils/grammar_checker.c\
 						./utils/backslash_handling.c\
 						./utils/line_handler_utils.c\
 						./utils/abs_value.c\
+						./utils/line_execution_errors.c\
+						./utils/free_execution.c\
+						./utils/tokens_utils2.c\
+						./utils/dollar_utils.c\
+						./utils/ft_charjoin.c\
+						./utils/is_builtin.c\
+						./utils/type_identifier.c\
+						
 
 SRCS=					$(LIBFT_SRCS)\
 						$(UTILS_SRCS)\
@@ -77,15 +85,12 @@ SRCS=					$(LIBFT_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 
-# FLAGS=					-Wall -Werror -Wextra
-
-FLAGS=					-Wall -Werror -Wextra\
+FLAGS=					-Wall -Werror -Wextra \
 						-lreadline\
-					   	-L /goinfre/abelarif/.brew/opt/readline/lib\
-						-I /goinfre/abelarif/.brew/opt/readline/include\
-
+					   	-L /goinfre/abelarif/.brew/opt/readline/lib \
+						-I /goinfre/abelarif/.brew/opt/readline/include
 $(NAME): $(OBJS)
-		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
+		gcc $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 
@@ -96,12 +101,3 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
-
-fsanitize: fclean $(OBJS)
-		gcc $(FLAGS) -g3 -fsanitize=address $(SRCS) -o $(NAME)
-
-
-# TO-DO:
-# FIX -- < >
-# FIX exit_code status dial exit
-# FIX exit code dial redirections
