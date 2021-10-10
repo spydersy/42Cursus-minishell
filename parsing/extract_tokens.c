@@ -26,6 +26,24 @@ void	set_separator_type(int *type, char **toks)
 	}
 }
 
+// void	print_toks(t_tokens *tok)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = -1;
+// 	while (++i < tok[0].pipe)
+// 	{
+// 		j = -1;
+// 		printf("TOK : ");
+// 		while (tok[i].tokens[++j])
+// 		{
+// 			printf("[%s] ", tok[i].tokens[j]);
+// 		}
+// 		printf("\n");
+// 	}
+// }
+
 void	extract_tokens_helper(char **commands, t_tokens **tok, int nb)
 {
 	int		i;
@@ -37,7 +55,8 @@ void	extract_tokens_helper(char **commands, t_tokens **tok, int nb)
 		(*tok)[i].nb = count_tokens(commands[i]);
 		(*tok)[i].tokens = split_tok(commands[i], (*tok)[i].nb);
 		(*tok)[i].type = set_tok_types((*tok)[i]);
-		*tok[i] = replace_dollar(*tok + i);
+		(*tok)[i] = replace_dollar(*tok + i);
+		// print_toks((*tok));
 	}
 }
 

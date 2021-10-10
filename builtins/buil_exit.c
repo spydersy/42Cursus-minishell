@@ -52,7 +52,7 @@ int	builtin_exit(char **args, int is_a_child_process, int counter)
 		else
 		{
 			if (is_a_child_process == 1)
-				return ((unsigned char)ft_atoi(args[0]));
+				exit((unsigned char)ft_atoi(args[0]));
 			exit((unsigned char)ft_atoi(args[0]));
 		}
 	}

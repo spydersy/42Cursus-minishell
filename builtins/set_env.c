@@ -75,16 +75,3 @@ char	**set_env(char *variable, char *value)
 	sort_env();
 	return (g_env.env);
 }
-
-// int	main(int argc, char *argv[], char *envp[])
-// {
-// 	int	i = -1;
-
-// 	if (argc || argv[0]){}
-// 	envp = set_env("SHELL", "HIHIHIHIHIHIHIHIHIHIHIHIIHIHI");
-// 	while (envp[++i])
-// 	{
-// 		printf("aft : [%s]\n", envp[i]);
-// 	}
-// 	return (0);
-// }

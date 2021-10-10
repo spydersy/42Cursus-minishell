@@ -125,7 +125,9 @@ void	replace_dollar_helper(int i, int *oldlen, int *presence, t_tokens *tok)
 	else
 		tok->type[i] = PROTECTED0;
 	if (tok->type[0] == PROTECTED0 || tok->type[0] == -PROTECTED0)
+	{
 		tok->type[i] = -CMD;
+	}
 	i += newlen - *oldlen;
 	*oldlen = newlen;
 }

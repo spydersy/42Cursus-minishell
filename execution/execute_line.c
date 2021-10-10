@@ -48,7 +48,6 @@ void	child_process_errors(t_execution *execution, int index)
 void	child_process(int index, int *pipes, t_execution *execution)
 {
 	int		ret;
-	char	*str_exit;
 
 	ret = 0;
 	execution[index].fds = get_fds_files(index, execution);
@@ -61,8 +60,6 @@ void	child_process(int index, int *pipes, t_execution *execution)
 	if (ft_strncmp("builtin", execution[index].exec_path, 7) == 0
 		&& execution[index].exec_path)
 	{
-		str_exit = ft_itoa(simple_builtin(execution + index, 1));
-		free(str_exit);
 		exit(simple_builtin(execution + index, 1));
 	}
 	else
@@ -118,8 +115,8 @@ void	create_childs(t_execution *execution)
 		}
 	}
 	close_all_fds(pipes, execution[0].nb_pipelines - 1);
-	waitpid(pid, &status, 0);
 	waitpid(-1, &status, 0);
+	waitpid(pid, &status, 0);
 	set_exit_status(status);
 	free(pipes);
 }

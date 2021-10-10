@@ -86,23 +86,3 @@ int	get_fd(int index, t_execution *execution, int i)
 	}
 	return (fd);
 }
-
-int	*open_files(int index, t_execution *execution)
-{
-	int		i;
-	int		*fds;
-
-	i = 0;
-	while (execution[index].files[i])
-		i++;
-	if (i != 0)
-		fds = malloc(sizeof(int) * i);
-	else
-		return (0);
-	i = -1;
-	while (execution[index].files[++i])
-	{
-		fds[i] = get_fd(index, execution, i);
-	}
-	return (fds);
-}

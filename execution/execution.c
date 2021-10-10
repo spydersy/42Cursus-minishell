@@ -176,6 +176,8 @@ void	cases_redirection(t_execution *execution)
 	int		tmp_input_fd;
 	int		tmp_output_fd;
 
+	tmp_input_fd = dup(STDIN);
+	tmp_output_fd = dup(STDOUT);
 	if (execution[0].exec_path
 		&& ft_strncmp(execution[0].exec_path, "builtin", 7) == 0
 		&& execution[0].nb_pipelines == 1 && execution[0].files[0])
@@ -183,21 +185,25 @@ void	cases_redirection(t_execution *execution)
 		execution[0].fds = get_fds_files(0, execution);
 		if (check_redirections_errors(0, execution) != -1)
 		{
-			tmp_input_fd = dup(STDIN);
-			tmp_output_fd = dup(STDOUT);
 			dup_in_out(0, NULL, execution);
 		}
 		else
-			exit(1);
+		{
+			set_env("?", "1");
+			return ;
+		}
 		reset_stdio(ft_itoa(simple_builtin(execution, 0)),
 			tmp_input_fd, tmp_output_fd);
-		return ;
 	}
 	else if (execution[0].exec_path && ft_strncmp(execution[0].exec_path,
 			"builtin", 7) == 0 && execution[0].nb_pipelines == 1)
+	{
 		simple_builtin(execution, 0);
+	}
 	else
+	{	
 		execute_line(execution);
+	}
 }
 
 void	execution(t_tokens *tokens)

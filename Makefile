@@ -6,7 +6,7 @@
 #    By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 08:04:18 by abelarif          #+#    #+#              #
-#    Updated: 2021/10/09 16:57:27 by abelarif         ###   ########.fr        #
+#    Updated: 2021/10/10 18:00:25 by abelarif         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ FLAGS=					-Wall -Werror -Wextra \
 					   	-L /goinfre/abelarif/.brew/opt/readline/lib \
 						-I /goinfre/abelarif/.brew/opt/readline/include
 $(NAME): $(OBJS)
-		gcc $(FLAGS) $(SRCS) -o $(NAME)
+		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
 
@@ -101,3 +101,6 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+fsanitize: $(fclean) 
+	gcc -g3 $(FLAGS) -fsanitize=address $(SRCS) -o $(NAME)
