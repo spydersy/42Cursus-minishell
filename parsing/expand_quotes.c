@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 09:01:07 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/08 15:32:54 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:18:44 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_tokens	select_quotes(t_tokens tokens)
 	int		i;
 	int		dqIndex;
 	char	*tmp_token;
+
 	i = -1;
 	while (tokens.tokens[++i])
 	{

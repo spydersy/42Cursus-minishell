@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:28:27 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/11 16:38:50 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:14:31 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	builtin_echo(char **args, int *types)
 {
 	int		i;
 	int		new_line;
-    char    **new_args;
+	char	**new_args;
 
 	i = -1;
 	new_line = 1;
@@ -55,13 +55,13 @@ int	builtin_echo(char **args, int *types)
 	while (new_args[++i])
 	{
 		printf("%s", new_args[i]);
-        if (new_args[i + 1])
-        {
-            printf(" ");
-        }
+		if (new_args[i + 1])
+		{
+			printf(" ");
+		}
 	}
 	if (new_line == 1)
 		printf("\n");
-    free_arr(new_args);
+	free_arr(new_args);
 	return (0);
 }

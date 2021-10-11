@@ -49,11 +49,11 @@ char	**append_arg(char *arg, char **arr)
 	return (arr);
 }
 
-char    **join_args(char **args, int *types)
+char	**join_args(char **args, int *types)
 {
-    int     index;
-    char    *arg;
-    char    **new_args;
+	int		index;
+	char	*arg;
+	char	**new_args;
 
 	index = 0;
 	new_args = malloc(sizeof(char *) * 1);
@@ -67,5 +67,5 @@ char    **join_args(char **args, int *types)
 		new_args = append_arg(arg, new_args);
 		index = get_next_index(args, types, index);
 	}
-    return (new_args);
+	return (new_args);
 }

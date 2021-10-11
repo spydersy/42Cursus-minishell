@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 15:56:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 15:56:49 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:15:41 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	*get_fds_files(int index, t_execution *execution)
 	i = 0;
 	while (execution[index].files[i])
 		i++;
-	// if (i)
-		fds = malloc(sizeof(int) * i);
-	// else
-		// return (NULL);
+	fds = malloc(sizeof(int) * i);
 	i = -1;
 	while (execution[index].files[++i])
 	{

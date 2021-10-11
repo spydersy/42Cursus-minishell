@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buil_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 14:43:02 by abelarif          #+#    #+#             */
-/*   Updated: 2021/09/17 14:27:14 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 17:15:05 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	eq_exist(char *env_var)
 {
 	int		i;
-	
+
 	i = -1;
 	while (env_var[++i])
 	{
