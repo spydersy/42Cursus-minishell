@@ -167,7 +167,6 @@ char	*init_args(char **args, int *types, int index)
 		tmp = ft_strdup(arg);
 		free(arg);
 	}
-	printf("JOIN : [%s]\n", tmp);
 	return (tmp);
 }
 
@@ -189,7 +188,6 @@ char	**append_arg(char *arg, char **arr)
 	char	**new_arr;
 
 	i = count(arr);
-	printf("LEN : %d\n", i);
 	new_arr = malloc(sizeof(char *) * (i + 2));
 	i = -1;
 	while (arr && arr[++i])
@@ -200,6 +198,7 @@ char	**append_arg(char *arg, char **arr)
 	new_arr[i] = NULL;
 	if (arr != NULL)
 		free_arr(arr);
+	free(arg);
 	arr = new_arr;
 	return (arr);
 }
@@ -225,5 +224,12 @@ int	builtin_export(char **args, int *types)
 		index = get_next_index(args, types, index);
 		// printf("D\n");
 	}
+	int i = -1;
+	while (new_args[++i])
+	{
+		printf("[%s] ", new_args[i]);
+	}
+	printf("\n");
+	free_arr(new_args);
 	return (0);
 }
