@@ -163,8 +163,11 @@ t_execution	*init_execution(t_tokens *tokens)
 	return (execution);
 }
 
-void	reset_stdio(char *str_exit, int tmp_in, int tmp_out)
+void	reset_stdio(int exit_status, int tmp_in, int tmp_out)
 {
+	char	*str_exit;
+
+	str_exit = ft_itoa(exit_status);
 	set_env("?", str_exit);
 	dup2(tmp_in, STDIN);
 	dup2(tmp_out, STDOUT);
@@ -192,18 +195,15 @@ void	cases_redirection(t_execution *execution)
 			set_env("?", "1");
 			return ;
 		}
-		reset_stdio(ft_itoa(simple_builtin(execution, 0)),
-			tmp_input_fd, tmp_output_fd);
+			system("leaks minishell");
+			sleep(5);
+		reset_stdio(simple_builtin(execution, 0), tmp_input_fd, tmp_output_fd);
 	}
 	else if (execution[0].exec_path && ft_strncmp(execution[0].exec_path,
 			"builtin", 7) == 0 && execution[0].nb_pipelines == 1)
-	{
 		simple_builtin(execution, 0);
-	}
 	else
-	{	
 		execute_line(execution);
-	}
 }
 
 void	execution(t_tokens *tokens)

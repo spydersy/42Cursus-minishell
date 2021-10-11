@@ -97,6 +97,13 @@ typedef struct s_execution
 	char				*command;
 }						t_execution;
 
+typedef struct	s_x_y_z
+{
+	int			x;
+	int			y;
+	int			z;
+}				t_x_y_z;
+
 t_env					g_env;
 
 int				*init_pipes(int nb_pipes);
