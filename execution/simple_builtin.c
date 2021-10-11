@@ -36,5 +36,6 @@ int	simple_builtin(t_execution *execution, int exit_flag)
 	str_exit = ft_itoa(ret);
 	set_env("?", str_exit);
 	free(str_exit);
+	// free_execution(execution);
 	return (ret);
 }

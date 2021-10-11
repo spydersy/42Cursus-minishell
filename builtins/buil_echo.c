@@ -42,21 +42,19 @@ int	skip_new_line(char **args)
 int	builtin_echo(char **args, int *types)
 {
 	int		i;
-	int		counter;
 	int		new_line;
 
 	i = -1;
 	new_line = 1;
-	counter = count_arr(args);
 	i = skip_new_line(args);
 	if (i > 0)
 		new_line = 0;
 	i--;
 	while (args[++i])
 	{
-		printf("%s", args[i]);
-		if (types[i] > 0)
+		if (i && types[i] > 0)
 			printf(" ");
+		printf("%s", args[i]);
 	}
 	if (new_line == 1)
 		printf("\n");

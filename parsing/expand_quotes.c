@@ -69,7 +69,7 @@ t_tokens	select_quotes(t_tokens tokens)
 {
 	int		i;
 	int		dqIndex;
-
+	char	*tmp_token;
 	i = -1;
 	while (tokens.tokens[++i])
 	{
@@ -79,8 +79,10 @@ t_tokens	select_quotes(t_tokens tokens)
 		if (tokens.tokens[i][dqIndex] == '\"'
 			|| tokens.tokens[i][dqIndex] == '\'')
 		{
+			tmp_token = tokens.tokens[i];
 			tokens.tokens[i]
 				= expand_quotes(tokens.tokens[i], dqIndex);
+			free(tmp_token);
 		}
 	}
 	return (tokens);

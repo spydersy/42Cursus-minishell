@@ -97,12 +97,12 @@ typedef struct s_execution
 	char				*command;
 }						t_execution;
 
-typedef struct	s_x_y_z
+typedef struct	s_data
 {
-	int			x;
-	int			y;
-	int			z;
-}				t_x_y_z;
+	int			presence;
+	int			oldlen;
+	int			newlen;
+}				t_data;
 
 t_env					g_env;
 

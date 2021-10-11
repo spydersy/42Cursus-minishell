@@ -110,142 +110,45 @@ void	set_types(t_tokens *tok, int oldlen, int newlen, int index)
 	tok->type = newtype;
 }
 
-// void	replace_dollar_helper(int i, int *oldlen, int *presence, t_tokens *tok)
-// {
-// 	int		newlen;
-
-// 	dollar_handling(&(tok->tokens[i]), i);
-// 	tok->tokens = split_dollar_signe(tok->tokens, i);
-// 	*presence = 1;
-// 	newlen = count(tok->tokens);
-// 	if (*oldlen != newlen)
-// 		set_types(tok, *oldlen, newlen, i);
-// 	else if (tok->type[i] < 0)
-// 		tok->type[i] = -PROTECTED0;
-// 	else
-// 		tok->type[i] = PROTECTED0;
-// 	if (tok->type[0] == PROTECTED0 || tok->type[0] == -PROTECTED0)
-// 	{
-// 		tok->type[i] = -CMD;
-// 	}
-// 	i += newlen - *oldlen;
-// 	*oldlen = newlen;
-// }
-
-// t_tokens	replace_dollar(t_tokens *tok)
-// {
-// 	int			i;
-// 	int			presence;
-// 	int			oldlen;
-// 	int			newlen;
-
-// 	presence = 1;
-// 	oldlen = count(tok->tokens);
-// 	newlen = oldlen;
-// 	i = -1;
-// 	while (presence)
-// 	{
-// 		presence = 0;
-// 		while (tok->tokens[++i])
-// 		{
-// 			if ((tok->tokens[i][1] == '$' && i)
-// 				|| (i == 0 && tok->tokens[i][0] == '$'))
-// 			{
-// 				dollar_handling(&(tok->tokens[i]), i);
-// 				tok->tokens = split_dollar_signe(tok->tokens, i);
-// 				presence = 1;
-// 				newlen = count(tok->tokens);
-// 				if (oldlen != newlen)
-// 					set_types(tok, oldlen, newlen, i);
-// 				else if (tok->type[i] < 0)
-// 					tok->type[i] = -PROTECTED0;
-// 				else
-// 					tok->type[i] = PROTECTED0;
-// 				if (tok->type[0] == PROTECTED0 || tok->type[0] == -PROTECTED0)
-// 					tok->type[i] = -CMD;
-// 				i += newlen - oldlen;
-// 				oldlen = newlen;
-// 				break ;
-// 			}
-// 		}
-// 		tok->nb = i;
-// 	}
-// 	return (*tok);
-// }
-
-// t_tokens	replace_dollar(t_tokens *tok)
-// {
-// 	int			i;
-// 	int			presence;
-// 	int			oldlen;
-// 	int			newlen;
-
-// 	presence = 1;
-// 	oldlen = count(tok->tokens);
-// 	newlen = oldlen;
-// 	i = -1;
-// 	while (presence)
-// 	{
-// 		presence = 0;
-// 		while (tok->tokens[++i])
-// 		{
-// 			if ((tok->tokens[i][1] == '$' && i)
-// 				|| (i == 0 && tok->tokens[i][0] == '$'))
-// 			{
-// 				replace_dollar_helper(i, &oldlen, &presence, tok);
-// 				break ;
-// 			}
-// 		}
-// 		tok->nb = i;
-// 	}
-// 	return (*tok);
-// }
-
-
-
-int	ft(t_tokens *tok, int *i, t_x_y_z *xyz)
+int	replace_dollar_helper(t_tokens *tok, int *i, t_data *data)
 {
 	if ((tok->tokens[*i][1] == '$' && *i)
 				|| (*i == 0 && tok->tokens[*i][0] == '$'))
 	{
 		dollar_handling(&(tok->tokens[*i]), *i);
 		tok->tokens = split_dollar_signe(tok->tokens, *i);
-		xyz->x = 1;
-		xyz->z = count(tok->tokens);
-		if (xyz->y != xyz->z)
-			set_types(tok, xyz->y, xyz->z, *i);
+		data->presence = 1;
+		data->newlen = count(tok->tokens);
+		if (data->oldlen != data->newlen)
+			set_types(tok, data->oldlen, data->newlen, *i);
 		else if (tok->type[*i] < 0)
 			tok->type[*i] = -PROTECTED0;
 		else
 			tok->type[*i] = PROTECTED0;
 		if (tok->type[0] == PROTECTED0 || tok->type[0] == -PROTECTED0)
 			tok->type[*i] = -CMD;
-		(*i) += xyz->z - xyz->y;
-		xyz->y = xyz->z;
+		(*i) += data->newlen - data->oldlen;
+		data->oldlen = data->newlen;
 		return (1);
 	}
 	return (0);
 }
 
-// X = PRESENCE
-// Y = OLDLEN
-// Z = NEWLEN
-
 t_tokens	replace_dollar(t_tokens *tok)
 {
 	int			i;
-	t_x_y_z		xyz;
+	t_data		data;
 
-	xyz.x = 1;
-	xyz.y = count(tok->tokens);
-	xyz.z = xyz.y;
+	data.presence = 1;
+	data.oldlen = count(tok->tokens);
+	data.newlen = data.oldlen;
 	i = -1;
-	while (xyz.x)
+	while (data.presence)
 	{
-		xyz.x = 0;
+		data.presence = 0;
 		while (tok->tokens[++i])
 		{
-			if (ft(tok, &i, &xyz) == 1)
+			if (replace_dollar_helper(tok, &i, &data) == 1)
 				break ;
 		}
 		tok->nb = i;

@@ -20,10 +20,10 @@ int	*get_fds_files(int index, t_execution *execution)
 	i = 0;
 	while (execution[index].files[i])
 		i++;
-	if (i)
+	// if (i)
 		fds = malloc(sizeof(int) * i);
-	else
-		return (NULL);
+	// else
+		// return (NULL);
 	i = -1;
 	while (execution[index].files[++i])
 	{

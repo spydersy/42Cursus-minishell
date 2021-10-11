@@ -70,11 +70,6 @@ void	free_execution(t_execution *execution)
 		if (execution[i].exec_path != NULL)
 			free(execution[i].exec_path);
 		free(execution[i].files_type);
-		// if (execution[i].fds == NULL)
-		// {
-		// 	printf("NUUUUUUUUUUUUL\n");
-		// }
-		// free(execution[i].fds);
 	}
 	free(execution);
 }
