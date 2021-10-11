@@ -39,6 +39,7 @@ BUILTINS_SRCS=			./builtins/set_env.c\
 						./builtins/buil_exit.c\
 						./builtins/buil_echo.c\
 						./builtins/buil_unset.c\
+						./builtins/buil_export.c\
 
 EXECUTION_SRCS=			./execution/exec_path.c\
 						./execution/execution.c\

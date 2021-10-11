@@ -33,6 +33,8 @@ int	simple_builtin(t_execution *execution, int exit_flag)
 	}
 	else if (!ft_strcmp(execution[0].exec_path, "builtin_unset"))
 		ret = builtin_unset(execution[0].args + 1);
+	else if (!ft_strcmp(execution[0].exec_path, "builtin_export"))
+		ret = builtin_export(execution[0].args + 1, execution[0].args_type + 1);
 	str_exit = ft_itoa(ret);
 	set_env("?", str_exit);
 	free(str_exit);

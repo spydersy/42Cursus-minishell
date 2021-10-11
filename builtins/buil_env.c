@@ -12,6 +12,19 @@
 
 #include "../minishell.h"
 
+int	eq_exist(char *env_var)
+{
+	int		i;
+	
+	i = -1;
+	while (env_var[++i])
+	{
+		if (env_var[i] == '=')
+			return (1);
+	}
+	return (0);
+}
+
 int	builtin_env(void)
 {
 	int		i;
@@ -19,7 +32,8 @@ int	builtin_env(void)
 	i = 0;
 	while (g_env.env[++i])
 	{
-		printf("%s\n", g_env.env[i]);
+		if (eq_exist(g_env.env[i]) == 1)
+			printf("%s\n", g_env.env[i]);
 	}
 	return (0);
 }

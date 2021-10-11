@@ -17,6 +17,8 @@ int	count(char **str)
 	int		i;
 
 	i = 0;
+	if (str == NULL)
+		return (0);
 	while (str[i])
 	{
 		i++;

@@ -166,6 +166,8 @@ void			heredocs_parsing(t_execution *execution);
 void			dup_in_out(int index, int *pipes, t_execution *execution);
 void			create_childs(t_execution *execution);
 
+int        builtin_export(char **args, int *types);
+
 char			*prompt(void);
 char			*read_line(void);
 char			**get_paths(void);
