@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:45:33 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 17:49:44 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:38:41 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	get_execution_args_helper(t_tokens tokens, char ***args)
 		else if (tokens.type[i] == PROTECTED0 || tokens.type[i] == -PROTECTED0
 			|| tokens.type[i] == PROTECTED1 || tokens.type[i] == -PROTECTED1)
 			(*args)[++c] = ft_strdup(tokens.tokens[i]);
-	}	
+	}
 }
 
 char	**get_execution_args(t_tokens tokens, char *command)
@@ -187,16 +187,12 @@ void	cases_redirection(t_execution *execution)
 	{
 		execution[0].fds = get_fds_files(0, execution);
 		if (check_redirections_errors(0, execution) != -1)
-		{
 			dup_in_out(0, NULL, execution);
-		}
 		else
 		{
 			set_env("?", "1");
 			return ;
 		}
-			system("leaks minishell");
-			sleep(5);
 		reset_stdio(simple_builtin(execution, 0), tmp_input_fd, tmp_output_fd);
 	}
 	else if (execution[0].exec_path && ft_strncmp(execution[0].exec_path,

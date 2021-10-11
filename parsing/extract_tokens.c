@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 12:42:31 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 18:00:42 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:36:37 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,10 @@ void	set_separator_type(int *type, char **toks)
 	}
 }
 
-// void	print_toks(t_tokens *tok)
-// {
-// 	int		i;
-// 	int		j;
-
-// 	i = -1;
-// 	while (++i < tok[0].pipe)
-// 	{
-// 		j = -1;
-// 		printf("TOK : ");
-// 		while (tok[i].tokens[++j])
-// 		{
-// 			printf("[%s] ", tok[i].tokens[j]);
-// 		}
-// 		printf("\n");
-// 	}
-// }
-
 void	extract_tokens_helper(char **commands, t_tokens **tok, int nb)
 {
 	int		i;
-	
+
 	i = -1;
 	while (commands[++i])
 	{
@@ -56,7 +38,6 @@ void	extract_tokens_helper(char **commands, t_tokens **tok, int nb)
 		(*tok)[i].tokens = split_tok(commands[i], (*tok)[i].nb);
 		(*tok)[i].type = set_tok_types((*tok)[i]);
 		(*tok)[i] = replace_dollar(*tok + i);
-		// print_toks((*tok));
 	}
 }
 

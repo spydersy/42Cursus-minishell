@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 15:41:44 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 17:53:02 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:35:42 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ typedef struct s_execution
 	char				*command;
 }						t_execution;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int			presence;
 	int			oldlen;
@@ -143,6 +143,7 @@ int				simple_builtin(t_execution *execution, int exit_flag);
 int				*get_fds_files(int index, t_execution *execution);
 int				check_redirections_errors(int index, t_execution *execution);
 int				get_fd(int index, t_execution *execution, int i);
+int				builtin_export(char **args, int *types);
 
 void			sort_env(void);
 void			terminal_view(void);
@@ -166,8 +167,6 @@ void			heredocs_parsing(t_execution *execution);
 void			dup_in_out(int index, int *pipes, t_execution *execution);
 void			create_childs(t_execution *execution);
 
-int        builtin_export(char **args, int *types);
-
 char			*prompt(void);
 char			*read_line(void);
 char			**get_paths(void);
@@ -180,8 +179,7 @@ char			*sub_dollar(char *str, int index);
 char			**set_env(char *variable, char *value);
 char			*get_exec_path(t_tokens token, char **paths);
 char			**splitSep(char *line, int *sepIndex, int nbSep);
-
-char    **join_args(char **args, int *types);
+char			**join_args(char **args, int *types);
 
 t_quote			init_quote(void);
 t_quote			set_quote_value(char quote_type, t_quote to_quote);

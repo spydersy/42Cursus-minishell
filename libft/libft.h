@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 18:53:10 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 15:29:21 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/11 16:07:53 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_atoi(const char *str);
+int         	ft_isalpha(int c);
 
 char			*ft_strdup(const char *src);
 char			*ft_strchr(const char *s, int c);
