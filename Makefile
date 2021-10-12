@@ -31,6 +31,7 @@ LIBFT_SRCS=				./libft/ft_split.c\
 						./libft/ft_strcmp.c\
 						./libft/ft_atoi.c\
 						./libft/ft_itoa.c\
+						./libft/ft_isalpha.c\
 
 BUILTINS_SRCS=			./builtins/set_env.c\
 						./builtins/buil_cd.c\
@@ -75,6 +76,7 @@ UTILS_SRCS=				./utils/max_of.c\
 						./utils/ft_charjoin.c\
 						./utils/is_builtin.c\
 						./utils/type_identifier.c\
+						./utils/add_env.c\
 						
 
 SRCS=					$(LIBFT_SRCS)\

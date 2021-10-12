@@ -17,7 +17,7 @@ void	print_export(void)
 	int		i;
 	int		j;
 
-	i = -1;
+	i = 0;
 	while (g_env.sorted[++i])
 	{
 		ft_putstr_fd("declare -x ", STDOUT);
@@ -26,9 +26,10 @@ void	print_export(void)
 		{
 			if (g_env.sorted[i][j] == '=')
 			{
-				ft_putchar_fd("\"", STDOUT);
+				ft_putstr_fd("=\"", STDOUT);
 			}
-			ft_putchar_fd(g_env.sorted[i][j], STDOUT);
+			else
+				ft_putchar_fd(g_env.sorted[i][j], STDOUT);
 		}
 		ft_putstr_fd("\"\n", STDOUT);
 	}
@@ -49,7 +50,7 @@ void	print_export_errors(char **args)
 	i = -1;
 	while (args[++i])
 	{
-		if (ft_isalpha(args[i][0]) && args[i][0] != '_')
+		if (ft_isalpha(args[i][0]) == 0 && args[i][0] != '_')
 		{
 			print_error(args[i]);
 		}
@@ -58,7 +59,7 @@ void	print_export_errors(char **args)
 
 int	is_wrong_arg(char *arg)
 {
-	if (ft_isalpha(args[i][0]) && rgs[i][0] != '_')
+	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')
 	{
 		return (1);
 	}
@@ -95,7 +96,11 @@ char	*get_value(char *arg)
 			break ;
 		}
 	}
-	var = ft_strdup(arg + start + 1);
+	if (arg[start] == '=')
+		var = ft_strdup(arg + start + 1);
+	else
+		var = ft_strdup("");
+
 	return (var);
 }
 
@@ -110,11 +115,11 @@ int	export(char **args)
 	wrong = 0;
 	while (args[++i])
 	{
-		if (is_wrong_arg(arg[i]) == 0)
+		if (is_wrong_arg(args[i]) == 0)
 		{
-			var = get_var(arg);
-			value = get_value(arg);
-			add_env(var, value);
+			var = get_var(args[i]);
+			value = get_value(args[i]);
+			export_add_env(var, value);
 			free(var);
 			free(value);
 		}

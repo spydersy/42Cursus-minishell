@@ -47,6 +47,11 @@ int	builtin_echo(char **args, int *types)
 
 	i = -1;
 	new_line = 1;
+	if (count(args) == 0)
+	{
+		printf("\n");
+		return (0);
+	}
 	new_args = join_args(args, types);
 	i = skip_new_line(new_args);
 	if (i > 0)

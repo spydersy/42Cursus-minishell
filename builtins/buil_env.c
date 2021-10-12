@@ -25,6 +25,15 @@ int	eq_exist(char *env_var)
 	return (0);
 }
 
+int	is_exist_stat(char *env)
+{
+	if (ft_strncmp(env, "?=", 2) == 0)
+	{
+		return (1);
+	}
+	return (0);
+}
+
 int	builtin_env(void)
 {
 	int		i;
@@ -32,7 +41,8 @@ int	builtin_env(void)
 	i = 0;
 	while (g_env.env[++i])
 	{
-		if (eq_exist(g_env.env[i]) == 1)
+		if (eq_exist(g_env.env[i]) == 1
+			&& is_exist_stat(g_env.env[i]) == 0)
 			printf("%s\n", g_env.env[i]);
 	}
 	return (0);

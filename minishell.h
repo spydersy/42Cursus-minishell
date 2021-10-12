@@ -181,6 +181,13 @@ char			*get_exec_path(t_tokens token, char **paths);
 char			**splitSep(char *line, int *sepIndex, int nbSep);
 char			**join_args(char **args, int *types);
 
+
+
+void	export_add_env(char *var, char *value);
+
+
+
+
 t_quote			init_quote(void);
 t_quote			set_quote_value(char quote_type, t_quote to_quote);
 t_tokens		replace_dollar(t_tokens *tok);

@@ -31,13 +31,14 @@ void	resize_env(char *var, char *value)
 
 	i = -1;
 	size = count(g_env.env);
-	new_env = malloc(sizeof(char *) * (i + 2));
+	new_env = malloc(sizeof(char *) * (size + 2));
 	while (g_env.env[++i])
 	{
 		new_env[i] = ft_strdup(g_env.env[i]);
 	}
 	new_value = join_varvalue(var, value);
-	new_env[i] = ft_stdup(new_value);
+	new_env[i] = ft_strdup(new_value);
+	new_env[i + 1] = NULL;
 	free(new_value);
 	free_arr(g_env.env);
 	free_arr(g_env.sorted);
@@ -45,7 +46,7 @@ void	resize_env(char *var, char *value)
 	sort_env();
 }
 
-void	add_env(char *var, char *value)
+void	export_add_env(char *var, char *value)
 {
 	int		i;
 	int		var_len;
