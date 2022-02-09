@@ -6,7 +6,7 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/17 16:18:08 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/11 17:12:04 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/12 16:50:41 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,6 @@ void	print_export(void)
 		}
 		ft_putstr_fd("\"\n", STDOUT);
 	}
-}
-
-void	print_error(char *wrong_arg)
-{
-	ft_putstr_fd(KRED, 2);
-	ft_putstr_fd("export: `", 2);
-	ft_putstr_fd(wrong_arg, 2);
-	ft_putendl_fd("': not a valid identifier", 2);
-}
-
-void	print_export_errors(char **args)
-{
-	int		i;
-
-	i = -1;
-	while (args[++i])
-	{
-		if (ft_isalpha(args[i][0]) == 0 && args[i][0] != '_')
-		{
-			print_error(args[i]);
-		}
-	}
-}
-
-int	is_wrong_arg(char *arg)
-{
-	if (ft_isalpha(arg[0]) == 0 && arg[0] != '_')
-	{
-		return (1);
-	}
-	return (0);
 }
 
 char	*get_var(char *arg)
@@ -100,7 +69,6 @@ char	*get_value(char *arg)
 		var = ft_strdup(arg + start + 1);
 	else
 		var = ft_strdup("");
-
 	return (var);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: amaghat <amaghat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 10:06:45 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 17:10:27 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/12 16:47:33 by amaghat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,6 @@ char	**split_tok(char *line, int nb)
 		tok[i] = get_token(line, i);
 	}
 	return (tok);
-}
-
-void	free_toks(t_tokens tok)
-{
-	int			i;
-
-	i = -1;
-	while (tok.tokens[++i])
-	{
-		free(tok.tokens[i]);
-		tok.tokens[i] = NULL;
-	}
-	free(tok.tokens[i]);
-	tok.tokens[i] = NULL;
-	free(tok.tokens);
-	tok.tokens = NULL;
 }
 
 int	is_redirection_value(char *content, int len)

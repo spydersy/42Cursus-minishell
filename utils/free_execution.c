@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   free_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: amaghat <amaghat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:35:26 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 16:39:53 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/12 16:47:40 by amaghat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	free_toks(t_tokens tok)
+{
+	int			i;
+
+	i = -1;
+	while (tok.tokens[++i])
+	{
+		free(tok.tokens[i]);
+		tok.tokens[i] = NULL;
+	}
+	free(tok.tokens[i]);
+	tok.tokens[i] = NULL;
+	free(tok.tokens);
+	tok.tokens = NULL;
+}
 
 int	count(char **str)
 {

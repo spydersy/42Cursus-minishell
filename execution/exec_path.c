@@ -6,27 +6,11 @@
 /*   By: abelarif <abelarif@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 16:38:32 by abelarif          #+#    #+#             */
-/*   Updated: 2021/10/09 17:42:43 by abelarif         ###   ########.fr       */
+/*   Updated: 2021/10/12 16:51:27 by abelarif         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	join_bs(char **paths)
-{
-	int		i;
-	char	*tmp;
-
-	i = -1;
-	if (paths == NULL)
-		return ;
-	while (paths[++i])
-	{
-		tmp = ft_strjoin(paths[i], "/");
-		free(paths[i]);
-		paths[i] = tmp;
-	}
-}
 
 char	**get_paths(void)
 {
