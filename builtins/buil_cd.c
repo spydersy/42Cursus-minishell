@@ -17,7 +17,7 @@ void	no_args(char *old_pwd)
 	int		ret;
 	char	*new_pwd;	
 
-	ret = chdir("/Users/amaghat");
+	ret = chdir("/Users/achraf");
 	new_pwd = builtin_pwd(1);
 	set_env("OLDPWD", old_pwd);
 	set_env("PWD", new_pwd);

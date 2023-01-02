@@ -93,10 +93,8 @@ SRCS=					$(LIBFT_SRCS)\
 
 OBJS=					$(SRCS:.c=.o)
 
-FLAGS=					-Wall -Werror -Wextra \
-						-lreadline\
-					   	-L /goinfre/amaghat/.brew/opt/readline/lib \
-						-I /goinfre/amaghat/.brew/opt/readline/include
+FLAGS=					-lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include
+
 $(NAME): $(OBJS)
 		gcc -g3 $(FLAGS) $(SRCS) -o $(NAME)
 

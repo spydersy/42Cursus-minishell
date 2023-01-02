@@ -157,6 +157,7 @@ void			command_not_found_error(char *command);
 void			free_dollar(char **old, char **content);
 void			close_all_fds(int *pipes, int nb_pipes);
 void			free_execution(t_execution *execution);
+void 			rl_replace_line(const char *, int);
 void			free_toks(t_tokens tok);
 void			execution(t_tokens *tokens);
 void			extract_tokens(char **commands);
